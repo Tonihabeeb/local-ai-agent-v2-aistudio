@@ -1,0 +1,4941 @@
+# Frontend Implementation Plan - Local AI Agent Platform (Comprehensive)
+
+## Overview
+This document provides a comprehensive implementation plan for the **Frontend Layer** of the Local AI Agent Platform. It includes all detailed tasks from the main task tracker, organized by phases with specific subtasks, dependencies, and completion criteria.
+
+## Frontend Architecture
+- **Framework**: Reflex (Pynecone) - Python-to-React
+- **State Management**: Global AppState + Page-specific state classes
+- **Real-time Updates**: WebSocket integration for live data
+- **Navigation**: 3-tier navigation system (Primary/Secondary/Tertiary)
+- **Components**: 18 comprehensive pages with full feature sets
+- **Responsive Design**: Mobile-friendly and accessible
+
+## Project Status Legend
+- 🔴 **Not Started** - Task not yet begun
+- 🟡 **In Progress** - Task currently being worked on
+- 🟢 **Completed** - Task finished and verified
+- ⚠️ **Blocked** - Task waiting on dependencies
+- 🔄 **Review** - Task completed, awaiting review
+
+---
+
+# 🎨 FRONTEND IMPLEMENTATION PHASES
+
+## Phase 0: Environment Preparation
+
+### 🎨 Frontend Environment Setup
+- [x] 🟢 **Reflex Framework Setup**
+  - [x] Install Reflex (Pynecone)
+  - [x] Verify Node.js 16.8+ is available
+  - [x] Test Reflex CLI functionality
+  - [x] Document Windows WSL considerations
+  - [x] Set up Reflex project structure
+  - [x] Configure Reflex build system
+
+### 🎨 Frontend Dependencies
+- [x] 🟢 **Core Frontend Dependencies**
+  - [x] Install Reflex framework
+  - [x] Install Plotly for charts and visualizations
+  - [x] Install additional UI libraries
+  - [x] Configure frontend build tools
+  - [x] Set up frontend development environment
+
+---
+
+## Phase 1: Frontend Environment Setup
+
+### 1.1 Reflex Framework Setup
+- [x] 🟢 **Reflex Framework Installation**
+  - [x] Install Reflex (Pynecone)
+  - [x] Verify Node.js 16.8+ is available
+  - [x] Test Reflex CLI functionality
+  - [x] Document Windows WSL considerations
+  - [x] Set up Reflex project structure
+  - [x] Configure Reflex build system
+
+### 1.2 Frontend Dependencies
+- [x] 🟢 **Core Frontend Dependencies**
+  - [x] Install Reflex framework
+  - [x] Install Plotly for charts and visualizations
+  - [x] Install additional UI libraries
+  - [x] Configure frontend build tools
+  - [x] Set up frontend development environment
+
+### 1.3 Frontend Project Structure
+- [x] 🟢 **Project Organization**
+  - [x] Create frontend directory structure
+  - [x] Set up component organization
+  - [x] Configure routing system
+  - [x] Set up state management structure
+  - [x] Create development scripts
+
+---
+
+## Phase 2: Core Frontend Development
+
+### 2.1 Reflex Application Setup
+- [x] 🟢 **Main Application Structure**
+  - [x] Create main Reflex application
+  - [x] Set up routing system
+  - [x] Configure build system
+  - [x] Set up development server
+  - [x] Configure production build
+
+### 2.2 Global State Management
+- [x] 🟢 **AppState Implementation**
+  - [x] Create AppState class
+  - [x] Implement authentication state
+  - [x] Add theme management
+  - [x] Create loading states
+  - [x] Add notification system
+
+### 2.3 Navigation System
+- [x] 🟢 **Navigation Implementation**
+  - [x] Create main navigation component
+  - [x] Implement 3-tier navigation
+  - [x] Add breadcrumb navigation
+  - [x] Create deep linking support
+  - [x] Add navigation state management
+
+### 2.4 WebSocket Integration
+- [x] 🟢 **Real-time Updates**
+  - [x] Set up WebSocket connections
+  - [x] Implement real-time state updates
+  - [x] Handle connection management
+  - [x] Add fallback polling
+  - [x] Create reconnection logic
+
+---
+
+## Phase 3: Primary Navigation Pages
+
+### 3.1 Dashboard Page (Command Cockpit)
+- [x] 🟢 **Dashboard Layout & Structure**
+  - [x] Create three-panel responsive layout (Left Column, Center Column, Right Column)
+  - [x] Implement top bar with global header components
+  - [x] Add bottom footer with logs strip
+  - [x] Create drag-and-drop widget reordering functionality
+  - [x] Implement user-specific layout customization and persistence
+
+- [x] 🟢 **Top Bar (Global Header)**
+  - [x] Create current profile indicator with quick-switch dropdown
+  - [x] Add system mode badge (LOCAL/CLOUD/HYBRID) with color coding
+  - [x] Implement universal quick search bar for commands, documents, agents
+  - [x] Create user menu with profile, help, shutdown/logout options
+  - [x] Add keyboard shortcut support (Ctrl+K for search focus)
+
+- [x] 🟢 **Left Column - Quick Actions & Navigation Tiles**
+  - [x] Create "New Chat" tile → opens Chat Console
+  - [x] Add "Create Task" tile → opens Task Builder modal
+  - [x] Implement "Run Workflow" tile → launches saved workflow directly
+  - [x] Add "Add Document" tile → uploads to RAG store
+  - [x] Create system controls section:
+    - [x] "Pause Scheduler" button
+    - [x] "Restart Backend" button
+    - [x] "Flush Cache" button
+  - [x] Implement tile hover tooltips with descriptions
+  - [x] Add tile click animations and feedback
+
+- [x] 🟢 **Center Column - Dynamic Metrics & Status Cards**
+  - [x] Create Agent Activity Card:
+    - [x] Display number of active agents
+    - [x] Show queued tasks count
+    - [x] Add throughput metrics (tasks/min)
+    - [x] Implement click navigation to Agents page (filtered by active=true)
+  - [x] Create Model Health Card:
+    - [x] Display current LLM name and version
+    - [x] Show context window and temperature settings
+    - [x] Add response latency chart (real-time)
+    - [x] Implement click navigation to Settings → Providers tab
+  - [x] Create Automation Card:
+    - [x] Show APScheduler status (running/paused)
+    - [x] Display next job countdown timers
+    - [x] Add job queue status indicators
+  - [x] Create Knowledge Base Card:
+    - [x] Display documents indexed count
+    - [x] Show embeddings completion percentage
+    - [x] Add last rebuild date and time
+    - [x] Implement index health indicators
+  - [x] Create Alerts & Warnings Feed:
+    - [x] Aggregate error feed from backend
+    - [x] Show connectivity issues, model timeouts, disk space warnings
+    - [x] Implement click navigation to Diagnostics page (filtered by issue)
+    - [x] Add alert severity indicators and icons
+
+- [x] 🟢 **Right Column - System Performance Charts**
+  - [x] Create CPU/GPU Utilization Charts:
+    - [x] Real-time Plotly line charts
+    - [x] Multi-core CPU display
+    - [x] GPU memory and utilization
+    - [x] Implement double-click to expand to full Monitoring page
+  - [x] Add Memory & VRAM Usage Charts:
+    - [x] System RAM usage visualization
+    - [x] GPU VRAM usage tracking
+    - [x] Memory trend analysis
+  - [x] Create Disk I/O Rates Charts:
+    - [x] Read/write operations per second
+    - [x] Disk space utilization
+    - [x] I/O latency monitoring
+  - [x] Add Network Latency Charts:
+    - [x] Ollama API response times
+    - [x] External API latency (OpenRouter, etc.)
+    - [x] Network connectivity status
+  - [x] Create Scheduler Job Timeline:
+    - [x] Last 10 job runs visualization
+    - [x] Job success/failure indicators
+    - [x] Execution time trends
+
+- [x] 🟢 **Bottom Footer - Logs Strip**
+  - [x] Create live scrolling log display:
+    - [x] "Agent A finished task #123" messages
+    - [x] "Index updated" notifications
+    - [x] "LLM ping OK" status updates
+  - [x] Add log control buttons:
+    - [x] Pause/resume log streaming
+    - [x] Clear log display
+    - [x] Level filter (info/warn/error)
+  - [x] Implement log message formatting and color coding
+  - [x] Add log message timestamps and source indicators
+
+- [ ] 🔴 **Real-time Data Integration**
+  - [ ] Implement WebSocket /ws/dashboard connection
+  - [ ] Create JSON data streaming every 2 seconds
+  - [ ] Add fallback polling every 10 seconds if WebSocket closed
+  - [ ] Implement data update handling and UI refresh
+  - [ ] Add connection status indicators
+
+- [ ] 🔴 **Health Indicators & Validation**
+  - [ ] Implement card border color coding:
+    - [ ] Green = normal operation
+    - [ ] Orange = degraded (latency > threshold or resource > 80%)
+    - [ ] Red = critical (API down, disk < 5%)
+  - [ ] Create global "All Systems Operational" banner
+  - [ ] Add health threshold configuration
+  - [ ] Implement health status aggregation logic
+
+- [ ] 🔴 **Alert System Integration**
+  - [ ] Create critical alert toast notifications
+  - [ ] Add icon badges for alert counts
+  - [ ] Implement alert click navigation to Diagnostics page
+  - [ ] Create alert severity classification
+  - [ ] Add alert acknowledgment functionality
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement GET /dashboard/summary for initial load
+  - [ ] Create WebSocket /ws/dashboard for real-time updates
+  - [ ] Add POST /system/actions/restart_backend for restart button
+  - [ ] Implement POST /scheduler/actions/pause|resume
+  - [ ] Create GET /rag/status for Knowledge Base Card
+  - [ ] Add error handling and retry logic for API calls
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create DashboardPage root container component
+  - [ ] Implement StatusCard component (reusable for all cards)
+  - [ ] Create ResourceChart component (Plotly integration)
+  - [ ] Add AlertFeed component (list + icons)
+  - [ ] Implement QuickActionGrid component (button tiles)
+  - [ ] Create FooterLogBar component (real-time log stream)
+  - [ ] Add ProfileIndicator component
+  - [ ] Create SystemModeBadge component
+  - [ ] Implement QuickSearch component
+
+- [ ] 🔴 **User Interactions & Accessibility**
+  - [ ] Add hover tooltips with numeric stats and last updated time
+  - [ ] Implement click navigation to related pages
+  - [ ] Create keyboard shortcuts (Ctrl+K for search focus)
+  - [ ] Add drag-and-drop widget reordering
+  - [ ] Implement responsive design for different screen sizes
+  - [ ] Add loading states and error handling
+  - [ ] Create accessibility features (screen reader support, keyboard navigation)
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement efficient data update mechanisms
+  - [ ] Add chart rendering optimization
+  - [ ] Create memory management for real-time data
+  - [ ] Implement data caching strategies
+  - [ ] Add performance monitoring for dashboard load times
+
+### 3.2 Chat Console Page (Primary Interactive Workspace)
+- [x] 🟢 **Chat Console Layout & Structure**
+  - [x] Create two-column conversational layout (Left: Conversation Stream, Right: Context & Tools Panel)
+  - [x] Implement top header with context controls
+  - [x] Add bottom bar with prompt composer
+  - [x] Create responsive design for different screen sizes
+  - [x] Implement session persistence and auto-save functionality
+
+- [x] 🟢 **Top Header (Context Controls)**
+  - [x] Create Session Selector dropdown:
+    - [x] Display active/past chats list
+    - [x] Add session renaming functionality
+    - [x] Implement session duplicating feature
+    - [x] Add session archiving capability
+  - [x] Create Agent Selector dropdown:
+    - [x] Main Agent option
+    - [x] Planner+Executor group option
+    - [x] RAG Agent option
+    - [x] Code Agent option
+    - [x] Custom agent group selection
+  - [x] Add Mode Badge display:
+    - [x] Local Model indicator
+    - [x] Cloud mode indicator
+    - [x] Hybrid mode indicator
+    - [x] Color-coded status indicators
+  - [x] Create Context Tokens Counter:
+    - [x] Real-time tokens used display
+    - [x] Remaining tokens counter
+    - [x] Token usage visualization
+  - [x] Implement Action Buttons:
+    - [x] 🧠 "Summarize Chat" button
+    - [x] 📎 "Attach File" button with file picker
+    - [x] ⚙️ "Settings" button for quick LLM settings access
+
+- [x] 🟢 **Left Column - Conversation Stream**
+  - [x] Create Chat Bubbles with avatars:
+    - [x] User message bubbles with user avatar
+    - [x] Agent message bubbles with agent avatar
+    - [x] System message bubbles for errors/notifications
+    - [x] Message timestamp display
+  - [x] Implement Streaming Response Display:
+    - [x] WebSocket-based incremental rendering
+    - [x] Real-time token streaming via /ws/chat
+    - [x] Typing indicator with animated dots
+    - [x] Auto-scroll behavior (pinned to bottom unless user scrolls up)
+  - [x] Create Markdown Renderer with support for:
+    - [x] Code blocks with syntax highlighting
+    - [x] Copy button for code blocks
+    - [x] Tables, links, and lists rendering
+    - [x] Inline math (KaTeX) support
+    - [x] Rich text formatting
+  - [x] Add "Show Reasoning Steps" Toggle:
+    - [x] Reveal internal reasoning chain
+    - [x] Show agent messages for debugging
+    - [x] Transparency mode for multi-agent systems
+    - [x] Collapsible reasoning display
+
+- [x] 🟢 **Right Column - Context & Tools Panel**
+  - [x] Create Context Stack Viewer:
+    - [x] Display current context documents (RAG chunks)
+    - [x] Show prior steps from Planner/Executor
+    - [x] Context relevance scoring
+    - [x] Click to expand context details
+  - [x] Implement Quick Commands Palette:
+    - [x] Saved prompt templates
+    - [x] "Summarize" template
+    - [x] "Generate Report" template
+    - [x] "Code Review" template
+    - [x] Custom template management
+  - [x] Create Attachments List:
+    - [x] Display uploaded files
+    - [x] File preview functionality
+    - [x] Remove attachment option
+    - [x] File type indicators
+  - [x] Add Agent Timeline:
+    - [x] Visual sequence of multi-agent actions
+    - [x] Each node represents agent turn
+    - [x] Real-time timeline updates
+    - [x] Collapsible timeline view
+  - [x] Create Inspector Tabs:
+    - [x] "LLM Input" tab (raw system + user prompt)
+    - [x] "LLM Output" tab (raw model text pre-format)
+    - [x] "Logs" tab (backend log snippets)
+    - [x] Tab switching functionality
+
+- [x] 🟢 **Bottom Bar (Prompt Composer)**
+  - [x] Create Text Input Field:
+    - [x] Multi-line editing support
+    - [x] Shift+Enter for newline
+    - [x] Enter to send message
+    - [x] Auto-resize based on content
+  - [x] Implement Action Buttons:
+    - [x] ▶️ Send/Execute button
+    - [x] ⏱ Stop Generation button
+    - [x] 🔄 Regenerate Last Response button
+    - [x] 🧩 Use Tool button (opens tool picker modal)
+  - [x] Add Voice Input Button (optional):
+    - [x] Browser microphone capture
+    - [x] Local audio transcription
+    - [x] Voice-to-text conversion
+  - [x] Create Token Cost Preview:
+    - [x] Estimated cost display (API mode)
+    - [x] Cost calculation before sending
+    - [x] Usage tracking integration
+  - [x] Implement Context Toggles:
+    - [x] "Include Memory" toggle (on/off)
+    - [x] "Include Documents" toggle (on/off)
+    - [x] "Streaming Mode" toggle (on/off)
+    - [x] Toggle state persistence
+
+- [x] 🟢 **Session Management & Persistence**
+  - [x] Implement Session Storage:
+    - [x] SQLite local storage for chat sessions
+    - [x] Auto-save after each message
+    - [x] Session metadata management
+    - [x] Session search and filtering
+  - [x] Create Session Summary:
+    - [x] Auto-generate summary on session close
+    - [x] Tag generation for search
+    - [x] Summary preview in session list
+    - [x] Manual summary editing
+
+- [x] 🟢 **Multi-Agent Collaboration**
+  - [x] Implement Multi-Agent Mode:
+    - [x] Agent timeline visualization
+    - [x] Real-time intermediate exchanges
+    - [x] Agent handoff indicators
+    - [x] Collaboration status display
+  - [x] Create Agent Communication:
+    - [x] Inter-agent message display
+    - [x] Agent role indicators
+    - [x] Collaboration flow visualization
+    - [x] Agent performance tracking
+
+- [x] 🟢 **Context Injection & RAG Integration**
+  - [x] Implement Context Injection:
+    - [x] RAG snippet retrieval
+    - [x] Session memory integration
+    - [x] Context relevance scoring
+    - [x] Context display in right panel
+  - [x] Create RAG Integration:
+    - [x] Document chunk display
+    - [ ] Citation highlighting
+    - [ ] Source document links
+    - [ ] Context confidence indicators
+
+- [ ] 🔴 **Inline Tool Execution**
+  - [ ] Implement Tool Execution Display:
+    - [ ] Inline tool output rendering
+    - [ ] Code execution results
+    - [ ] Database query outputs
+    - [ ] Tool status indicators
+  - [ ] Create Tool Picker Modal:
+    - [ ] Available tools list
+    - [ ] Tool descriptions and parameters
+    - [ ] Tool execution interface
+    - [ ] Tool result display
+
+- [ ] 🔴 **Error Recovery & Handling**
+  - [ ] Implement Error Display:
+    - [ ] Network error messages
+    - [ ] Model error notifications
+    - [ ] Colored "System" message bubbles
+    - [ ] Retry options for failed requests
+  - [ ] Create Error Recovery:
+    - [ ] Automatic retry mechanisms
+    - [ ] Manual retry buttons
+    - [ ] Error logging and reporting
+    - [ ] Graceful degradation
+
+- [ ] 🔴 **Export & Sharing Features**
+  - [ ] Create Conversation Export:
+    - [ ] Export as .txt format
+    - [ ] Export as .md format
+    - [ ] Export as .json format
+    - [ ] Copy to clipboard functionality
+  - [ ] Implement Sharing Features:
+    - [ ] Share conversation links
+    - [ ] Export specific message ranges
+    - [ ] Include/exclude system messages
+    - [ ] Privacy controls for sharing
+
+- [ ] 🔴 **Visual Feedback & States**
+  - [ ] Create Visual Indicators:
+    - [ ] Typing indicator (animated dots)
+    - [ ] Error banner for disconnections
+    - [ ] Session status icons (🟢 Active, 🟡 Waiting, 🔴 Error)
+    - [ ] Connection status display
+  - [ ] Implement State Management:
+    - [ ] Loading states for all operations
+    - [ ] Error states with recovery options
+    - [ ] Success states with confirmation
+    - [ ] Idle states with helpful hints
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Chat API Endpoints:
+    - [ ] POST /chat/send (send prompt, returns session_id, message_id)
+    - [ ] WebSocket /ws/chat/{session_id} (token streaming)
+    - [ ] GET /chat/{session_id} (load previous history)
+    - [ ] POST /chat/stop (cancel running generation)
+    - [ ] POST /chat/regenerate (re-run last prompt)
+    - [ ] POST /chat/attach (upload file, returns vectorized reference ID)
+    - [ ] GET /chat/context/{session_id} (get associated docs and context)
+  - [ ] Add Error Handling:
+    - [ ] API error responses
+    - [ ] WebSocket connection management
+    - [ ] Retry logic for failed requests
+    - [ ] Offline mode handling
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] ChatPage (root page container)
+    - [ ] ChatBubble (dynamic text renderer)
+    - [ ] PromptBox (text input + tool picker)
+    - [ ] ContextPanel (RAG/documents sidebar)
+    - [ ] AgentTimeline (collapsible timeline visualization)
+    - [ ] SessionHeader (controls and indicators)
+  - [ ] Implement Specialized Components:
+    - [ ] MarkdownRenderer (with syntax highlighting)
+    - [ ] CodeBlock (with copy functionality)
+    - [ ] AttachmentList (file management)
+    - [ ] InspectorTabs (debug information)
+    - [ ] VoiceInput (audio capture and transcription)
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Navigation Integration:
+    - [ ] Click agent name → opens Agents Page (focused on agent)
+    - [ ] Click attached document → opens RAG Knowledge Base (file selected)
+    - [ ] Click workflow reference → opens Workflows Page (at specific workflow)
+    - [ ] Context-aware navigation
+  - [ ] Implement Cross-Page Communication:
+    - [ ] Share context between pages
+    - [ ] Maintain session state across navigation
+    - [ ] Update related pages when chat changes
+    - [ ] Synchronize data across components
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient message rendering
+    - [ ] Lazy loading for long conversations
+    - [ ] Memory management for large sessions
+    - [ ] Optimized WebSocket handling
+  - [ ] Create Optimization Strategies:
+    - [ ] Message virtualization for long chats
+    - [ ] Image and file lazy loading
+    - [ ] Efficient markdown rendering
+    - [ ] Reduced re-renders with state optimization
+
+### 3.3 Agents Page (Command & Management Center)
+- [x] 🟢 **Agents Page Layout & Structure**
+  - [x] Create two-column layout (Left: Agent Registry, Right: Agent Details)
+  - [x] Implement top header with global agent controls
+  - [x] Add live metrics sidebar
+  - [x] Create agent creation modal
+  - [x] Implement dynamic registry management
+
+- [x] 🟢 **Agents Page Components**
+  - [x] AgentTable (interactive data grid)
+  - [x] AgentDetailTabs (overview/config/performance/memory/logs)
+  - [x] NewAgentModal
+  - [x] MemoryViewer
+  - [x] AgentMetricsChart (Plotly)
+
+- [x] 🟢 **Agents Page Integration**
+  - [x] Connect to `/agents` API
+  - [x] Connect to `/ws/agents` WebSocket
+  - [x] Implement agent control operations
+  - [x] Add performance monitoring
+  - [x] Create agent health alerts
+
+### 3.4 Tasks Page (Mission Control Center)
+- [x] 🟢 **Tasks Page Layout & Structure**
+  - [x] Create two-panel layout (Left: Task Table/List View, Right: Task Details)
+  - [x] Implement top header with task overview and controls
+  - [x] Add responsive design for different screen sizes
+  - [x] Create real-time updates via WebSocket
+  - [x] Implement task filtering and search functionality
+
+- [x] 🟢 **Top Header (Task Overview & Controls)**
+  - [x] Create Task Counters:
+    - [x] Running 🟢 counter with live updates
+    - [x] Completed ✅ counter with historical data
+    - [x] Failed 🔴 counter with error tracking
+    - [x] Queued ⏳ counter with queue status
+    - [x] Example format: "3 Running / 14 Completed / 1 Failed"
+  - [x] Implement Search & Filters:
+    - [x] Filter by status (Running, Completed, Failed, Queued)
+    - [x] Filter by agent (dropdown with agent names)
+    - [x] Filter by type (Chat, Workflow, RAG, Automation, File)
+    - [x] Filter by creation time (date range picker)
+    - [x] Quick filter chips: Chat, Workflow, RAG, Automation, Manual
+  - [x] Add Control Buttons:
+    - [x] ➕ New Task button (opens Task Creation modal)
+    - [x] ♻️ Refresh button (force refresh table)
+    - [x] 🧹 Clear Completed button (bulk-delete finished tasks)
+
+- [x] 🟢 **Left Panel - Task Table/List View**
+  - [x] Create Interactive Task Table with columns:
+    - [x] Task ID column (short UUID/hash, clickable for detail view)
+    - [x] Type column (Chat, Workflow, RAG, Automation, File)
+    - [x] Agent column (name or icon)
+    - [x] Status column (Running, Waiting, Completed, Failed, Cancelled)
+    - [x] Progress column (percentage with progress bar)
+    - [x] Start Time/Duration column (timestamps and elapsed time)
+    - [x] Priority column (Normal, High, Critical)
+    - [x] Created By column (User, Agent, Scheduler)
+  - [x] Implement Row Actions:
+    - [x] ⏹ Cancel button (stop running task)
+    - [x] 🔁 Retry button (restart failed task)
+    - [x] 📄 View Logs button (open logs in detail panel)
+    - [x] 🧩 Inspect Inputs button (show task inputs)
+  - [x] Add Color Coding:
+    - [x] 🟢 Green for Running tasks
+    - [x] 🟡 Yellow for Waiting/Queued tasks
+    - [x] 🔵 Blue for Completed tasks
+    - [x] 🔴 Red for Failed tasks
+    - [x] ⚪ Gray for Cancelled tasks
+  - [x] Create Row Interactions:
+    - [x] Click row → opens detailed task view (right panel)
+    - [x] Double-click → jump to originating page (chat, workflow)
+    - [x] Hover → shows live progress tooltip
+    - [x] Right-click → context menu with actions
+
+- [ ] 🔴 **Right Panel - Task Details**
+  - [ ] Create Task Header:
+    - [ ] Task Title (editable)
+    - [ ] Type Badge with color coding
+    - [ ] Agent name and avatar
+    - [ ] Created Time and Elapsed Time display
+    - [ ] Control Buttons: Pause/Resume, Retry, Terminate
+  - [ ] Implement Detail Tabs:
+    - [ ] Overview Tab:
+      - [ ] Task summary and description
+      - [ ] Origin information (user, agent, scheduler)
+      - [ ] Inputs and context used
+      - [ ] Output display (if available)
+      - [ ] Dependencies or parent/child tasks (clickable links)
+    - [ ] Progress Tab:
+      - [ ] Animated progress bar with real-time percentage
+      - [ ] Substep list for multi-phase tasks
+      - [ ] ETA estimate and last update time
+      - [ ] Progress history timeline
+    - [ ] Logs Tab:
+      - [ ] Streaming logs filtered to this task only
+      - [ ] Severity filters (info/warn/error)
+      - [ ] "Copy to Clipboard" functionality
+      - [ ] "Download Log" option
+      - [ ] Log search and filtering
+    - [ ] Resources Tab:
+      - [ ] CPU usage for task process
+      - [ ] Memory usage tracking
+      - [ ] GPU usage (if applicable)
+      - [ ] Token count and model latency
+      - [ ] Estimated cost calculation
+    - [ ] Artifacts Tab:
+      - [ ] Output files and generated content
+      - [ ] "Open in Files Page" shortcut
+      - [ ] Artifact download options
+      - [ ] File preview functionality
+    - [ ] Debug/Trace Tab:
+      - [ ] Developer mode view
+      - [ ] Execution trace display
+      - [ ] LangChain chain graph visualization
+      - [ ] Debug information and stack traces
+  - [ ] Add Footer Toolbar:
+    - [ ] "View Parent Task" button (if nested)
+    - [ ] "Open Origin" button (chat, workflow)
+    - [ ] "Promote to Workflow" button (save recurring pattern)
+
+- [ ] 🔴 **Task Creation Modal**
+  - [ ] Create Modal Fields:
+    - [ ] Type dropdown (Chat, Workflow, Automation, RAG, Custom)
+    - [ ] Prompt/Description (multiline text editor)
+    - [ ] Assign to Agent (dropdown from agent registry)
+    - [ ] Priority selection (Low/Normal/High/Critical)
+    - [ ] Schedule options (Now/Later/Recurring with cron syntax)
+    - [ ] Attachments (optional file uploads)
+    - [ ] Tool Selection (optional, select available tools)
+    - [ ] Execution Mode (synchronous/interactive or async/background)
+  - [ ] Implement Modal Actions:
+    - [ ] "Validate Task" button (dry-run through orchestrator)
+    - [ ] "Create & Run" button (saves and triggers immediately)
+    - [ ] "Save Draft" button (save without running)
+    - [ ] "Cancel" button (close without saving)
+  - [ ] Add Validation Features:
+    - [ ] Syntax check for task parameters
+    - [ ] Agent availability validation
+    - [ ] Tool compatibility check
+    - [ ] Schedule validation for recurring tasks
+
+- [ ] 🔴 **Real-time Task Tracking**
+  - [ ] Implement WebSocket Integration:
+    - [ ] WebSocket /ws/tasks for real-time updates
+    - [ ] Task status change notifications
+    - [ ] Progress percentage updates
+    - [ ] Log streaming for active tasks
+  - [ ] Create Live Updates:
+    - [ ] Automatic table refresh
+    - [ ] Progress bar animations
+    - [ ] Status icon updates
+    - [ ] Counter updates in header
+
+- [ ] 🔴 **Task Control Operations**
+  - [ ] Implement Cancellation & Retry:
+    - [ ] Immediate backend signal to terminate task
+    - [ ] Requeue functionality for failed tasks
+    - [ ] Bulk operations for multiple tasks
+    - [ ] Confirmation dialogs for destructive actions
+  - [ ] Create Parent/Child Linking:
+    - [ ] Agent-generated subtasks appear nested
+    - [ ] Parent task links to child tasks
+    - [ ] Child task links back to parent
+    - [ ] Task hierarchy visualization
+
+- [ ] 🔴 **Progress Streaming & Monitoring**
+  - [ ] Implement Progress Streaming:
+    - [ ] Percentage updates via backend events
+    - [ ] Substep text streaming
+    - [ ] ETA calculations and updates
+    - [ ] Progress history tracking
+  - [ ] Create Resource Isolation:
+    - [ ] Each task runs in separate threadpool
+    - [ ] Async task execution to prevent blocking
+    - [ ] Resource usage monitoring per task
+    - [ ] Performance impact tracking
+
+- [ ] 🔴 **Task History & Persistence**
+  - [ ] Implement Persisted History:
+    - [ ] All tasks logged to SQLite database
+    - [ ] Filter by date range functionality
+    - [ ] Task archival and cleanup
+    - [ ] Historical data retention policies
+  - [ ] Create Error Diagnostics:
+    - [ ] Failed tasks show stack traces
+    - [ ] Detailed error logs in detail tab
+    - [ ] Error categorization and analysis
+    - [ ] Recovery suggestions for common errors
+
+- [ ] 🔴 **Tagging & Search System**
+  - [ ] Implement Automatic Tagging:
+    - [ ] Tasks automatically tagged by type
+    - [ ] Agent-based tagging
+    - [ ] Priority-based tagging
+    - [ ] Custom tag support
+  - [ ] Create Advanced Search:
+    - [ ] Full-text search across task descriptions
+    - [ ] Tag-based filtering
+    - [ ] Date range filtering
+    - [ ] Status-based filtering
+    - [ ] Agent-based filtering
+
+- [ ] 🔴 **Cross-Linking & Navigation**
+  - [ ] Implement Cross-Page Navigation:
+    - [ ] "Open in Chat" button for chat tasks
+    - [ ] "Open in Workflow" button for workflow tasks
+    - [ ] "Open Origin" button for context navigation
+    - [ ] Deep linking to originating pages
+  - [ ] Create Context Preservation:
+    - [ ] Maintain context when navigating
+    - [ ] Return to task view after navigation
+    - [ ] Breadcrumb navigation
+    - [ ] History tracking
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /tasks (list tasks with metadata)
+    - [ ] GET /tasks/{id} (detailed task info)
+    - [ ] POST /tasks/create (new task creation)
+    - [ ] POST /tasks/{id}/cancel (cancel running task)
+    - [ ] POST /tasks/{id}/retry (restart with same params)
+    - [ ] GET /tasks/{id}/logs (stream or fetch logs)
+    - [ ] WebSocket /ws/tasks (task events streaming)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /tasks/{id}/progress (progress information)
+    - [ ] POST /tasks/{id}/pause (pause task execution)
+    - [ ] POST /tasks/{id}/resume (resume paused task)
+    - [ ] GET /tasks/{id}/resources (resource usage)
+    - [ ] GET /tasks/{id}/artifacts (output artifacts)
+    - [ ] POST /tasks/bulk/delete (bulk delete operations)
+    - [ ] GET /tasks/stats (task statistics)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] TasksPage (root container)
+    - [ ] TaskTable (interactive table with status icons)
+    - [ ] TaskDetailTabs (tabbed right-side panel)
+    - [ ] TaskCreationModal
+    - [ ] TaskProgressBar
+    - [ ] ResourceUsageChart (Plotly integration)
+    - [ ] LogViewer
+  - [ ] Implement Specialized Components:
+    - [ ] TaskStatusIndicator
+    - [ ] TaskTypeBadge
+    - [ ] TaskPriorityIndicator
+    - [ ] TaskProgressChart
+    - [ ] TaskLogStream
+    - [ ] TaskArtifactList
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Chat Console Integration:
+    - [ ] "Create Task from Message" functionality
+    - [ ] Task creation from chat context
+    - [ ] Chat task tracking and monitoring
+  - [ ] Implement Workflow Integration:
+    - [ ] Workflow step logging as internal tasks
+    - [ ] Click to open task detail from workflow
+    - [ ] Workflow task dependency tracking
+  - [ ] Add Monitoring Integration:
+    - [ ] Click running process → opens corresponding task
+    - [ ] Process-to-task mapping
+    - [ ] Resource usage correlation
+  - [ ] Create Automation Integration:
+    - [ ] Recurring jobs appear under "Scheduled"
+    - [ ] Automation task tracking
+    - [ ] Scheduled task management
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient table rendering for large task lists
+    - [ ] Lazy loading for task details
+    - [ ] Real-time update optimization
+    - [ ] Memory management for task data
+  - [ ] Create Optimization Strategies:
+    - [ ] Task data virtualization
+    - [ ] Efficient WebSocket handling
+    - [ ] Reduced re-renders with state optimization
+    - [ ] Background task cleanup
+
+- [ ] 🔴 **Operational Dashboard Features**
+  - [ ] Create System Health Monitoring:
+    - [ ] Task success rate tracking
+    - [ ] Average task completion time
+    - [ ] Resource usage trends
+    - [ ] Error rate monitoring
+  - [ ] Implement Operational Insights:
+    - [ ] Task performance analytics
+    - [ ] Bottleneck identification
+    - [ ] Resource optimization suggestions
+    - [ ] Capacity planning data
+
+### 3.5 Workflows Page (Automation Designer & Orchestrator)
+- [ ] 🔴 **Workflows Page Layout & Structure**
+  - [ ] Create two-view mode layout (List View default, Canvas View for building)
+  - [ ] Implement top header with workflow controls
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create real-time updates via WebSocket
+  - [ ] Implement workflow filtering and search functionality
+
+- [ ] 🔴 **Top Header (Workflow Controls)**
+  - [ ] Create Search Bar:
+    - [ ] Filter workflows by name
+    - [ ] Filter by tags
+    - [ ] Filter by creator
+    - [ ] Advanced search functionality
+  - [ ] Add Quick Stats Display:
+    - [ ] "X Active / Y Draft / Z Scheduled" format
+    - [ ] Real-time count updates
+    - [ ] Status-based color coding
+  - [ ] Implement Control Buttons:
+    - [ ] ➕ New Workflow button (opens workflow builder modal)
+    - [ ] ▶️ Run Selected button (executes chosen workflow)
+    - [ ] ⏸ Pause button (stops running workflows)
+    - [ ] 🗑 Delete button (removes selected workflows)
+    - [ ] 📦 Export/Import button (JSON export/import)
+  - [ ] Add Mode Toggle:
+    - [ ] View mode switcher (List / Canvas)
+    - [ ] Visual indicator of current mode
+    - [ ] Smooth transition between modes
+
+- [ ] 🔴 **List View (Default Mode)**
+  - [ ] Create Workflow Table with columns:
+    - [ ] Name column (workflow title, clickable for detail view)
+    - [ ] Type column (Manual / Scheduled / Event-triggered)
+    - [ ] Created By column (user or system)
+    - [ ] Steps column (# of workflow steps)
+    - [ ] Last Run/Duration column (execution history)
+    - [ ] Status column (Active, Draft, Failed)
+    - [ ] Next Run column (if scheduled)
+  - [ ] Implement Row Actions:
+    - [ ] ▶️ Run button (execute workflow)
+    - [ ] ✏️ Edit button (open in canvas mode)
+    - [ ] 🧩 Duplicate button (copy workflow)
+    - [ ] 📋 View Logs button (open logs viewer)
+    - [ ] 🗑 Delete button (remove workflow)
+  - [ ] Add Row Interactions:
+    - [ ] Click row → opens workflow detail view
+    - [ ] Double-click → opens in canvas mode
+    - [ ] Right-click → context menu with actions
+    - [ ] Hover → shows workflow summary tooltip
+
+- [ ] 🔴 **Canvas View (Visual Builder)**
+  - [ ] Create Drag-and-Drop Interface:
+    - [ ] Visual nodes (steps) and edges (data flow)
+    - [ ] Smooth drag-and-drop functionality
+    - [ ] Visual connection system
+    - [ ] Canvas zoom and pan controls
+  - [ ] Implement Node Types with Visual Labels:
+    - [ ] 🧠 Agent Node (AI execution) - Blue color
+    - [ ] 📄 Document Node (RAG retrieval) - Green color
+    - [ ] ⚙️ Function Node (Python/tool execution) - Orange color
+    - [ ] 🔁 Loop Node (iteration condition) - Purple color
+    - [ ] ⏱ Timer Node (schedule trigger) - Yellow color
+    - [ ] 📨 Email Node (IMAP integration) - Red color
+    - [ ] ✅ End Node (workflow result) - Gray color
+  - [ ] Add Node Interactions:
+    - [ ] Click node → opens Properties Panel
+    - [ ] Connect nodes by dragging output → input
+    - [ ] Double-click node → expand detailed configuration
+    - [ ] Right-click node → context menu
+  - [ ] Create Canvas Features:
+    - [ ] Node selection and multi-selection
+    - [ ] Copy/paste nodes
+    - [ ] Undo/redo functionality
+    - [ ] Canvas grid and snap-to-grid
+    - [ ] Auto-layout algorithms
+
+- [ ] 🔴 **Workflow Builder Modal**
+  - [ ] Create General Info Section:
+    - [ ] Name field (required)
+    - [ ] Description field (multiline)
+    - [ ] Tags field (multi-input)
+    - [ ] Type selection (Manual/Scheduled/Event-triggered)
+    - [ ] Visibility setting (Private/Shared)
+  - [ ] Implement Configuration Section:
+    - [ ] Trigger Configuration:
+      - [ ] Manual: run on demand
+      - [ ] Scheduled: cron or interval settings
+      - [ ] Event-triggered: file added, email received, task completed
+    - [ ] Entry Point Node selection
+    - [ ] Global Parameters (API keys, models, file paths)
+  - [ ] Add Builder Canvas:
+    - [ ] Drag new nodes from Node Palette
+    - [ ] Visual flow animation
+    - [ ] "Validate Flow" button
+    - [ ] Connection validation and type checking
+  - [ ] Create Testing Section:
+    - [ ] "Dry Run" button (simulation mode)
+    - [ ] Data flow trace display
+    - [ ] Validation results
+    - [ ] No external side effects
+  - [ ] Add Save Options:
+    - [ ] Save as Draft
+    - [ ] Save & Activate
+    - [ ] Export JSON definition
+    - [ ] Version control integration
+
+- [ ] 🔴 **Node Palette (Left Side)**
+  - [ ] Create Draggable Node Types:
+    - [ ] Agent Node (assign specific agent)
+    - [ ] Tool Node (Python function)
+    - [ ] RAG Query Node
+    - [ ] Conditional Node (if/else logic)
+    - [ ] Wait/Timer Node
+    - [ ] Email Node
+    - [ ] Output/End Node
+  - [ ] Implement Node Categories:
+    - [ ] AI & Agents category
+    - [ ] Data & RAG category
+    - [ ] Logic & Control category
+    - [ ] Communication category
+    - [ ] Output & Results category
+  - [ ] Add Node Search and Filtering:
+    - [ ] Search nodes by name
+    - [ ] Filter by category
+    - [ ] Recently used nodes
+    - [ ] Favorites system
+
+- [ ] 🔴 **Properties Panel (Right Side)**
+  - [ ] Create Node Configuration:
+    - [ ] Node-specific settings
+    - [ ] Input/output definitions
+    - [ ] Parameter configuration
+    - [ ] Validation rules
+  - [ ] Implement Connection Management:
+    - [ ] Input/output port configuration
+    - [ ] Data type validation
+    - [ ] Connection requirements
+    - [ ] Dependency management
+  - [ ] Add Advanced Settings:
+    - [ ] Error handling configuration
+    - [ ] Timeout settings
+    - [ ] Retry logic
+    - [ ] Resource allocation
+
+- [ ] 🔴 **Workflow Detail View**
+  - [ ] Create Overview Tab:
+    - [ ] Summary of purpose and creator
+    - [ ] Created date and last modified
+    - [ ] Run History with quick filter ("last 5 runs")
+    - [ ] Linked Agents and Tools
+    - [ ] Workflow statistics
+  - [ ] Implement Graph Tab:
+    - [ ] Rendered flow diagram (interactive)
+    - [ ] Hover shows current step progress (if running)
+    - [ ] Click nodes for detailed information
+    - [ ] Zoom and pan controls
+  - [ ] Add Parameters Tab:
+    - [ ] Editable global variables
+    - [ ] Input bindings for triggers
+    - [ ] Parameter validation
+    - [ ] Default value management
+  - [ ] Create Logs Tab:
+    - [ ] Combined log stream from all steps
+    - [ ] Collapsible logs per node
+    - [ ] Log level filtering
+    - [ ] Search and export functionality
+  - [ ] Implement Runs Tab:
+    - [ ] List of previous executions
+    - [ ] Status and output links
+    - [ ] Execution timeline
+    - [ ] Performance metrics
+  - [ ] Add Output Tab:
+    - [ ] Final results display
+    - [ ] Generated artifacts (text, files, summaries)
+    - [ ] Download options
+    - [ ] Result visualization
+
+- [ ] 🔴 **Visual Flow Editing**
+  - [ ] Implement Graphical Workflow Building:
+    - [ ] Users build workflows graphically
+    - [ ] Backend saves JSON schema
+    - [ ] Real-time validation
+    - [ ] Visual feedback for errors
+  - [ ] Create Execution Engine:
+    - [ ] Each workflow maps to LangGraph
+    - [ ] Internal directed acyclic graph (DAG)
+    - [ ] Orchestration layer execution
+    - [ ] Step-by-step execution tracking
+
+- [ ] 🔴 **Advanced Workflow Features**
+  - [ ] Implement Parameter Injection:
+    - [ ] Dynamic variables ({{var_name}})
+    - [ ] Runtime variable resolution
+    - [ ] Variable scope management
+    - [ ] Parameter validation
+  - [ ] Create Conditional Logic:
+    - [ ] If/Else nodes with agent evaluation
+    - [ ] Rule expressions (x > y)
+    - [ ] Boolean logic support
+    - [ ] Complex condition chains
+  - [ ] Add Loop Functionality:
+    - [ ] Iteration over list results
+    - [ ] Limited to 50 steps (infinite loop prevention)
+    - [ ] Loop condition evaluation
+    - [ ] Break and continue logic
+  - [ ] Implement Error Handling:
+    - [ ] Failed nodes trigger rollback
+    - [ ] Alternate branch execution
+    - [ ] Error recovery strategies
+    - [ ] Failure notification system
+
+- [ ] 🔴 **Scheduling & Event Triggers**
+  - [ ] Create Scheduling Integration:
+    - [ ] APScheduler integration
+    - [ ] Workflows appear as jobs in Automation page
+    - [ ] Cron expression support
+    - [ ] Interval scheduling
+  - [ ] Implement Event Triggers:
+    - [ ] File watcher hooks
+    - [ ] IMAP mail triggers
+    - [ ] Task completion events
+    - [ ] Custom event types
+  - [ ] Add Trigger Management:
+    - [ ] Event subscription
+    - [ ] Trigger configuration
+    - [ ] Event filtering
+    - [ ] Trigger testing
+
+- [ ] 🔴 **Versioning & Export/Import**
+  - [ ] Implement Versioning:
+    - [ ] Each save increments version
+    - [ ] Version history tracking
+    - [ ] Rollback functionality
+    - [ ] Version comparison
+  - [ ] Create Export/Import:
+    - [ ] JSON definitions with node metadata
+    - [ ] Connector settings preservation
+    - [ ] Version control integration
+    - [ ] Backup and restore functionality
+
+- [ ] 🔴 **Real-time Workflow Monitoring**
+  - [ ] Implement WebSocket Integration:
+    - [ ] WebSocket /ws/workflows for real-time updates
+    - [ ] Running workflow status updates
+    - [ ] Step-by-step progress tracking
+    - [ ] Execution notifications
+  - [ ] Create Live Updates:
+    - [ ] Real-time status changes
+    - [ ] Progress indicators
+    - [ ] Error notifications
+    - [ ] Completion alerts
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /workflows (list all workflows)
+    - [ ] GET /workflows/{id} (fetch workflow with nodes/connections)
+    - [ ] POST /workflows/create (create or import workflow)
+    - [ ] PATCH /workflows/{id} (update workflow definition)
+    - [ ] POST /workflows/{id}/run (execute workflow)
+    - [ ] POST /workflows/{id}/pause|resume|delete
+    - [ ] GET /workflows/{id}/runs (run history)
+    - [ ] GET /workflows/{id}/logs (per-run logs)
+    - [ ] WebSocket /ws/workflows (real-time status updates)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /workflows/{id}/validate (validate workflow)
+    - [ ] POST /workflows/{id}/dry-run (simulation mode)
+    - [ ] GET /workflows/{id}/nodes (node information)
+    - [ ] POST /workflows/{id}/export (export JSON)
+    - [ ] POST /workflows/import (import from JSON)
+    - [ ] GET /workflows/{id}/metrics (execution metrics)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] WorkflowsPage (main page container)
+    - [ ] WorkflowTable (list view table)
+    - [ ] WorkflowCanvas (visual graph editor)
+    - [ ] NodePalette (left-side draggable node types)
+    - [ ] PropertiesPanel (right-side configuration editor)
+    - [ ] WorkflowRunViewer (run history + logs)
+    - [ ] WorkflowModal (create/edit modal)
+  - [ ] Implement Specialized Components:
+    - [ ] WorkflowNode (individual workflow nodes)
+    - [ ] WorkflowEdge (connections between nodes)
+    - [ ] WorkflowStatusIndicator
+    - [ ] WorkflowMetricsChart
+    - [ ] WorkflowLogViewer
+    - [ ] WorkflowParameterEditor
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Tasks Page Integration:
+    - [ ] Each workflow run registers as a task
+    - [ ] Task-to-workflow linking
+    - [ ] Workflow execution tracking
+  - [ ] Implement Agents Page Integration:
+    - [ ] Workflow nodes link to specific agents
+    - [ ] Clicking opens agent config
+    - [ ] Agent workflow assignments
+  - [ ] Add RAG Page Integration:
+    - [ ] Workflows using retrieval steps link to document sources
+    - [ ] RAG workflow integration
+    - [ ] Document workflow tracking
+  - [ ] Create Automation Page Integration:
+    - [ ] Scheduled workflows appear as recurring jobs
+    - [ ] Automation workflow management
+    - [ ] Schedule synchronization
+  - [ ] Add Monitoring Page Integration:
+    - [ ] Execution metrics (time, resource use)
+    - [ ] Workflow performance monitoring
+    - [ ] Resource usage tracking
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Canvas Performance:
+    - [ ] Efficient rendering for large workflows
+    - [ ] Smooth drag-and-drop animations
+    - [ ] Real-time update optimization
+    - [ ] Memory management for workflow data
+  - [ ] Create Optimization Strategies:
+    - [ ] Workflow execution optimization
+    - [ ] Node rendering optimization
+    - [ ] WebSocket message batching
+    - [ ] Background processing
+
+- [ ] 🔴 **Workflow Analytics & Insights**
+  - [ ] Create Execution Analytics:
+    - [ ] Workflow performance metrics
+    - [ ] Success/failure rates
+    - [ ] Execution time analysis
+    - [ ] Resource usage patterns
+  - [ ] Implement Workflow Insights:
+    - [ ] Bottleneck identification
+    - [ ] Optimization suggestions
+    - [ ] Usage patterns analysis
+    - [ ] Performance recommendations
+
+### 3.6 RAG Knowledge Base Page (Document Intelligence Hub)
+- [ ] 🔴 **RAG Knowledge Base Layout & Structure**
+  - [ ] Create two-column layout (Left: Document Library, Right: Document Details & Query Tools)
+  - [ ] Implement top header with knowledge base controls
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create real-time updates via WebSocket
+  - [ ] Implement document filtering and search functionality
+
+- [ ] 🔴 **Top Header (Knowledge Base Controls)**
+  - [ ] Create Indexed Docs Counter:
+    - [ ] Display "X documents / Y chunks embedded" format
+    - [ ] Real-time count updates
+    - [ ] Color-coded status indicators
+  - [ ] Add Embedding Model Indicator:
+    - [ ] Current embedding model name
+    - [ ] Dimension display (e.g., "MiniLM-L6-v2 (384d)")
+    - [ ] Model performance metrics
+  - [ ] Implement Storage Indicator:
+    - [ ] Total index size on disk
+    - [ ] Available disk space
+    - [ ] Storage usage percentage
+    - [ ] Storage warnings and alerts
+  - [ ] Add Control Buttons:
+    - [ ] 📁 Upload Documents button (opens upload modal)
+    - [ ] 🔄 Rebuild Index button (triggers full rebuild)
+    - [ ] ⚙️ Settings button (shortcut to RAG section in Control Center)
+    - [ ] 🧠 Test Query button (opens query tester modal)
+    - [ ] 🗑 Cleanup button (purge deleted/obsolete files)
+
+- [ ] 🔴 **Left Column - Document Library**
+  - [ ] Create Document Table with columns:
+    - [ ] Name/Title column (document title, clickable for details)
+    - [ ] Type column (PDF, DOCX, TXT, MD, EML, CSV, etc.)
+    - [ ] Source column (local folder/uploaded/email)
+    - [ ] Status column (Embedded, Pending, Failed)
+    - [ ] Chunks column (# of chunks)
+    - [ ] Date Added column (timestamp)
+    - [ ] Last Updated column (modification time)
+    - [ ] Size column (KB/MB)
+  - [ ] Implement Row Actions:
+    - [ ] 🧩 Re-embed button (per file)
+    - [ ] 🔍 Preview Chunks button
+    - [ ] 🗑 Delete button
+    - [ ] 📂 Open File Location button
+  - [ ] Add Table Features:
+    - [ ] Filter by file type, source, or status
+    - [ ] Sort by name, date, or chunk count
+    - [ ] Multi-select for bulk actions (delete, re-embed, move)
+    - [ ] Pagination for large libraries (>1000 docs)
+    - [ ] Virtualized list for performance
+  - [ ] Create Search Functionality:
+    - [ ] Fuzzy search by file name
+    - [ ] Full-text search using FAISS metadata
+    - [ ] Advanced search filters
+    - [ ] Search history and suggestions
+
+- [ ] 🔴 **Right Column - Document Details & Query Tools**
+  - [ ] Create Document Header:
+    - [ ] File name display
+    - [ ] Type icon with color coding
+    - [ ] Metadata summary (size, added date, source path)
+    - [ ] Status indicators
+  - [ ] Implement Detail Tabs:
+    - [ ] Overview Tab:
+      - [ ] Extracted text summary
+      - [ ] Document type and language detection
+      - [ ] Embedding status and chunk count
+      - [ ] Processing statistics
+    - [ ] Chunks Tab:
+      - [ ] List of text segments with vector IDs
+      - [ ] Preview text (first 200 chars)
+      - [ ] Chunk metadata and timestamps
+      - [ ] Chunk search and filtering
+    - [ ] Metadata Tab:
+      - [ ] Key-value pairs (author, category, tags, source)
+      - [ ] Editable metadata fields
+      - [ ] Metadata validation
+      - [ ] Custom field support
+    - [ ] Relationships Tab:
+      - [ ] Documents with semantic similarity > threshold
+      - [ ] FAISS query results
+      - [ ] Similarity scores and rankings
+      - [ ] Interactive relationship graph
+    - [ ] Queries Tab:
+      - [ ] History of questions using this document
+      - [ ] Relevance scores and context
+      - [ ] Query performance metrics
+      - [ ] Query result analysis
+  - [ ] Add Footer Actions:
+    - [ ] "Open in File Viewer" (opens raw file)
+    - [ ] "Re-embed Document"
+    - [ ] "Remove from Index"
+    - [ ] "Export Document"
+
+- [ ] 🔴 **Upload Modal**
+  - [ ] Create Upload Interface:
+    - [ ] File picker with drag-and-drop support
+    - [ ] Multiple file selection
+    - [ ] File type validation
+    - [ ] Size limit enforcement
+  - [ ] Implement Upload Configuration:
+    - [ ] Assign Category (Knowledge/Support/Code/Policy)
+    - [ ] Chunking Parameters Override
+    - [ ] Auto-Embed After Upload (checkbox)
+    - [ ] Language Detection (checkbox)
+    - [ ] Vector Namespace (dropdown: default, emails, reports, projects)
+  - [ ] Add Upload Validation:
+    - [ ] Supported file type checking
+    - [ ] Total size ≤ configured max upload limit
+    - [ ] Duplicate file detection
+    - [ ] File integrity verification
+  - [ ] Create Upload Progress:
+    - [ ] Real-time upload progress
+    - [ ] File-by-file status tracking
+    - [ ] Error handling and retry logic
+    - [ ] Success/failure notifications
+
+- [ ] 🔴 **Query Tester Modal (🧠 Test Query)**
+  - [ ] Create Query Interface:
+    - [ ] Query Text input box with placeholder
+    - [ ] Top K slider (1-10)
+    - [ ] Use Reranker toggle
+    - [ ] Include Metadata Filter (category = "policies")
+    - [ ] Display Embedding Similarity checkbox
+    - [ ] Include Agent Explanation checkbox
+  - [ ] Implement Results Section:
+    - [ ] Ranked list of retrieved chunks
+    - [ ] File name and similarity score
+    - [ ] Excerpt text display
+    - [ ] Optional Answer (if Agent Explanation checked)
+    - [ ] LLM summarization of retrieved context
+  - [ ] Add Query Features:
+    - [ ] Query history and favorites
+    - [ ] Query performance metrics
+    - [ ] Export query results
+    - [ ] Save query templates
+
+- [ ] 🔴 **Auto-ingestion System**
+  - [ ] Implement File Watching:
+    - [ ] Watch configured directories for new files
+    - [ ] Automatic file detection and processing
+    - [ ] File change monitoring
+    - [ ] Real-time status updates
+  - [ ] Create Ingestion Pipeline:
+    - [ ] File type detection and validation
+    - [ ] Content extraction and preprocessing
+    - [ ] Chunking and segmentation
+    - [ ] Embedding generation and storage
+  - [ ] Add Ingestion Management:
+    - [ ] Ingestion queue management
+    - [ ] Priority-based processing
+    - [ ] Error handling and retry logic
+    - [ ] Ingestion statistics and monitoring
+
+- [ ] 🔴 **Embedding Pipeline**
+  - [ ] Create Document Processing:
+    - [ ] Document splitting into configurable chunks
+    - [ ] Text preprocessing and cleaning
+    - [ ] Language detection and segmentation
+    - [ ] Metadata extraction and tagging
+  - [ ] Implement Embedding Generation:
+    - [ ] Vector encoding using embedding models
+    - [ ] Batch processing for efficiency
+    - [ ] Quality validation and verification
+    - [ ] Embedding storage and indexing
+  - [ ] Add FAISS Integration:
+    - [ ] Vector storage in FAISS index
+    - [ ] Index optimization and maintenance
+    - [ ] Similarity search capabilities
+    - [ ] Performance monitoring
+
+- [ ] 🔴 **Namespace Separation**
+  - [ ] Implement Vector Namespaces:
+    - [ ] Separate vector spaces for different document types
+    - [ ] Namespace-based document organization
+    - [ ] Cross-namespace search capabilities
+    - [ ] Namespace management and configuration
+  - [ ] Create Namespace Features:
+    - [ ] Default namespace for general documents
+    - [ ] Specialized namespaces (emails, reports, projects)
+    - [ ] Namespace-specific embedding models
+    - [ ] Namespace access control and permissions
+
+- [ ] 🔴 **Index Management**
+  - [ ] Implement Rebuild Index:
+    - [ ] Full re-embedding of all documents
+    - [ ] Long-running job with progress tracking
+    - [ ] Incremental update capabilities
+    - [ ] Index optimization and maintenance
+  - [ ] Create Incremental Updates:
+    - [ ] Scan directories for changed/new files
+    - [ ] Delta processing for efficiency
+    - [ ] Change detection and processing
+    - [ ] Update tracking and validation
+  - [ ] Add FAISS Maintenance:
+    - [ ] "Vacuum" or "Optimize" jobs
+    - [ ] Internal structure rebuilding
+    - [ ] Performance optimization
+    - [ ] Index health monitoring
+
+- [ ] 🔴 **Similarity and Relationships**
+  - [ ] Create Similarity View:
+    - [ ] Per-document relation graph
+    - [ ] Semantically related documents
+    - [ ] Similarity score visualization
+    - [ ] Interactive relationship exploration
+  - [ ] Implement Chunk Preview:
+    - [ ] Expandable chunk details
+    - [ ] Embedding metadata display
+    - [ ] Vector ID and similarity scores
+    - [ ] Chunk context and relationships
+  - [ ] Add Relationship Analysis:
+    - [ ] Document clustering and grouping
+    - [ ] Similarity threshold configuration
+    - [ ] Relationship strength indicators
+    - [ ] Cross-document connections
+
+- [ ] 🔴 **Search and Discovery**
+  - [ ] Implement Advanced Search:
+    - [ ] Fuzzy search by file name
+    - [ ] Full-text search using FAISS metadata
+    - [ ] Semantic search capabilities
+    - [ ] Hybrid search combining multiple methods
+  - [ ] Create Search Features:
+    - [ ] Search filters and facets
+    - [ ] Search history and suggestions
+    - [ ] Saved searches and alerts
+    - [ ] Search performance optimization
+  - [ ] Add Discovery Tools:
+    - [ ] Document recommendation system
+    - [ ] Related document suggestions
+    - [ ] Content exploration interface
+    - [ ] Knowledge graph visualization
+
+- [ ] 🔴 **Real-time Monitoring**
+  - [ ] Implement Job Progress Tracking:
+    - [ ] WebSocket /ws/jobs for embedding jobs
+    - [ ] Real-time progress updates
+    - [ ] Job status and completion tracking
+    - [ ] Error handling and notifications
+  - [ ] Create System Monitoring:
+    - [ ] Embedding job metrics (time, memory, chunk rate)
+    - [ ] Index performance monitoring
+    - [ ] Storage usage tracking
+    - [ ] System health indicators
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /rag/documents (list all indexed documents)
+    - [ ] GET /rag/documents/{id} (detailed info with metadata/chunks)
+    - [ ] POST /rag/upload (upload files)
+    - [ ] POST /rag/embed (trigger embedding job)
+    - [ ] POST /rag/rebuild (rebuild entire index)
+    - [ ] POST /rag/cleanup (purge deleted files)
+    - [ ] POST /rag/query (similarity search and LLM summarization)
+    - [ ] WebSocket /ws/jobs (monitor long-running jobs)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /rag/documents/{id}/chunks (document chunks)
+    - [ ] POST /rag/documents/{id}/re-embed (re-embed specific document)
+    - [ ] GET /rag/documents/{id}/similar (similar documents)
+    - [ ] POST /rag/namespaces (namespace management)
+    - [ ] GET /rag/stats (index statistics)
+    - [ ] POST /rag/validate (validate index integrity)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] RagPage (root layout)
+    - [ ] DocumentTable (file registry)
+    - [ ] DocumentDetailTabs (tabbed detail view)
+    - [ ] UploadModal (file upload interface)
+    - [ ] QueryTesterModal (query testing interface)
+    - [ ] ChunkViewer (scrollable virtual list)
+    - [ ] SimilarityGraph (interactive relationship map)
+    - [ ] JobProgressPanel (progress tracking)
+  - [ ] Implement Specialized Components:
+    - [ ] DocumentStatusIndicator
+    - [ ] EmbeddingProgressBar
+    - [ ] ChunkPreview
+    - [ ] SimilarityScore
+    - [ ] DocumentMetadata
+    - [ ] QueryResultList
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Chat Console Integration:
+    - [ ] Agents retrieve context automatically
+    - [ ] Clicking referenced doc opens RAG page
+    - [ ] Document context sharing
+    - [ ] Citation tracking and display
+  - [ ] Implement Workflows Integration:
+    - [ ] RAG Query nodes use same backend
+    - [ ] Workflow document processing
+    - [ ] Document workflow tracking
+  - [ ] Add Automation Integration:
+    - [ ] "Auto-ingest" and "Index Rebuild" jobs
+    - [ ] Automation page visibility
+    - [ ] Scheduled maintenance tasks
+  - [ ] Create Monitoring Integration:
+    - [ ] Embedding job metrics display
+    - [ ] Performance monitoring
+    - [ ] System health indicators
+  - [ ] Add Settings Integration:
+    - [ ] RAG parameters in Control Center
+    - [ ] Configuration management
+    - [ ] Settings synchronization
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient document table rendering
+    - [ ] Virtualized lists for large datasets
+    - [ ] Real-time update optimization
+    - [ ] Memory management for embeddings
+  - [ ] Create Optimization Strategies:
+    - [ ] Lazy loading for document details
+    - [ ] Efficient search indexing
+    - [ ] WebSocket message batching
+    - [ ] Background processing optimization
+
+- [ ] 🔴 **Knowledge Management Features**
+  - [ ] Create Document Lifecycle Management:
+    - [ ] Upload, embed, validate, clean workflow
+    - [ ] Document versioning and history
+    - [ ] Content update tracking
+    - [ ] Document archival and deletion
+  - [ ] Implement Knowledge Validation:
+    - [ ] Embedding quality verification
+    - [ ] Content accuracy validation
+    - [ ] Relationship verification
+    - [ ] Knowledge consistency checking
+  - [ ] Add Knowledge Analytics:
+    - [ ] Document usage statistics
+    - [ ] Query performance analysis
+    - [ ] Knowledge gap identification
+    - [ ] Content optimization suggestions
+
+### 3.7 Monitoring Page (Real-time Observability Center)
+- [ ] 🔴 **Monitoring Page Layout & Structure**
+  - [ ] Create three-panel layout (System Metrics, AI & Orchestration Metrics, Scheduler & Automation Metrics)
+  - [ ] Implement top header with system overview summary
+  - [ ] Add right sidebar with live metrics feed
+  - [ ] Create responsive design for different screen sizes
+  - [ ] Implement real-time updates via WebSocket
+
+- [ ] 🔴 **Top Header (System Overview Summary)**
+  - [ ] Create Status Banner:
+    - [ ] "All Systems Operational" or warning indicator (🟢🟠🔴)
+    - [ ] Real-time system health status
+    - [ ] Color-coded health indicators
+    - [ ] Alert threshold monitoring
+  - [ ] Add Current Mode Display:
+    - [ ] LOCAL/OFFLINE or HYBRID/CLOUD mode indicator
+    - [ ] Mode-specific configuration display
+    - [ ] Mode switching capabilities
+  - [ ] Implement Uptime Counter:
+    - [ ] Total runtime since last restart
+    - [ ] System uptime tracking
+    - [ ] Restart history display
+  - [ ] Create Scheduler Status:
+    - [ ] Running/Paused/Error status
+    - [ ] Next job time display
+    - [ ] Scheduler health indicators
+  - [ ] Add Quick Actions:
+    - [ ] ♻️ Refresh Now button
+    - [ ] 📊 Export Metrics (CSV or JSON)
+    - [ ] 🧹 Clear Metrics Cache
+    - [ ] ⚙️ Configure Thresholds (link to System Settings)
+
+- [ ] 🔴 **System Metrics (Top Section)**
+  - [ ] Create CPU Usage Monitoring:
+    - [ ] Multi-core line chart (% over time)
+    - [ ] Per-core utilization display
+    - [ ] Average load indicator
+    - [ ] Alert color if usage >90%
+  - [ ] Implement Memory Usage Display:
+    - [ ] Stacked bar for total, used, and available memory
+    - [ ] Swap utilization display
+    - [ ] Memory pressure indicators
+    - [ ] Garbage collection metrics
+  - [ ] Add GPU Utilization Monitoring:
+    - [ ] VRAM usage tracking
+    - [ ] Temperature monitoring
+    - [ ] CUDA activity display
+    - [ ] GPU performance metrics
+  - [ ] Create Disk I/O Monitoring:
+    - [ ] Read/write throughput per device
+    - [ ] I/O latency tracking
+    - [ ] Disk space utilization
+    - [ ] I/O queue depth monitoring
+  - [ ] Implement Network Stats:
+    - [ ] Upload/download rate tracking
+    - [ ] Ping latency to Ollama and external APIs
+    - [ ] Connection error logging
+    - [ ] Dropped packet monitoring
+  - [ ] Add Footer Information:
+    - [ ] "Last updated: <timestamp>"
+    - [ ] Polling interval indicator
+    - [ ] Chart update frequency display
+
+- [ ] 🔴 **AI & Orchestration Metrics (Middle Section)**
+  - [ ] Create Model Performance Widgets:
+    - [ ] Model Throughput: requests per minute
+    - [ ] Response Latency: moving average + histogram (p50, p90, p99)
+    - [ ] Token Usage: cumulative tokens processed per model
+    - [ ] Failure Rate: percentage of failed model calls
+  - [ ] Implement Orchestration Activity:
+    - [ ] Active LangGraph flows count
+    - [ ] smolagents code executions
+    - [ ] AutoGen conversations count
+    - [ ] Average Chain Depth: steps per LangChain graph
+  - [ ] Add Agent Analytics:
+    - [ ] Top Agents by Usage: sorted bar chart (tasks per hour)
+    - [ ] Top Tools Invoked: frequency chart of tool calls
+    - [ ] LLM Context Size Distribution: histogram of context lengths
+    - [ ] Agent performance metrics
+  - [ ] Create Interactive Features:
+    - [ ] Hover to reveal detailed metrics
+    - [ ] Click to expand trend (24-hour history)
+    - [ ] Zoom via drag gesture
+    - [ ] Reset button to restore view
+  - [ ] Add Performance Analysis:
+    - [ ] Bottleneck identification
+    - [ ] Performance trend analysis
+    - [ ] Resource utilization patterns
+    - [ ] Optimization recommendations
+
+- [ ] 🔴 **Scheduler & Automation Metrics (Bottom Section)**
+  - [ ] Create Jobs Timeline:
+    - [ ] Gantt-style chart showing all jobs over past 24 hours
+    - [ ] Job execution visualization
+    - [ ] Timeline zoom and pan controls
+    - [ ] Job dependency display
+  - [ ] Implement Job Performance:
+    - [ ] Job Success/Failure Rate: stacked bar chart by type
+    - [ ] Health check, embedding, email sync metrics
+    - [ ] Job execution time analysis
+    - [ ] Performance trend tracking
+  - [ ] Add Scheduling Information:
+    - [ ] Next Scheduled Runs: live table with countdown timers
+    - [ ] Missed Jobs Alert: red badge for missed schedules
+    - [ ] Schedule adherence monitoring
+    - [ ] Job queue status
+  - [ ] Create Auto-Recovery Stats:
+    - [ ] Restart attempts (Ollama, agents)
+    - [ ] Success vs failure count
+    - [ ] Mean recovery time (MRT)
+    - [ ] Recovery success rate
+  - [ ] Add Scheduler Actions:
+    - [ ] "Pause Scheduler" / "Resume Scheduler"
+    - [ ] "Force Run Job" (dropdown to choose job)
+    - [ ] "Export Scheduler Log"
+    - [ ] Job management controls
+
+- [ ] 🔴 **Right Sidebar - Live Metrics Feed**
+  - [ ] Create Collapsible Telemetry Stream:
+    - [ ] Real-time WebSocket-powered stream
+    - [ ] Event-based JSON messages
+    - [ ] Formatted for readability
+    - [ ] Collapsible/expandable interface
+  - [ ] Implement Event Types:
+    - [ ] [SYSTEM] CPU/Memory threshold exceeded
+    - [ ] [LLM] Response latency > limit
+    - [ ] [AGENT] Agent stalled or crashed
+    - [ ] [SCHEDULER] Job completed or failed
+    - [ ] [RAG] Embedding task finished
+    - [ ] [SECURITY] Safe mode triggered
+  - [ ] Add Event Features:
+    - [ ] Timestamped entries
+    - [ ] Color-coded by severity
+    - [ ] Clickable for expanded logs
+    - [ ] Redirect to Logs page
+  - [ ] Create Event Management:
+    - [ ] Event filtering by type
+    - [ ] Event search functionality
+    - [ ] Event history retention
+    - [ ] Event export capabilities
+
+- [ ] 🔴 **WebSocket Telemetry System**
+  - [ ] Implement Real-time Streaming:
+    - [ ] /ws/metrics streams telemetry JSON
+    - [ ] Metrics, thresholds, events streaming
+    - [ ] Real-time chart updates
+    - [ ] Live data synchronization
+  - [ ] Create Local Caching:
+    - [ ] Reflex state retains last 60 minutes of data
+    - [ ] Offline graph navigation
+    - [ ] Data persistence
+    - [ ] Cache management
+  - [ ] Add Alert System:
+    - [ ] Threshold breaches trigger banners
+    - [ ] Desktop notifications
+    - [ ] Alert escalation
+    - [ ] Alert acknowledgment
+
+- [ ] 🔴 **History & Persistence**
+  - [ ] Implement Data Storage:
+    - [ ] Metrics logged to SQLite
+    - [ ] Rotating JSON files
+    - [ ] Configurable retention policies
+    - [ ] Data archival system
+  - [ ] Create Export/Import:
+    - [ ] Metric snapshots exportable to CSV/JSON
+    - [ ] Debug data export
+    - [ ] Historical data analysis
+    - [ ] Data backup and restore
+  - [ ] Add Data Management:
+    - [ ] Data retention policies
+    - [ ] Storage optimization
+    - [ ] Data compression
+    - [ ] Cleanup automation
+
+- [ ] 🔴 **Threshold Configuration**
+  - [ ] Implement Threshold Management:
+    - [ ] Limits (CPU %, memory, latency) editable
+    - [ ] Settings → System configuration
+    - [ ] Dynamic threshold adjustment
+    - [ ] Threshold validation
+  - [ ] Create Alert Configuration:
+    - [ ] Alert threshold settings
+    - [ ] Notification preferences
+    - [ ] Alert escalation rules
+    - [ ] Alert suppression options
+  - [ ] Add Threshold Monitoring:
+    - [ ] Real-time threshold checking
+    - [ ] Threshold breach detection
+    - [ ] Alert triggering
+    - [ ] Threshold performance analysis
+
+- [ ] 🔴 **Chart Visualization & Interaction**
+  - [ ] Implement Auto-Scaling View:
+    - [ ] Charts auto-rescale for live vs historical modes
+    - [ ] Dynamic scaling based on data range
+    - [ ] Zoom and pan capabilities
+    - [ ] View mode switching
+  - [ ] Create Dark/Light Mode Support:
+    - [ ] Plotly charts adapt to Reflex theme colors
+    - [ ] Theme-aware chart styling
+    - [ ] Consistent color schemes
+    - [ ] Accessibility considerations
+  - [ ] Add Interactive Features:
+    - [ ] Hover tooltips with detailed metrics
+    - [ ] Click to drill down
+    - [ ] Drag to zoom
+    - [ ] Reset view functionality
+  - [ ] Implement Chart Management:
+    - [ ] Chart refresh controls
+    - [ ] Chart export options
+    - [ ] Chart configuration
+    - [ ] Chart performance optimization
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /metrics/system (one-time snapshot)
+    - [ ] GET /metrics/ai (aggregated AI stats)
+    - [ ] GET /metrics/scheduler (job performance data)
+    - [ ] WebSocket /ws/metrics (real-time telemetry stream)
+    - [ ] POST /scheduler/actions/pause|resume|run_job
+    - [ ] GET /metrics/export (export current metrics snapshot)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /metrics/history (historical data)
+    - [ ] GET /metrics/thresholds (threshold configuration)
+    - [ ] POST /metrics/thresholds (update thresholds)
+    - [ ] GET /metrics/alerts (alert history)
+    - [ ] POST /metrics/alerts/acknowledge (acknowledge alerts)
+    - [ ] GET /metrics/health (system health check)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] MonitoringPage (root layout)
+    - [ ] MetricCard (individual compact metric widget)
+    - [ ] PlotlyChart (reusable graph wrapper)
+    - [ ] JobTimeline (Gantt chart for scheduler)
+    - [ ] MetricsFeed (real-time event log panel)
+    - [ ] ThresholdConfigModal
+  - [ ] Implement Specialized Components:
+    - [ ] SystemHealthIndicator
+    - [ ] PerformanceChart
+    - [ ] ResourceUsageWidget
+    - [ ] AlertBanner
+    - [ ] MetricsExport
+    - [ ] ThresholdEditor
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Tasks Page Integration:
+    - [ ] Clicking a process opens its task detail
+    - [ ] Resource usage correlation
+    - [ ] Task performance metrics
+    - [ ] Process monitoring
+  - [ ] Implement Agents Page Integration:
+    - [ ] Agent name click filters metrics by agent
+    - [ ] Agent-specific performance tracking
+    - [ ] Agent resource usage
+    - [ ] Agent health monitoring
+  - [ ] Add Automation Page Integration:
+    - [ ] Scheduler job metrics synced
+    - [ ] Automation performance tracking
+    - [ ] Job execution monitoring
+    - [ ] Schedule adherence tracking
+  - [ ] Create Diagnostics Page Integration:
+    - [ ] Accessed directly when error threshold triggered
+    - [ ] Error correlation and analysis
+    - [ ] Diagnostic data sharing
+    - [ ] Troubleshooting workflows
+  - [ ] Add Settings Page Integration:
+    - [ ] "Configure Thresholds" button links to system config
+    - [ ] Settings synchronization
+    - [ ] Configuration management
+    - [ ] Settings validation
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient chart rendering
+    - [ ] Real-time data processing
+    - [ ] Memory management for metrics
+    - [ ] WebSocket optimization
+  - [ ] Create Optimization Strategies:
+    - [ ] Data sampling for large datasets
+    - [ ] Efficient chart updates
+    - [ ] Background data processing
+    - [ ] Resource usage optimization
+  - [ ] Add Monitoring Optimization:
+    - [ ] Minimal performance impact
+    - [ ] Efficient data collection
+    - [ ] Smart alerting
+    - [ ] Resource-aware monitoring
+
+- [ ] 🔴 **Mission Control Dashboard Features**
+  - [ ] Create Situational Awareness:
+    - [ ] Real-time system status
+    - [ ] Continuous activity monitoring
+    - [ ] System health indicators
+    - [ ] Performance trends
+  - [ ] Implement Mission Control Interface:
+    - [ ] Fast, dense with data
+    - [ ] Continuously alive interface
+    - [ ] Human-readable telemetry
+    - [ ] Operational intelligence
+  - [ ] Add System Intelligence:
+    - [ ] Complex backend activity visualization
+    - [ ] AI analytics integration
+    - [ ] Operational telemetry blending
+    - [ ] System behavior insights
+
+---
+
+## Phase 4: Secondary Navigation Pages
+
+### 4.1 Mail Page (AI-Augmented Email Interface)
+- [ ] 🔴 **Mail Page Layout & Structure**
+  - [ ] Create three-panel layout (Left: Folder Tree & Accounts, Center: Email List, Right: Email Detail & AI Assistant)
+  - [ ] Implement top header with mail controls
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create real-time updates via WebSocket
+  - [ ] Implement email filtering and search functionality
+
+- [ ] 🔴 **Top Header (Mail Controls)**
+  - [ ] Create Account Selector:
+    - [ ] Dropdown showing connected IMAP accounts
+    - [ ] Account status indicators
+    - [ ] Account switching capabilities
+    - [ ] Account configuration display
+  - [ ] Add Folder Selector:
+    - [ ] Inbox, Sent, Drafts, Custom Labels
+    - [ ] Dynamic folder loading from IMAP
+    - [ ] Folder hierarchy display
+    - [ ] Folder management options
+  - [ ] Implement Unread Count:
+    - [ ] Real-time badge per folder
+    - [ ] Unread count updates
+    - [ ] Color-coded indicators
+    - [ ] Unread status tracking
+  - [ ] Create Quick Filters:
+    - [ ] 📬 Unread filter
+    - [ ] ⭐ Important filter
+    - [ ] 🤖 AI-labeled filter (Action/Follow-up/Later)
+    - [ ] 🔍 With Attachments filter
+  - [ ] Add Search Bar:
+    - [ ] Semantic + keyword hybrid search
+    - [ ] "Find all emails about contract renewals" functionality
+    - [ ] Search history and suggestions
+    - [ ] Advanced search options
+  - [ ] Implement Control Buttons:
+    - [ ] 🔄 Sync Now (manual IMAP sync trigger)
+    - [ ] 🧠 Summarize Folder (AI summarization of top 20 threads)
+    - [ ] ⚙️ Manage Accounts (shortcut to Mail section in Control Center)
+
+- [ ] 🔴 **Left Panel - Folder Tree & Accounts**
+  - [ ] Create Folder Tree Structure:
+    - [ ] Tree structure of folders per account
+    - [ ] Hierarchical folder display
+    - [ ] Folder expansion/collapse
+    - [ ] Folder drag-and-drop support
+  - [ ] Implement Folder Information:
+    - [ ] Unread counts per folder
+    - [ ] Sync status indicators
+    - [ ] Last sync time display
+    - [ ] Folder size information
+  - [ ] Add Context Menu (Right-click):
+    - [ ] "Sync Folder" option
+    - [ ] "Rename" folder option
+    - [ ] "Delete" folder option
+    - [ ] "Add Label" option
+  - [ ] Create Account Management:
+    - [ ] Account headers collapsible
+    - [ ] Multi-account view support
+    - [ ] Account-specific settings
+    - [ ] Account status monitoring
+
+- [ ] 🔴 **Center Panel - Email List View**
+  - [ ] Create Email Table with columns:
+    - [ ] Sender/From column (sender name and email)
+    - [ ] Subject column (email subject line)
+    - [ ] Snippet column (first line of body)
+    - [ ] Date/Time column (timestamp)
+    - [ ] AI Label column (color-coded)
+    - [ ] Attachment Icon column (📎)
+  - [ ] Implement Row Indicators:
+    - [ ] 🔵 Unread indicator
+    - [ ] ⭐ Starred indicator
+    - [ ] ⚠️ Flagged by AI (requires review)
+    - [ ] Priority indicators
+  - [ ] Add Row Interactions:
+    - [ ] Single click → opens email in right panel
+    - [ ] Double-click → full-screen preview
+    - [ ] Shift+Select → multi-select for bulk operations
+    - [ ] Right-click → context menu
+  - [ ] Create Bulk Actions Toolbar:
+    - [ ] Mark as Read/Unread
+    - [ ] Delete selected emails
+    - [ ] Apply Label to selected
+    - [ ] Export Thread (.eml or .txt)
+  - [ ] Add List Features:
+    - [ ] Pagination for large email lists
+    - [ ] Virtual scrolling for performance
+    - [ ] Sort by date, sender, subject
+    - [ ] Filter by AI labels, attachments, flags
+
+- [ ] 🔴 **Right Panel - Email Detail & AI Assistant**
+  - [ ] Create Email Header:
+    - [ ] Sender information
+    - [ ] Subject line
+    - [ ] Date and time
+    - [ ] Recipients list
+    - [ ] Flags and priority indicators
+  - [ ] Implement Detail Tabs:
+    - [ ] Message View Tab:
+      - [ ] Full HTML or plain text rendering
+      - [ ] Attachments list with preview/download
+      - [ ] "Reply" and "Forward" buttons (opens AI draft composer)
+      - [ ] Message formatting and display
+    - [ ] AI Summary Tab:
+      - [ ] Auto-generated short summary
+      - [ ] "Expand Summary" → full LLM explanation
+      - [ ] Confidence score indicator (0-100%)
+      - [ ] Summary customization options
+    - [ ] Smart Actions Tab:
+      - [ ] AI-suggested actions (Schedule meeting, Reply with summary, Add to tasks)
+      - [ ] Click → opens modal to confirm execution
+      - [ ] Action customization
+      - [ ] Action history tracking
+    - [ ] Thread Context Tab:
+      - [ ] Message tree of replies and responses
+      - [ ] Semantic links (Similar past threads)
+      - [ ] Thread visualization
+      - [ ] Context navigation
+    - [ ] Metadata Tab:
+      - [ ] Headers information
+      - [ ] Message-id and routing
+      - [ ] Attachments MIME info
+      - [ ] RAG embedding ID
+
+- [ ] 🔴 **AI Features Implementation**
+  - [ ] Create Email Summarization:
+    - [ ] On opening email or thread, AI summarizes content
+    - [ ] Uses configured model for summarization
+    - [ ] Thread-level summarization
+    - [ ] Summary customization and editing
+  - [ ] Implement Auto-triage:
+    - [ ] Emails automatically labeled as Action/Follow-up/Later
+    - [ ] Fine-tuned classifier for email categorization
+    - [ ] Confidence scoring for labels
+    - [ ] Manual label override capabilities
+  - [ ] Add Vector Search:
+    - [ ] Semantic search through FAISS vector space
+    - [ ] Namespace=emails for email-specific search
+    - [ ] Similar email suggestions
+    - [ ] Search result ranking
+  - [ ] Create Smart Reply:
+    - [ ] Generates email drafts based on context
+    - [ ] Tone selection (formal, friendly, neutral)
+    - [ ] Context-aware reply generation
+    - [ ] Reply customization options
+  - [ ] Implement Attachment Context:
+    - [ ] Text from attached PDFs/DOCs automatically embedded
+    - [ ] RAG support for attachment content
+    - [ ] Attachment analysis and summarization
+    - [ ] Attachment-based search
+  - [ ] Add AI Insights Sidebar:
+    - [ ] Suggests next steps ("Add this to workflow", "Extract contact info")
+    - [ ] Context-aware recommendations
+    - [ ] Action automation suggestions
+    - [ ] Insight customization
+
+- [ ] 🔴 **AI Draft Composer (Reply/Forward Modal)**
+  - [ ] Create Composer Fields:
+    - [ ] To/CC/BCC recipient fields
+    - [ ] Subject (prefilled from original)
+    - [ ] Body (rich text area with formatting)
+    - [ ] Tone selector (Formal/Neutral/Friendly)
+  - [ ] Implement Context Options:
+    - [ ] Include previous thread checkbox
+    - [ ] Use attachments as context checkbox
+    - [ ] Reference RAG documents checkbox
+    - [ ] Context customization options
+  - [ ] Add Composer Actions:
+    - [ ] 🧠 "Generate Draft" (AI writes the reply)
+    - [ ] ✏️ "Edit & Send" (manual adjustments before sending)
+    - [ ] 📨 "Queue for Review" (adds draft to Tasks page for approval)
+    - [ ] 💾 "Save Draft" (save for later editing)
+  - [ ] Create Composer Features:
+    - [ ] Rich text editing with formatting
+    - [ ] Attachment support
+    - [ ] Signature management
+    - [ ] Template integration
+
+- [ ] 🔴 **IMAP Integration & Sync**
+  - [ ] Implement IMAP Sync:
+    - [ ] Automatic background sync at configured interval (60s default)
+    - [ ] Manual sync trigger
+    - [ ] Sync status monitoring
+    - [ ] Sync error handling
+  - [ ] Create Email Vectorization:
+    - [ ] Each message embedded on ingestion
+    - [ ] Stored in emails namespace
+    - [ ] Vector search capabilities
+    - [ ] Embedding quality monitoring
+  - [ ] Add Deduplication:
+    - [ ] Prevents re-embedding duplicates via message-id index
+    - [ ] Duplicate detection and handling
+    - [ ] Index maintenance
+    - [ ] Performance optimization
+  - [ ] Implement Error Handling:
+    - [ ] Connection errors shown inline (red banner)
+    - [ ] Retry logic for failed operations
+    - [ ] Error notification system
+    - [ ] Recovery procedures
+
+- [ ] 🔴 **Offline Mode & Caching**
+  - [ ] Create Offline Mode:
+    - [ ] Cached view available even if IMAP disconnected
+    - [ ] Offline email reading
+    - [ ] Offline draft composition
+    - [ ] Sync when connection restored
+  - [ ] Implement Smart Caching:
+    - [ ] Keeps last 500 emails locally for quick reload
+    - [ ] Cache management and cleanup
+    - [ ] Cache performance optimization
+    - [ ] Cache size monitoring
+  - [ ] Add Cache Features:
+    - [ ] Intelligent cache warming
+    - [ ] Cache invalidation strategies
+    - [ ] Cache compression
+    - [ ] Cache analytics
+
+- [ ] 🔴 **Batch Processing & Background Tasks**
+  - [ ] Implement Batch Summaries:
+    - [ ] "Summarize Folder" creates background summarization task
+    - [ ] Visible in Tasks page
+    - [ ] Progress tracking
+    - [ ] Result delivery
+  - [ ] Create Background Processing:
+    - [ ] Email processing queue
+    - [ ] Priority-based processing
+    - [ ] Resource management
+    - [ ] Performance monitoring
+  - [ ] Add Task Management:
+    - [ ] Task creation and tracking
+    - [ ] Task status monitoring
+    - [ ] Task result handling
+    - [ ] Task cleanup
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /email/folders (list IMAP folders)
+    - [ ] GET /email/messages (list emails paginated)
+    - [ ] GET /email/messages/{id} (full email detail)
+    - [ ] POST /email/tests/imap (connection test)
+    - [ ] POST /email/actions/sync (force sync)
+    - [ ] POST /email/actions/reindex (re-embed messages)
+    - [ ] POST /email/draft (generate AI reply)
+    - [ ] POST /email/send (send email via SMTP)
+    - [ ] WebSocket /ws/email (optional live updates)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /email/accounts (list connected accounts)
+    - [ ] POST /email/accounts (add new account)
+    - [ ] DELETE /email/accounts/{id} (remove account)
+    - [ ] GET /email/search (semantic search)
+    - [ ] POST /email/summarize (batch summarization)
+    - [ ] GET /email/labels (list AI labels)
+    - [ ] POST /email/labels (create custom labels)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] MailPage (root layout)
+    - [ ] FolderTree (left navigation)
+    - [ ] MailTable (center list view)
+    - [ ] MailDetailTabs (tabbed detail view)
+    - [ ] AiSummaryPanel (AI summary display)
+    - [ ] AiDraftModal (AI draft composer)
+    - [ ] SmartActionCard (AI action suggestions)
+    - [ ] MailFeedSocket (WebSocket connector)
+  - [ ] Implement Specialized Components:
+    - [ ] EmailStatusIndicator
+    - [ ] AttachmentPreview
+    - [ ] AiLabelBadge
+    - [ ] ThreadVisualization
+    - [ ] SmartReplyGenerator
+    - [ ] EmailSearchBar
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Tasks Page Integration:
+    - [ ] Email actions (summarize, reply, draft) appear as tasks
+    - [ ] Task creation from email actions
+    - [ ] Task status tracking
+    - [ ] Task result handling
+  - [ ] Implement Workflows Integration:
+    - [ ] "Email Trigger" workflows can react to new messages
+    - [ ] Workflow email processing
+    - [ ] Email workflow automation
+    - [ ] Workflow email tracking
+  - [ ] Add RAG Integration:
+    - [ ] Attachments and message text stored in emails vector namespace
+    - [ ] RAG search integration
+    - [ ] Document context sharing
+    - [ ] Knowledge base integration
+  - [ ] Create Settings Integration:
+    - [ ] All IMAP configuration under Control Center → Mail section
+    - [ ] Settings synchronization
+    - [ ] Configuration management
+    - [ ] Settings validation
+  - [ ] Add Monitoring Integration:
+    - [ ] Email sync job metrics visible under scheduler jobs
+    - [ ] Performance monitoring
+    - [ ] Error tracking
+    - [ ] System health indicators
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient email list rendering
+    - [ ] Virtual scrolling for large lists
+    - [ ] Real-time update optimization
+    - [ ] Memory management for email data
+  - [ ] Create Optimization Strategies:
+    - [ ] Lazy loading for email details
+    - [ ] Efficient IMAP sync
+    - [ ] WebSocket message batching
+    - [ ] Background processing optimization
+  - [ ] Add Email Optimization:
+    - [ ] Email compression and storage
+    - [ ] Attachment handling optimization
+    - [ ] Search performance optimization
+    - [ ] Cache efficiency improvements
+
+- [ ] 🔴 **Inbox Intelligence Features**
+  - [ ] Create Smart Organization:
+    - [ ] AI-driven email categorization
+    - [ ] Automatic folder suggestions
+    - [ ] Priority-based sorting
+    - [ ] Smart filtering
+  - [ ] Implement Context Awareness:
+    - [ ] Email relationship mapping
+    - [ ] Thread context understanding
+    - [ ] Sender reputation tracking
+    - [ ] Content pattern recognition
+  - [ ] Add Automation Features:
+    - [ ] Auto-reply generation
+    - [ ] Meeting scheduling integration
+    - [ ] Task creation from emails
+    - [ ] Workflow automation triggers
+  - [ ] Create Intelligence Analytics:
+    - [ ] Email usage patterns
+    - [ ] Response time analysis
+    - [ ] Communication insights
+    - [ ] Productivity metrics
+
+### 4.2 Files Page (Local Data & Document Management Interface)
+- [ ] 🔴 **Files Page Layout & Structure**
+  - [ ] Create two-panel layout (Left: Folder Tree & Filters, Right: File Grid/List View)
+  - [ ] Implement top header with file controls
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create real-time updates via WebSocket
+  - [ ] Implement file filtering and search functionality
+
+- [ ] 🔴 **Top Header (File Controls)**
+  - [ ] Create Workspace Path Indicator:
+    - [ ] Display active workspace data directory
+    - [ ] Path navigation and breadcrumbs
+    - [ ] Workspace switching capabilities
+    - [ ] Path validation and error handling
+  - [ ] Add Storage Summary:
+    - [ ] "X GB used / Y GB available" format
+    - [ ] Real-time storage monitoring
+    - [ ] Storage usage percentage
+    - [ ] Storage warnings and alerts
+  - [ ] Implement Control Buttons:
+    - [ ] 📤 Upload Files button (upload or drag-and-drop)
+    - [ ] 🧠 Vectorize button (create embeddings for selected files)
+    - [ ] 🔄 Sync Folder button (refresh file list and check changes)
+    - [ ] 🗑 Clean Temp Files button (remove old or orphaned files)
+    - [ ] ⚙️ Manage Locations button (open workspace folder or switch data root)
+
+- [ ] 🔴 **Left Panel - Folder Tree & Filters**
+  - [ ] Create Folder Tree View:
+    - [ ] Tree view reflecting actual directory hierarchy
+    - [ ] Hierarchical folder display
+    - [ ] Folder expansion/collapse
+    - [ ] Folder drag-and-drop support
+  - [ ] Implement Right-click Menu:
+    - [ ] "New Folder" option
+    - [ ] "Rename" folder option
+    - [ ] "Delete" folder option
+    - [ ] "Mark for Indexing" option
+  - [ ] Add Indexing Integration:
+    - [ ] Folders marked for indexing automatically sync with RAG ingestion
+    - [ ] Indexing status indicators
+    - [ ] Indexing progress tracking
+    - [ ] Indexing error handling
+  - [ ] Create File Type Filters:
+    - [ ] Filter by file type (PDF, DOCX, TXT, CSV, IMG)
+    - [ ] Filter by tag (reports, contracts, logs)
+    - [ ] Filter by date range
+    - [ ] Filter by size range
+  - [ ] Add Folder Information:
+    - [ ] Number of files per folder
+    - [ ] Total size per folder
+    - [ ] Last modified date
+    - [ ] Folder-level summaries
+
+- [ ] 🔴 **Right Panel - File Grid/List View**
+  - [ ] Create Switchable Layout:
+    - [ ] Grid view: thumbnails for images, icons for docs
+    - [ ] List view: detailed metadata table
+    - [ ] Layout switching controls
+    - [ ] Layout preferences saving
+  - [ ] Implement List View Columns:
+    - [ ] File name column
+    - [ ] Type/MIME column
+    - [ ] Size column
+    - [ ] Modified date column
+    - [ ] Vectorized (yes/no) column
+    - [ ] Tags column
+    - [ ] Accessed by (which agent last used it) column
+  - [ ] Add Row Actions:
+    - [ ] 👁 Preview button
+    - [ ] 🧩 Vectorize button
+    - [ ] 🏷 Tag/Categorize button
+    - [ ] 📤 Download button
+    - [ ] 🗑 Delete button
+  - [ ] Create Multi-select Features:
+    - [ ] Multi-select for bulk operations
+    - [ ] Bulk vectorization
+    - [ ] Bulk tagging
+    - [ ] Bulk download/delete
+  - [ ] Add Grid View Features:
+    - [ ] Thumbnail generation for images
+    - [ ] File type icons
+    - [ ] Hover preview
+    - [ ] Grid size controls
+
+- [ ] 🔴 **File Preview Modal**
+  - [ ] Create Supported File Types & Views:
+    - [ ] PDF/DOCX/TXT/MD: scrollable text preview using pdfplumber/docx2txt
+    - [ ] Images: full preview with zoom, pan, and export options
+    - [ ] CSV/XLSX: rendered as table with pagination and column filters
+    - [ ] Code Files (.py, .js, .json): syntax-highlighted viewer
+    - [ ] Others: binary summary (metadata + hex sample)
+  - [ ] Implement AI Enhancements:
+    - [ ] 🧠 Summarize Document (runs LLM summary job)
+    - [ ] 🔍 Ask About This File (launches small chat modal scoped to document)
+    - [ ] 💡 Extract Entities (identifies names, numbers, and key terms)
+    - [ ] AI-powered content analysis
+  - [ ] Add Preview Features:
+    - [ ] Full-screen preview mode
+    - [ ] Zoom and pan controls
+    - [ ] Export options
+    - [ ] Print functionality
+  - [ ] Create Preview Navigation:
+    - [ ] Previous/Next file navigation
+    - [ ] File list in preview
+    - [ ] Quick file switching
+    - [ ] Preview history
+
+- [ ] 🔴 **Upload Modal**
+  - [ ] Create Upload Interface:
+    - [ ] File picker with drag-and-drop support
+    - [ ] Multiple file selection
+    - [ ] File type validation
+    - [ ] Size limit enforcement
+  - [ ] Implement Upload Configuration:
+    - [ ] Assign category/tags
+    - [ ] Choose destination folder
+    - [ ] Auto-vectorize toggle (default: enabled)
+    - [ ] Overwrite existing toggle
+  - [ ] Add Upload Progress:
+    - [ ] Progress bar per file
+    - [ ] Real-time upload status
+    - [ ] Error handling and retry
+    - [ ] Success/failure notifications
+  - [ ] Create Upload Validation:
+    - [ ] File size limit checking
+    - [ ] Duplicate file detection
+    - [ ] Supported MIME type validation
+    - [ ] File integrity verification
+
+- [ ] 🔴 **Two-way Sync System**
+  - [ ] Implement File Synchronization:
+    - [ ] Keeps workspace folder and UI in sync
+    - [ ] Detects file changes via watchdog
+    - [ ] Real-time file system monitoring
+    - [ ] Sync status indicators
+  - [ ] Create Change Detection:
+    - [ ] File creation monitoring
+    - [ ] File modification tracking
+    - [ ] File deletion detection
+    - [ ] Directory structure changes
+  - [ ] Add Sync Management:
+    - [ ] Manual sync triggers
+    - [ ] Automatic sync scheduling
+    - [ ] Sync conflict resolution
+    - [ ] Sync error handling
+
+- [ ] 🔴 **Tagging & Search System**
+  - [ ] Implement Metadata Storage:
+    - [ ] Metadata stored in SQLite
+    - [ ] Searchable by name, tag, or semantic embedding
+    - [ ] Metadata indexing and optimization
+    - [ ] Metadata backup and restore
+  - [ ] Create Tagging Features:
+    - [ ] Manual tagging interface
+    - [ ] Tag management and organization
+    - [ ] Tag-based filtering
+    - [ ] Tag statistics and analytics
+  - [ ] Add Search Capabilities:
+    - [ ] Full-text search across file contents
+    - [ ] Semantic search using embeddings
+    - [ ] Advanced search filters
+    - [ ] Search history and suggestions
+  - [ ] Implement AI Tagging:
+    - [ ] Optional LLM job auto-suggests file categories and tags
+    - [ ] AI-powered content analysis
+    - [ ] Automatic tag generation
+    - [ ] Tag confidence scoring
+
+- [ ] 🔴 **Vectorization Integration**
+  - [ ] Create Vectorization Pipeline:
+    - [ ] Sends file contents to /rag/embed for immediate use
+    - [ ] Vectorization progress tracking
+    - [ ] Vectorization error handling
+    - [ ] Vectorization quality validation
+  - [ ] Implement RAG Integration:
+    - [ ] Vectorized files appear automatically in RAG Knowledge Base
+    - [ ] RAG search integration
+    - [ ] Document context sharing
+    - [ ] Knowledge base synchronization
+  - [ ] Add Vectorization Management:
+    - [ ] Bulk vectorization operations
+    - [ ] Vectorization status tracking
+    - [ ] Re-vectorization capabilities
+    - [ ] Vectorization cleanup
+
+- [ ] 🔴 **Version Tracking System**
+  - [ ] Implement Version Management:
+    - [ ] Automatically versioned by file hash
+    - [ ] Overwriting creates new version entry
+    - [ ] Version history tracking
+    - [ ] Version comparison capabilities
+  - [ ] Create Version Features:
+    - [ ] Version rollback functionality
+    - [ ] Version diff viewing
+    - [ ] Version metadata tracking
+    - [ ] Version cleanup and archival
+  - [ ] Add Version Analytics:
+    - [ ] Version usage statistics
+    - [ ] Version change patterns
+    - [ ] Version optimization
+    - [ ] Version storage management
+
+- [ ] 🔴 **Auto-cleanup System**
+  - [ ] Implement Cleanup Rules:
+    - [ ] Removes .tmp or .cache files older than 7 days
+    - [ ] Configurable cleanup policies
+    - [ ] Cleanup scheduling
+    - [ ] Cleanup monitoring
+  - [ ] Create Cleanup Management:
+    - [ ] Manual cleanup triggers
+    - [ ] Cleanup preview and confirmation
+    - [ ] Cleanup statistics
+    - [ ] Cleanup error handling
+  - [ ] Add Cleanup Features:
+    - [ ] Orphaned file detection
+    - [ ] Duplicate file identification
+    - [ ] Storage optimization
+    - [ ] Cleanup reporting
+
+- [ ] 🔴 **Integration Hooks**
+  - [ ] Create Automation Triggers:
+    - [ ] File updates trigger "RAG incremental index update" automation job
+    - [ ] Workflow automation triggers
+    - [ ] Event-driven processing
+    - [ ] Integration with other system components
+  - [ ] Implement System Integration:
+    - [ ] RAG Knowledge Base integration
+    - [ ] Chat Console integration
+    - [ ] Workflows integration
+    - [ ] Automation integration
+    - [ ] Monitoring integration
+    - [ ] Settings integration
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /files (list all files in workspace)
+    - [ ] GET /files/{id} (metadata)
+    - [ ] GET /files/preview/{id} (file preview data)
+    - [ ] POST /files/upload (upload one or more files)
+    - [ ] POST /files/delete (delete file(s))
+    - [ ] POST /files/tag (update metadata tags)
+    - [ ] POST /files/vectorize (send to RAG embedding pipeline)
+    - [ ] POST /files/summarize (generate AI summary)
+    - [ ] POST /files/ask (context-based Q&A)
+    - [ ] WebSocket /ws/jobs (track upload/vectorization progress)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /files/search (file search)
+    - [ ] POST /files/bulk/vectorize (bulk vectorization)
+    - [ ] POST /files/bulk/tag (bulk tagging)
+    - [ ] GET /files/stats (file statistics)
+    - [ ] POST /files/sync (force sync)
+    - [ ] GET /files/versions/{id} (file versions)
+    - [ ] POST /files/cleanup (cleanup files)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] FilesPage (root container)
+    - [ ] FolderTree (left panel navigation)
+    - [ ] FileGrid (grid view component)
+    - [ ] FileTable (list view component)
+    - [ ] FilePreviewModal (file preview interface)
+    - [ ] UploadModal (file upload interface)
+    - [ ] TaggingModal (tag management interface)
+    - [ ] JobProgressPanel (progress tracking)
+    - [ ] FileSearchBar (search interface)
+  - [ ] Implement Specialized Components:
+    - [ ] FileThumbnail
+    - [ ] FileTypeIcon
+    - [ ] VectorizationStatus
+    - [ ] TagBadge
+    - [ ] FileMetadata
+    - [ ] PreviewViewer
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create RAG Knowledge Base Integration:
+    - [ ] Vectorized files appear automatically in document list
+    - [ ] RAG search integration
+    - [ ] Document context sharing
+    - [ ] Knowledge base synchronization
+  - [ ] Implement Chat Console Integration:
+    - [ ] Attach files from Files page to chat sessions
+    - [ ] File context in chat
+    - [ ] File sharing in conversations
+    - [ ] File-based chat history
+  - [ ] Add Workflows Integration:
+    - [ ] File upload or tagging can trigger automation workflows
+    - [ ] Workflow file processing
+    - [ ] File workflow automation
+    - [ ] Workflow file tracking
+  - [ ] Create Automation Integration:
+    - [ ] File sync and cleanup run as background jobs
+    - [ ] Automation job monitoring
+    - [ ] File automation triggers
+    - [ ] Automation performance tracking
+  - [ ] Add Monitoring Integration:
+    - [ ] File I/O and embedding jobs visible under system metrics
+    - [ ] Performance monitoring
+    - [ ] Error tracking
+    - [ ] System health indicators
+  - [ ] Implement Settings Integration:
+    - [ ] Data root and file policies defined in Control Center → Workspace section
+    - [ ] Settings synchronization
+    - [ ] Configuration management
+    - [ ] Settings validation
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient file list rendering
+    - [ ] Virtual scrolling for large file lists
+    - [ ] Real-time update optimization
+    - [ ] Memory management for file data
+  - [ ] Create Optimization Strategies:
+    - [ ] Lazy loading for file details
+    - [ ] Efficient file sync
+    - [ ] WebSocket message batching
+    - [ ] Background processing optimization
+  - [ ] Add File Optimization:
+    - [ ] File compression and storage
+    - [ ] Thumbnail generation optimization
+    - [ ] Search performance optimization
+    - [ ] Cache efficiency improvements
+
+- [ ] 🔴 **Data Management Features**
+  - [ ] Create File Lifecycle Management:
+    - [ ] Upload, process, tag, vectorize workflow
+    - [ ] File versioning and history
+    - [ ] File archival and deletion
+    - [ ] File backup and restore
+  - [ ] Implement Data Analytics:
+    - [ ] File usage statistics
+    - [ ] Storage utilization analysis
+    - [ ] File access patterns
+    - [ ] Performance metrics
+  - [ ] Add Data Security:
+    - [ ] File access control
+    - [ ] File encryption
+    - [ ] Secure file transfer
+    - [ ] Data privacy protection
+
+### 4.3 Automation Page (Scheduler & Process Orchestration)
+- [ ] 🔴 **Automation Page Layout & Structure**
+  - [ ] Create two-panel layout (Left: Job List & Scheduler, Right: Job Detail & Configuration)
+  - [ ] Implement top header with automation controls
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create real-time updates via WebSocket
+  - [ ] Implement automation filtering and search functionality
+
+- [ ] 🔴 **Top Header (Automation Controls)**
+  - [ ] Create Scheduler Status:
+    - [ ] Running/Paused/Error status display
+    - [ ] Next job time display
+    - [ ] Scheduler health indicators
+    - [ ] Status color coding and animations
+  - [ ] Add Job Counters:
+    - [ ] Active jobs counter
+    - [ ] Completed jobs counter
+    - [ ] Failed jobs counter
+    - [ ] Queued jobs counter
+  - [ ] Implement Control Buttons:
+    - [ ] ⏸ Pause Scheduler button
+    - [ ] ▶️ Resume Scheduler button
+    - [ ] ➕ New Automation button
+    - [ ] 🔄 Refresh Jobs button
+    - [ ] 📊 View Logs button
+  - [ ] Create Quick Actions:
+    - [ ] Run Health Check job
+    - [ ] Force RAG Index Update
+    - [ ] Trigger Email Sync
+    - [ ] Execute Custom Script
+
+- [ ] 🔴 **Left Panel - Job List & Scheduler**
+  - [ ] Create Job List View:
+    - [ ] Table with columns: Name, Type, Status, Next Run, Last Run, Actions
+    - [ ] Sortable by any column
+    - [ ] Filterable by status, type, or date range
+    - [ ] Real-time status updates
+  - [ ] Implement Job Types:
+    - [ ] Health Check jobs
+    - [ ] RAG Index Update jobs
+    - [ ] Email Sync jobs
+    - [ ] Custom Script jobs
+    - [ ] Workflow Trigger jobs
+  - [ ] Add Job Status Indicators:
+    - [ ] 🟢 Running status
+    - [ ] ⏸ Paused status
+    - [ ] ✅ Completed status
+    - [ ] 🔴 Failed status
+    - [ ] ⏳ Scheduled status
+  - [ ] Create Job Actions:
+    - [ ] ▶️ Run Now button
+    - [ ] ⏸ Pause/Resume button
+    - [ ] ✏️ Edit button
+    - [ ] 🗑 Delete button
+    - [ ] 📋 View Logs button
+  - [ ] Add Scheduler Information:
+    - [ ] Next scheduled runs
+    - [ ] Missed jobs alerts
+    - [ ] Job execution history
+    - [ ] Performance metrics
+
+- [ ] 🔴 **Right Panel - Job Detail & Configuration**
+  - [ ] Create Job Detail Header:
+    - [ ] Job name and description
+    - [ ] Job type and category
+    - [ ] Current status and health
+    - [ ] Last execution details
+  - [ ] Implement Detail Tabs:
+    - [ ] Configuration Tab:
+      - [ ] Job settings and parameters
+      - [ ] Schedule configuration
+      - [ ] Trigger conditions
+      - [ ] Execution environment
+    - [ ] Execution Tab:
+      - [ ] Real-time execution status
+      - [ ] Progress tracking
+      - [ ] Output streaming
+      - [ ] Error handling
+    - [ ] History Tab:
+      - [ ] Execution history
+      - [ ] Performance metrics
+      - [ ] Error logs
+      - [ ] Success/failure rates
+    - [ ] Logs Tab:
+      - [ ] Job execution logs
+      - [ ] Error messages
+      - [ ] Debug information
+      - [ ] Log filtering and search
+  - [ ] Add Job Configuration:
+    - [ ] Schedule settings
+    - [ ] Trigger conditions
+    - [ ] Execution parameters
+    - [ ] Error handling rules
+  - [ ] Create Job Management:
+    - [ ] Job editing interface
+    - [ ] Job duplication
+    - [ ] Job export/import
+    - [ ] Job templates
+
+- [ ] 🔴 **Automation Creation Modal**
+  - [ ] Create Job Type Selection:
+    - [ ] Health Check job type
+    - [ ] RAG Index Update job type
+    - [ ] Email Sync job type
+    - [ ] Custom Script job type
+    - [ ] Workflow Trigger job type
+  - [ ] Implement Job Configuration:
+    - [ ] Job name and description
+    - [ ] Schedule configuration
+    - [ ] Trigger conditions
+    - [ ] Execution parameters
+    - [ ] Error handling settings
+  - [ ] Add Advanced Settings:
+    - [ ] Execution timeout
+    - [ ] Retry attempts
+    - [ ] Notification settings
+    - [ ] Dependencies
+  - [ ] Create Validation:
+    - [ ] Configuration validation
+    - [ ] Schedule validation
+    - [ ] Parameter validation
+    - [ ] Dependency validation
+
+- [ ] 🔴 **Schedule Management**
+  - [ ] Implement Schedule Types:
+    - [ ] Cron-based scheduling
+    - [ ] Interval-based scheduling
+    - [ ] Event-based triggering
+    - [ ] Manual triggering
+  - [ ] Create Schedule Configuration:
+    - [ ] Cron expression editor
+    - [ ] Interval settings
+    - [ ] Timezone configuration
+    - [ ] Schedule validation
+  - [ ] Add Schedule Features:
+    - [ ] Schedule preview
+    - [ ] Schedule testing
+    - [ ] Schedule optimization
+    - [ ] Schedule analytics
+
+- [ ] 🔴 **Job Execution System**
+  - [ ] Implement Execution Engine:
+    - [ ] Job execution queue
+    - [ ] Priority-based execution
+    - [ ] Resource management
+    - [ ] Execution monitoring
+  - [ ] Create Execution Features:
+    - [ ] Real-time execution tracking
+    - [ ] Progress reporting
+    - [ ] Output streaming
+    - [ ] Error handling
+  - [ ] Add Execution Management:
+    - [ ] Job cancellation
+    - [ ] Job pausing
+    - [ ] Job resuming
+    - [ ] Job restarting
+
+- [ ] 🔴 **Error Handling & Recovery**
+  - [ ] Implement Error Detection:
+    - [ ] Job failure detection
+    - [ ] Error classification
+    - [ ] Error severity assessment
+    - [ ] Error notification
+  - [ ] Create Recovery Mechanisms:
+    - [ ] Automatic retry logic
+    - [ ] Fallback procedures
+    - [ ] Error escalation
+    - [ ] Recovery monitoring
+  - [ ] Add Error Management:
+    - [ ] Error logging
+    - [ ] Error analysis
+    - [ ] Error reporting
+    - [ ] Error optimization
+
+- [ ] 🔴 **Performance Monitoring**
+  - [ ] Implement Performance Tracking:
+    - [ ] Job execution time monitoring
+    - [ ] Resource usage tracking
+    - [ ] Performance metrics collection
+    - [ ] Performance analysis
+  - [ ] Create Performance Features:
+    - [ ] Performance dashboards
+    - [ ] Performance alerts
+    - [ ] Performance optimization
+    - [ ] Performance reporting
+  - [ ] Add Performance Management:
+    - [ ] Performance benchmarking
+    - [ ] Performance tuning
+    - [ ] Performance analytics
+    - [ ] Performance optimization
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /automation/jobs (list all jobs)
+    - [ ] GET /automation/jobs/{id} (job details)
+    - [ ] POST /automation/jobs (create job)
+    - [ ] PATCH /automation/jobs/{id} (update job)
+    - [ ] DELETE /automation/jobs/{id} (delete job)
+    - [ ] POST /automation/jobs/{id}/run (execute job)
+    - [ ] POST /automation/jobs/{id}/pause (pause job)
+    - [ ] POST /automation/jobs/{id}/resume (resume job)
+    - [ ] WebSocket /ws/jobs (real-time job updates)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /automation/scheduler/status (scheduler status)
+    - [ ] POST /automation/scheduler/pause (pause scheduler)
+    - [ ] POST /automation/scheduler/resume (resume scheduler)
+    - [ ] GET /automation/jobs/{id}/logs (job logs)
+    - [ ] GET /automation/jobs/{id}/history (execution history)
+    - [ ] POST /automation/jobs/{id}/duplicate (duplicate job)
+    - [ ] GET /automation/templates (job templates)
+    - [ ] POST /automation/import (import jobs)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] AutomationPage (root layout)
+    - [ ] JobList (job list view)
+    - [ ] JobDetail (job detail view)
+    - [ ] AutomationModal (job creation/editing)
+    - [ ] ScheduleEditor (schedule configuration)
+    - [ ] JobStatusIndicator (status display)
+    - [ ] ExecutionMonitor (real-time execution)
+  - [ ] Implement Specialized Components:
+    - [ ] JobTypeSelector
+    - [ ] CronExpressionEditor
+    - [ ] JobTemplateManager
+    - [ ] ExecutionLogViewer
+    - [ ] PerformanceChart
+    - [ ] ErrorHandler
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Tasks Integration:
+    - [ ] Automation jobs appear as tasks
+    - [ ] Task execution tracking
+    - [ ] Task result handling
+    - [ ] Task performance monitoring
+  - [ ] Implement Workflows Integration:
+    - [ ] Workflow triggers can be scheduled
+    - [ ] Workflow execution automation
+    - [ ] Workflow performance tracking
+    - [ ] Workflow error handling
+  - [ ] Add Monitoring Integration:
+    - [ ] Automation metrics visible in monitoring
+    - [ ] Performance monitoring
+    - [ ] Error tracking
+    - [ ] System health indicators
+  - [ ] Create Settings Integration:
+    - [ ] Automation settings in Control Center
+    - [ ] Settings synchronization
+    - [ ] Configuration management
+    - [ ] Settings validation
+  - [ ] Add Logs Integration:
+    - [ ] Automation logs in Logs & Reports
+    - [ ] Log correlation
+    - [ ] Log analysis
+    - [ ] Log reporting
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient job execution
+    - [ ] Real-time monitoring
+    - [ ] Resource optimization
+    - [ ] Memory management
+  - [ ] Create Optimization Strategies:
+    - [ ] Job execution optimization
+    - [ ] Schedule optimization
+    - [ ] Resource usage optimization
+    - [ ] Performance tuning
+  - [ ] Add System Optimization:
+    - [ ] Automation system performance
+    - [ ] Database query optimization
+    - [ ] WebSocket message optimization
+    - [ ] Resource usage optimization
+
+- [ ] 🔴 **Advanced Automation Features**
+  - [ ] Create Smart Automation:
+    - [ ] AI-powered job optimization
+    - [ ] Intelligent scheduling
+    - [ ] Predictive maintenance
+    - [ ] Automated error recovery
+  - [ ] Implement Advanced Features:
+    - [ ] Job dependency management
+    - [ ] Conditional execution
+    - [ ] Dynamic scheduling
+    - [ ] Advanced error handling
+  - [ ] Add Enterprise Features:
+    - [ ] Multi-user automation
+    - [ ] Role-based access control
+    - [ ] Automation compliance
+    - [ ] Advanced analytics and insights
+
+### 4.4 Settings Control Center (Master Configuration Panel)
+- [x] 🟢 **Settings Control Center Layout & Structure**
+  - [x] Create tabbed layout with 11 configuration sections
+  - [x] Implement top header with settings controls
+  - [x] Add responsive design for different screen sizes
+  - [x] Create real-time settings validation
+  - [x] Implement settings persistence and synchronization
+
+- [x] 🟢 **Top Header (Settings Controls)**
+  - [x] Create Settings Status:
+    - [x] Configuration validation status
+    - [x] Settings synchronization status
+    - [x] Settings backup status
+    - [x] Status color coding and indicators
+  - [x] Add Control Buttons:
+    - [x] 💾 Save All Settings button
+    - [x] 🔄 Reset to Defaults button
+    - [x] 📤 Export Settings button
+    - [x] 📥 Import Settings button
+    - [x] 🔒 Backup Settings button
+  - [x] Implement Settings Navigation:
+    - [x] Quick navigation between sections
+    - [x] Settings search functionality
+    - [x] Settings validation indicators
+    - [x] Settings change tracking
+
+- [x] 🟢 **Workspace Settings Tab**
+  - [x] Create Data Root Configuration:
+    - [x] Workspace data directory path
+    - [x] Path validation and error handling
+    - [x] Directory creation and permissions
+    - [x] Workspace switching capabilities
+  - [x] Implement File Management:
+    - [x] File retention policies
+    - [x] File cleanup settings
+    - [x] File compression options
+    - [x] File backup configuration
+  - [x] Add Workspace Features:
+    - [x] Workspace templates
+    - [x] Workspace sharing
+    - [x] Workspace analytics
+    - [x] Workspace optimization
+
+- [x] 🟢 **Providers & Models Settings Tab**
+  - [x] Create Local Model Configuration:
+    - [x] Ollama model selection
+    - [x] Model parameters and settings
+    - [x] Model performance monitoring
+    - [x] Model switching capabilities
+  - [x] Implement Cloud Provider Settings:
+    - [x] OpenAI API configuration
+    - [x] Anthropic API configuration
+    - [x] Other provider settings
+    - [x] API key management and security
+  - [x] Add Model Management:
+    - [x] Model testing and validation
+    - [ ] Model performance benchmarking
+    - [ ] Model usage analytics
+    - [ ] Model optimization
+
+- [ ] 🔴 **Orchestration Settings Tab**
+  - [ ] Create Agent Configuration:
+    - [ ] Agent registry management
+    - [ ] Agent parameters and settings
+    - [ ] Agent performance monitoring
+    - [ ] Agent collaboration settings
+  - [ ] Implement Orchestration Framework:
+    - [ ] LangChain configuration
+    - [ ] smolagents settings
+    - [ ] AutoGen configuration
+    - [ ] Orchestration performance tuning
+  - [ ] Add Orchestration Features:
+    - [ ] Agent communication protocols
+    - [ ] Task distribution settings
+    - [ ] Orchestration analytics
+    - [ ] Orchestration optimization
+
+- [ ] 🔴 **RAG Settings Tab**
+  - [ ] Create Embedding Configuration:
+    - [ ] Embedding model selection
+    - [ ] Embedding parameters
+    - [ ] Embedding performance monitoring
+    - [ ] Embedding quality validation
+  - [ ] Implement Vector Store Settings:
+    - [ ] FAISS configuration
+    - [ ] Vector store parameters
+    - [ ] Index management settings
+    - [ ] Vector store optimization
+  - [ ] Add RAG Features:
+    - [ ] Retrieval settings
+    - [ ] RAG performance tuning
+    - [ ] RAG analytics
+    - [ ] RAG optimization
+
+- [ ] 🔴 **Email Settings Tab**
+  - [ ] Create IMAP Configuration:
+    - [ ] Email account settings
+    - [ ] IMAP server configuration
+    - [ ] Authentication settings
+    - [ ] Connection testing and validation
+  - [ ] Implement Email Features:
+    - [ ] Email sync settings
+    - [ ] Email processing options
+    - [ ] Email security settings
+    - [ ] Email analytics
+  - [ ] Add Email Management:
+    - [ ] Email account management
+    - [ ] Email filtering rules
+    - [ ] Email automation settings
+    - [ ] Email optimization
+
+- [ ] 🔴 **Automation Settings Tab**
+  - [ ] Create Scheduler Configuration:
+    - [ ] Scheduler settings and parameters
+    - [ ] Job execution settings
+    - [ ] Scheduler performance tuning
+    - [ ] Scheduler monitoring
+  - [ ] Implement Automation Features:
+    - [ ] Automation triggers
+    - [ ] Automation workflows
+    - [ ] Automation performance settings
+    - [ ] Automation analytics
+  - [ ] Add Automation Management:
+    - [ ] Automation templates
+    - [ ] Automation scheduling
+    - [ ] Automation monitoring
+    - [ ] Automation optimization
+
+- [ ] 🔴 **System & Performance Settings Tab**
+  - [ ] Create System Configuration:
+    - [ ] System performance settings
+    - [ ] Resource allocation
+    - [ ] System monitoring settings
+    - [ ] System optimization
+  - [ ] Implement Performance Features:
+    - [ ] Performance monitoring
+    - [ ] Performance tuning
+    - [ ] Performance analytics
+    - [ ] Performance optimization
+  - [ ] Add System Management:
+    - [ ] System health monitoring
+    - [ ] System maintenance
+    - [ ] System updates
+    - [ ] System security
+
+- [ ] 🔴 **Security & Secrets Settings Tab**
+  - [ ] Create Security Configuration:
+    - [ ] Security policies and settings
+    - [ ] Access control settings
+    - [ ] Security monitoring
+    - [ ] Security compliance
+  - [ ] Implement Secrets Management:
+    - [ ] API key management
+    - [ ] Secret storage and encryption
+    - [ ] Secret rotation policies
+    - [ ] Secret access control
+  - [ ] Add Security Features:
+    - [ ] Security auditing
+    - [ ] Security analytics
+    - [ ] Security optimization
+    - [ ] Security compliance
+
+- [ ] 🔴 **UI & Accessibility Settings Tab**
+  - [ ] Create UI Configuration:
+    - [ ] Theme settings
+    - [ ] Layout preferences
+    - [ ] UI customization options
+    - [ ] UI performance settings
+  - [ ] Implement Accessibility Features:
+    - [ ] Accessibility settings
+    - [ ] Accessibility testing
+    - [ ] Accessibility compliance
+    - [ ] Accessibility optimization
+  - [ ] Add UI Management:
+    - [ ] UI analytics
+    - [ ] UI optimization
+    - [ ] UI personalization
+    - [ ] UI performance
+
+- [ ] 🔴 **Backup & Diagnostics Settings Tab**
+  - [ ] Create Backup Configuration:
+    - [ ] Backup settings and policies
+    - [ ] Backup scheduling
+    - [ ] Backup storage settings
+    - [ ] Backup validation
+  - [ ] Implement Diagnostics Settings:
+    - [ ] Diagnostic configuration
+    - [ ] Diagnostic scheduling
+    - [ ] Diagnostic reporting
+    - [ ] Diagnostic optimization
+  - [ ] Add Backup Management:
+    - [ ] Backup monitoring
+    - [ ] Backup analytics
+    - [ ] Backup optimization
+    - [ ] Backup compliance
+
+- [ ] 🔴 **Settings Validation System**
+  - [ ] Implement Real-time Validation:
+    - [ ] Settings validation on change
+    - [ ] Validation error display
+    - [ ] Validation recommendations
+    - [ ] Validation optimization
+  - [ ] Create Validation Features:
+    - [ ] Settings conflict detection
+    - [ ] Settings dependency validation
+    - [ ] Settings performance validation
+    - [ ] Settings security validation
+  - [ ] Add Validation Management:
+    - [ ] Validation analytics
+    - [ ] Validation optimization
+    - [ ] Validation reporting
+    - [ ] Validation compliance
+
+- [ ] 🔴 **Settings Persistence System**
+  - [ ] Implement Settings Storage:
+    - [ ] Settings database storage
+    - [ ] Settings file storage
+    - [ ] Settings versioning
+    - [ ] Settings backup and restore
+  - [ ] Create Settings Synchronization:
+    - [ ] Settings sync between components
+    - [ ] Settings conflict resolution
+    - [ ] Settings change tracking
+    - [ ] Settings rollback capabilities
+  - [ ] Add Settings Management:
+    - [ ] Settings export/import
+    - [ ] Settings migration
+    - [ ] Settings analytics
+    - [ ] Settings optimization
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /settings (get all settings)
+    - [ ] GET /settings/{section} (get section settings)
+    - [ ] PATCH /settings/{section} (update section settings)
+    - [ ] POST /settings/validate (validate settings)
+    - [ ] POST /settings/backup (backup settings)
+    - [ ] POST /settings/restore (restore settings)
+    - [ ] POST /settings/export (export settings)
+    - [ ] POST /settings/import (import settings)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /settings/history (settings history)
+    - [ ] POST /settings/reset (reset to defaults)
+    - [ ] GET /settings/validation (validation status)
+    - [ ] POST /settings/sync (sync settings)
+    - [ ] GET /settings/analytics (settings analytics)
+    - [ ] POST /settings/optimize (optimize settings)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] SettingsPage (root layout)
+    - [ ] SettingsTabs (tabbed navigation)
+    - [ ] SettingsSection (individual section)
+    - [ ] SettingsForm (settings form)
+    - [ ] SettingsValidation (validation display)
+    - [ ] SettingsBackup (backup management)
+    - [ ] SettingsExport (export/import)
+  - [ ] Implement Specialized Components:
+    - [ ] WorkspaceSettings
+    - [ ] ProviderSettings
+    - [ ] OrchestrationSettings
+    - [ ] RAGSettings
+    - [ ] EmailSettings
+    - [ ] AutomationSettings
+    - [ ] SystemSettings
+    - [ ] SecuritySettings
+    - [ ] UISettings
+    - [ ] BackupSettings
+    - [ ] DiagnosticsSettings
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Monitoring Integration:
+    - [ ] Settings changes reflected in monitoring
+    - [ ] Settings performance monitoring
+    - [ ] Settings health indicators
+    - [ ] Settings optimization
+  - [ ] Implement Diagnostics Integration:
+    - [ ] Settings validation in diagnostics
+    - [ ] Settings health checking
+    - [ ] Settings error detection
+    - [ ] Settings optimization
+  - [ ] Add Automation Integration:
+    - [ ] Settings changes trigger automation
+    - [ ] Settings-based automation
+    - [ ] Settings automation monitoring
+    - [ ] Settings automation optimization
+  - [ ] Create Logs Integration:
+    - [ ] Settings changes logged
+    - [ ] Settings audit trail
+    - [ ] Settings change tracking
+    - [ ] Settings compliance
+  - [ ] Implement User Profile Integration:
+    - [ ] Personal settings preferences
+    - [ ] User-specific settings
+    - [ ] Settings personalization
+    - [ ] Settings user analytics
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient settings rendering
+    - [ ] Real-time settings updates
+    - [ ] Settings caching
+    - [ ] Memory management for settings
+  - [ ] Create Optimization Strategies:
+    - [ ] Settings optimization
+    - [ ] Settings performance tuning
+    - [ ] Settings analytics
+    - [ ] Settings monitoring
+  - [ ] Add System Optimization:
+    - [ ] Settings system performance
+    - [ ] Database query optimization
+    - [ ] WebSocket message optimization
+    - [ ] Resource usage optimization
+
+- [ ] 🔴 **Advanced Settings Features**
+  - [ ] Create Smart Settings:
+    - [ ] AI-powered settings optimization
+    - [ ] Intelligent settings recommendations
+    - [ ] Predictive settings configuration
+    - [ ] Automated settings optimization
+  - [ ] Implement Advanced Features:
+    - [ ] Settings analytics
+    - [ ] Settings optimization
+    - [ ] Settings compliance
+    - [ ] Settings security
+  - [ ] Add Enterprise Features:
+    - [ ] Multi-tenant settings
+    - [ ] Centralized settings management
+    - [ ] Settings compliance reporting
+    - [ ] Advanced settings analytics
+
+---
+
+## Phase 5: Tertiary Navigation Pages
+
+### 5.1 Diagnostics Page (Troubleshooting & Validation Center)
+- [ ] 🔴 **Diagnostics Page Layout & Structure**
+  - [ ] Create three diagnostic categories layout (System Health, Connectivity, Data & AI Validation)
+  - [ ] Implement top header with diagnostics controls
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create real-time updates via WebSocket
+  - [ ] Implement diagnostic filtering and search functionality
+
+- [ ] 🔴 **Top Header (Diagnostics Controls)**
+  - [ ] Create Status Banner:
+    - [ ] 🟢 System Healthy status display
+    - [ ] 🟡 Warnings Detected status display
+    - [ ] 🔴 Critical Issues Found status display
+    - [ ] Status color coding and animations
+  - [ ] Add Last Test Timestamp:
+    - [ ] "Last run: Xm ago" format
+    - [ ] Real-time timestamp updates
+    - [ ] Test history tracking
+    - [ ] Timestamp accuracy and precision
+  - [ ] Implement Control Buttons:
+    - [ ] 🧠 Run Full Diagnostics button (executes all tests sequentially)
+    - [ ] ⚙️ Select Tests button (choose which categories to include)
+    - [ ] 📄 Generate Report button (exports full diagnostic report PDF/JSON)
+    - [ ] 🗂 Generate Support Bundle button (zips logs, configs, environment data)
+    - [ ] ♻️ Clear Diagnostics Cache button
+
+- [ ] 🔴 **System Health Diagnostics**
+  - [ ] Create CPU/Memory/Disk Usage Monitoring:
+    - [ ] Graphs with thresholds (red if >90%)
+    - [ ] Real-time resource monitoring
+    - [ ] Threshold breach alerts
+    - [ ] Resource usage trends
+  - [ ] Implement GPU Check:
+    - [ ] Verifies CUDA availability
+    - [ ] Accessible device verification
+    - [ ] GPU memory monitoring
+    - [ ] GPU performance testing
+  - [ ] Add API Ports Check:
+    - [ ] Confirms FastAPI + Reflex ports not in conflict
+    - [ ] Port availability testing
+    - [ ] Port conflict detection
+    - [ ] Port binding validation
+  - [ ] Create File Permissions Check:
+    - [ ] Validates access to workspace paths
+    - [ ] Permission verification
+    - [ ] Path accessibility testing
+    - [ ] Security permission audit
+  - [ ] Implement Background Services Check:
+    - [ ] Confirms scheduler, telemetry, and watcher threads are alive
+    - [ ] Service health monitoring
+    - [ ] Thread status verification
+    - [ ] Service dependency checking
+  - [ ] Add Temp Folder Cleanup:
+    - [ ] Identifies leftover .tmp or .cache files
+    - [ ] Cleanup recommendations
+    - [ ] Disk space optimization
+    - [ ] File cleanup automation
+  - [ ] Create Summary:
+    - [ ] "All essential services running OK" status
+    - [ ] Health summary display
+    - [ ] Service status overview
+    - [ ] Health recommendations
+
+- [ ] 🔴 **Connectivity Diagnostics**
+  - [ ] Create Ollama Connection Test:
+    - [ ] Pings /api/version for latency & response
+    - [ ] Connection stability testing
+    - [ ] Response time measurement
+    - [ ] Ollama health verification
+  - [ ] Implement Local API Loopback Test:
+    - [ ] Ensures frontend ↔ backend WebSocket communication
+    - [ ] API connectivity verification
+    - [ ] WebSocket connection testing
+    - [ ] Internal communication validation
+  - [ ] Add OpenAI/HF Connectivity Test:
+    - [ ] Only if cloud mode enabled
+    - [ ] API key validation
+    - [ ] Connection testing
+    - [ ] Response verification
+  - [ ] Create IMAP Connection Test:
+    - [ ] For each configured email account
+    - [ ] Login and folder list test
+    - [ ] Email connectivity verification
+    - [ ] IMAP server validation
+  - [ ] Implement Proxy Configuration Test:
+    - [ ] Validates active proxy and DNS resolution
+    - [ ] Proxy connectivity testing
+    - [ ] DNS resolution verification
+    - [ ] Network configuration validation
+  - [ ] Add Network Latency Map:
+    - [ ] Simple bar chart showing API response times
+    - [ ] Latency visualization
+    - [ ] Performance benchmarking
+    - [ ] Network quality assessment
+  - [ ] Create Status Indicators:
+    - [ ] 🟢 Reachable status
+    - [ ] 🟡 Slow Response (>2s) status
+    - [ ] 🔴 Failed status
+    - [ ] Status color coding and icons
+
+- [ ] 🔴 **Data & AI Validation Diagnostics**
+  - [ ] Create Database Check:
+    - [ ] Verifies SQLite/Postgres schema
+    - [ ] Migration version verification
+    - [ ] Write access testing
+    - [ ] Database integrity validation
+  - [ ] Implement Vector Store Check:
+    - [ ] Ensures FAISS index file exists
+    - [ ] Can load into memory verification
+    - [ ] Index integrity testing
+    - [ ] Vector store performance validation
+  - [ ] Add Embedding Model Check:
+    - [ ] Loads current model
+    - [ ] Tests encoding of sample text
+    - [ ] Model performance testing
+    - [ ] Embedding quality validation
+  - [ ] Create RAG Sanity Query:
+    - [ ] Runs canary query ("Test retrieval on demo data")
+    - [ ] Retrieval accuracy testing
+    - [ ] RAG system validation
+    - [ ] Knowledge base integrity check
+  - [ ] Implement LLM Health Test:
+    - [ ] Sends short prompt ("ping")
+    - [ ] Measures latency & token generation
+    - [ ] Model response testing
+    - [ ] LLM performance validation
+  - [ ] Add Orchestrator Dry-Run:
+    - [ ] Executes dummy LangChain/smolagents pipeline
+    - [ ] Verifies agent collaboration
+    - [ ] Orchestration testing
+    - [ ] Multi-agent system validation
+  - [ ] Create Task Loopback Test:
+    - [ ] Spawns temporary task
+    - [ ] Confirms round-trip completion
+    - [ ] Task execution testing
+    - [ ] Task system validation
+  - [ ] Add Summary Result:
+    - [ ] "All subsystems validated successfully" or detailed failures
+    - [ ] Validation summary display
+    - [ ] Failure analysis and reporting
+    - [ ] System health recommendations
+
+- [ ] 🔴 **Diagnostics Report Modal**
+  - [ ] Create Modal Header:
+    - [ ] Summary status (Healthy / Warnings / Failed)
+    - [ ] Status color coding
+    - [ ] Overall health indicator
+  - [ ] Implement Modal Body:
+    - [ ] Each section (System / Connectivity / Data & AI) expandable
+    - [ ] Each test shows:
+      - [ ] Test name
+      - [ ] Result (✅ / ⚠️ / ❌)
+      - [ ] Execution time
+      - [ ] Details (latency, file path, exception trace)
+    - [ ] "Copy JSON Report" button
+  - [ ] Add Modal Footer:
+    - [ ] "Save as Report File (.json)" button
+    - [ ] "Generate Support Bundle" button
+    - [ ] "Close" button
+  - [ ] Create Support Bundle Contents:
+    - [ ] Configuration snapshot (/settings.json)
+    - [ ] Latest logs (/logs/*.log)
+    - [ ] Diagnostic report
+    - [ ] System info (CPU, memory, disk, GPU)
+    - [ ] Optional anonymization toggle
+
+- [ ] 🔴 **Automated Health Tests**
+  - [ ] Implement Test Execution:
+    - [ ] All critical subsystems validated in sequence
+    - [ ] Color-coded results display
+    - [ ] Test progress tracking
+    - [ ] Result categorization
+  - [ ] Create Test Management:
+    - [ ] Test scheduling and execution
+    - [ ] Test result storage
+    - [ ] Test history tracking
+    - [ ] Test performance monitoring
+
+- [ ] 🔴 **Selective Testing System**
+  - [ ] Implement Test Selection:
+    - [ ] User can select specific modules to test (System, Network, Data, AI)
+    - [ ] Test category filtering
+    - [ ] Custom test configurations
+    - [ ] Test priority management
+  - [ ] Create Test Customization:
+    - [ ] Test parameter configuration
+    - [ ] Test scope selection
+    - [ ] Test frequency settings
+    - [ ] Test notification preferences
+
+- [ ] 🔴 **Real-Time Feedback System**
+  - [ ] Implement Progress Streaming:
+    - [ ] Test progress streamed via /ws/jobs
+    - [ ] Real-time status updates
+    - [ ] Progress indicators
+    - [ ] Live result display
+  - [ ] Create Feedback Features:
+    - [ ] Test status notifications
+    - [ ] Progress bar updates
+    - [ ] Result streaming
+    - [ ] Error reporting
+
+- [ ] 🔴 **Self-Healing Option**
+  - [ ] Implement Auto-Repair:
+    - [ ] If fixable issue detected (e.g., missing folder), offers one-click auto-repair
+    - [ ] Automatic issue resolution
+    - [ ] Repair confirmation
+    - [ ] Repair result tracking
+  - [ ] Create Repair Management:
+    - [ ] Repair option display
+    - [ ] Repair execution
+    - [ ] Repair validation
+    - [ ] Repair history tracking
+
+- [ ] 🔴 **Alert Integration**
+  - [ ] Implement Alert System:
+    - [ ] Failures automatically logged in Monitoring page
+    - [ ] Control Center notifications
+    - [ ] Alert escalation
+    - [ ] Alert resolution tracking
+  - [ ] Create Alert Management:
+    - [ ] Alert configuration
+    - [ ] Alert routing
+    - [ ] Alert acknowledgment
+    - [ ] Alert analytics
+
+- [ ] 🔴 **Offline Mode Support**
+  - [ ] Implement Offline Testing:
+    - [ ] Skips cloud provider checks if offline or in local-only mode
+    - [ ] Offline test configuration
+    - [ ] Local-only test execution
+    - [ ] Offline result reporting
+  - [ ] Create Offline Features:
+    - [ ] Offline test scheduling
+    - [ ] Offline result storage
+    - [ ] Offline report generation
+    - [ ] Offline system validation
+
+- [ ] 🔴 **Performance Metrics**
+  - [ ] Implement Metrics Collection:
+    - [ ] Measures latency, throughput, and model response times
+    - [ ] Performance benchmarking
+    - [ ] Metrics visualization
+    - [ ] Performance trend analysis
+  - [ ] Create Metrics Management:
+    - [ ] Metrics storage and retrieval
+    - [ ] Metrics comparison
+    - [ ] Metrics reporting
+    - [ ] Metrics optimization
+
+- [ ] 🔴 **Logging System**
+  - [ ] Implement Test Logging:
+    - [ ] Detailed test results stored in SQLite with timestamp
+    - [ ] Historical comparison support
+    - [ ] Log retention management
+    - [ ] Log analysis and reporting
+  - [ ] Create Log Management:
+    - [ ] Log storage optimization
+    - [ ] Log search and filtering
+    - [ ] Log export functionality
+    - [ ] Log analytics
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] POST /diagnostics/run (executes selected or full test suite)
+    - [ ] GET /diagnostics/status (retrieves progress and partial results)
+    - [ ] POST /diagnostics/support_bundle (compiles logs/config into archive)
+    - [ ] GET /diagnostics/reports (list historical diagnostic runs)
+    - [ ] DELETE /diagnostics/reports/{id} (remove old records)
+    - [ ] WebSocket /ws/jobs (real-time test progress updates)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /diagnostics/health (system health summary)
+    - [ ] POST /diagnostics/repair (auto-repair detected issues)
+    - [ ] GET /diagnostics/metrics (performance metrics)
+    - [ ] POST /diagnostics/schedule (schedule diagnostic tests)
+    - [ ] GET /diagnostics/history (diagnostic history)
+    - [ ] POST /diagnostics/export (export diagnostic data)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] DiagnosticsPage (root layout)
+    - [ ] DiagnosticsCard (individual test component)
+    - [ ] DiagnosticsResultModal (test results display)
+    - [ ] DiagnosticsProgressBar (test progress tracking)
+    - [ ] SupportBundleModal (support bundle generation)
+    - [ ] MetricIndicator (color-coded icons)
+    - [ ] DiagnosticsLogViewer (test log display)
+  - [ ] Implement Specialized Components:
+    - [ ] SystemHealthCard
+    - [ ] ConnectivityTestCard
+    - [ ] DataValidationCard
+    - [ ] PerformanceChart
+    - [ ] TestResultTable
+    - [ ] RepairOptionsModal
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Monitoring Integration:
+    - [ ] Triggers diagnostics automatically when repeated threshold breaches occur
+    - [ ] Monitoring-diagnostics correlation
+    - [ ] Health status synchronization
+    - [ ] Alert integration
+  - [ ] Implement Settings Integration:
+    - [ ] "Run System Check" button from Control Center opens this page pre-filtered
+    - [ ] Settings-diagnostics integration
+    - [ ] Configuration validation
+    - [ ] Settings health checking
+  - [ ] Add Automation Integration:
+    - [ ] Can schedule periodic diagnostic runs
+    - [ ] Automated diagnostics
+    - [ ] Schedule management
+    - [ ] Automation-diagnostics correlation
+  - [ ] Create Tasks Integration:
+    - [ ] Each diagnostic test logs as background task
+    - [ ] Task-diagnostics integration
+    - [ ] Task execution tracking
+    - [ ] Task result correlation
+  - [ ] Add Logs & Reports Integration:
+    - [ ] Diagnostic history stored and viewable there
+    - [ ] Log-diagnostics integration
+    - [ ] Report generation
+    - [ ] Historical analysis
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient diagnostic test execution
+    - [ ] Parallel test execution where possible
+    - [ ] Test result caching
+    - [ ] Resource usage optimization
+  - [ ] Create Optimization Strategies:
+    - [ ] Test execution optimization
+    - [ ] Result processing optimization
+    - [ ] UI rendering optimization
+    - [ ] Data storage optimization
+  - [ ] Add System Optimization:
+    - [ ] Diagnostic system performance tuning
+    - [ ] Test queue optimization
+    - [ ] Memory management
+    - [ ] CPU usage optimization
+
+- [ ] 🔴 **Advanced Diagnostic Features**
+  - [ ] Create Smart Diagnostics:
+    - [ ] AI-powered issue detection
+    - [ ] Intelligent problem analysis
+    - [ ] Predictive failure detection
+    - [ ] Automated solution recommendations
+  - [ ] Implement Advanced Features:
+    - [ ] Diagnostic correlation analysis
+    - [ ] Performance trend analysis
+    - [ ] System optimization recommendations
+    - [ ] Proactive health monitoring
+  - [ ] Add Enterprise Features:
+    - [ ] Multi-system diagnostics
+    - [ ] Centralized diagnostic management
+    - [ ] Diagnostic compliance reporting
+    - [ ] Advanced analytics and insights
+
+### 5.2 Logs & Reports Page (Audit & Traceability Center)
+- [ ] 🔴 **Logs & Reports Page Layout & Structure**
+  - [ ] Create two-panel layout (Log Viewer, Reports Section)
+  - [ ] Implement top header with controls & filters
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create real-time log streaming via WebSocket
+  - [ ] Implement advanced log search and filtering
+
+- [ ] 🔴 **Top Header (Logs & Reports Controls)**
+  - [ ] Create Status Indicators:
+    - [ ] 🔴 Error Count badge (critical errors)
+    - [ ] 🟡 Warning Count badge (warnings)
+    - [ ] 🟢 Info Count badge (informational)
+    - [ ] Status color coding and real-time updates
+  - [ ] Add Control Buttons:
+    - [ ] 🔍 Search Logs button (opens advanced search modal)
+    - [ ] 📊 Generate Report button (creates custom reports)
+    - [ ] 📥 Export Logs button (exports log data)
+    - [ ] 🗑️ Clear Old Logs button (cleanup old entries)
+    - [ ] ⚙️ Log Settings button (configure log levels)
+  - [ ] Implement Filter Controls:
+    - [ ] Log level filter (Error, Warning, Info, Debug)
+    - [ ] Time range picker (last hour, day, week, custom)
+    - [ ] Source filter (API, UI, System, Agent, etc.)
+    - [ ] Search text input with real-time filtering
+
+- [ ] 🔴 **Log Viewer Panel**
+  - [ ] Create Log List Display:
+    - [ ] Virtualized log list for performance
+    - [ ] Color-coded log levels (red=error, yellow=warning, blue=info, gray=debug)
+    - [ ] Timestamp display with relative time
+    - [ ] Source and component identification
+    - [ ] Log message preview with truncation
+    - [ ] Expandable log entries for full details
+  - [ ] Implement Log Details:
+    - [ ] Full log message display
+    - [ ] Stack trace for errors
+    - [ ] Context information (user, session, request ID)
+    - [ ] Related log entries
+    - [ ] Log entry metadata
+  - [ ] Add Log Navigation:
+    - [ ] Jump to specific timestamp
+    - [ ] Navigate between error entries
+    - [ ] Bookmark important log entries
+    - [ ] Log entry linking and cross-references
+  - [ ] Create Log Actions:
+    - [ ] Copy log entry to clipboard
+    - [ ] Share log entry via link
+    - [ ] Mark log entry as important
+    - [ ] Create log entry notes
+    - [ ] Export specific log entries
+
+- [ ] 🔴 **Advanced Search System**
+  - [ ] Create Search Interface:
+    - [ ] Full-text search across all log messages
+    - [ ] Regex pattern matching support
+    - [ ] Boolean search operators (AND, OR, NOT)
+    - [ ] Field-specific search (message, source, level, timestamp)
+    - [ ] Search history and saved searches
+  - [ ] Implement Search Features:
+    - [ ] Real-time search as you type
+    - [ ] Search result highlighting
+    - [ ] Search result count and pagination
+    - [ ] Search result export
+    - [ ] Search performance optimization
+  - [ ] Add Search Analytics:
+    - [ ] Search usage tracking
+    - [ ] Popular search terms
+    - [ ] Search performance metrics
+    - [ ] Search optimization recommendations
+
+- [ ] 🔴 **Log Filtering System**
+  - [ ] Create Filter Categories:
+    - [ ] Log Level Filter (Error, Warning, Info, Debug, All)
+    - [ ] Time Range Filter (Last hour, day, week, month, custom)
+    - [ ] Source Filter (API, UI, System, Agent, Database, etc.)
+    - [ ] Component Filter (Chat, Tasks, Workflows, RAG, etc.)
+    - [ ] User Filter (specific user sessions)
+    - [ ] Session Filter (specific session IDs)
+  - [ ] Implement Filter Features:
+    - [ ] Multiple filter combinations
+    - [ ] Filter presets and saved filters
+    - [ ] Filter performance optimization
+    - [ ] Filter result count display
+    - [ ] Filter export and sharing
+  - [ ] Add Filter Management:
+    - [ ] Filter history tracking
+    - [ ] Filter analytics
+    - [ ] Filter optimization
+    - [ ] Filter recommendations
+
+- [ ] 🔴 **Reports Section**
+  - [ ] Create Report Types:
+    - [ ] System Health Report (overview of system status)
+    - [ ] Error Analysis Report (error patterns and trends)
+    - [ ] Performance Report (system performance metrics)
+    - [ ] Usage Report (user activity and system usage)
+    - [ ] Security Report (security events and compliance)
+    - [ ] Custom Report Builder (user-defined reports)
+  - [ ] Implement Report Generation:
+    - [ ] Report template selection
+    - [ ] Report parameter configuration
+    - [ ] Report scheduling and automation
+    - [ ] Report delivery (email, download, dashboard)
+    - [ ] Report versioning and history
+  - [ ] Add Report Features:
+    - [ ] Interactive report charts and graphs
+    - [ ] Report data export (PDF, Excel, CSV)
+    - [ ] Report sharing and collaboration
+    - [ ] Report analytics and insights
+    - [ ] Report performance optimization
+
+- [ ] 🔴 **Log Analytics Dashboard**
+  - [ ] Create Analytics Charts:
+    - [ ] Log volume over time (line chart)
+    - [ ] Error rate trends (area chart)
+    - [ ] Log level distribution (pie chart)
+    - [ ] Top error sources (bar chart)
+    - [ ] System performance metrics (gauge charts)
+    - [ ] User activity patterns (heatmap)
+  - [ ] Implement Analytics Features:
+    - [ ] Real-time analytics updates
+    - [ ] Historical data analysis
+    - [ ] Trend detection and alerts
+    - [ ] Anomaly detection
+    - [ ] Performance benchmarking
+  - [ ] Add Analytics Management:
+    - [ ] Analytics data retention
+    - [ ] Analytics performance optimization
+    - [ ] Analytics export and sharing
+    - [ ] Analytics insights and recommendations
+
+- [ ] 🔴 **Log Management System**
+  - [ ] Create Log Storage:
+    - [ ] Log data persistence in SQLite
+    - [ ] Log data compression and optimization
+    - [ ] Log data archival and cleanup
+    - [ ] Log data backup and recovery
+  - [ ] Implement Log Retention:
+    - [ ] Configurable retention policies
+    - [ ] Automatic log cleanup
+    - [ ] Log data lifecycle management
+    - [ ] Log data compliance
+  - [ ] Add Log Security:
+    - [ ] Log data encryption
+    - [ ] Log access control
+    - [ ] Log data anonymization
+    - [ ] Log data audit trail
+
+- [ ] 🔴 **Real-Time Log Streaming**
+  - [ ] Implement WebSocket Streaming:
+    - [ ] Real-time log updates via WebSocket
+    - [ ] Log streaming performance optimization
+    - [ ] Log streaming error handling
+    - [ ] Log streaming connection management
+  - [ ] Create Streaming Features:
+    - [ ] Live log tail functionality
+    - [ ] Log streaming filters
+    - [ ] Log streaming performance monitoring
+    - [ ] Log streaming analytics
+  - [ ] Add Streaming Management:
+    - [ ] Streaming connection health
+    - [ ] Streaming performance optimization
+    - [ ] Streaming error recovery
+    - [ ] Streaming user experience
+
+- [ ] 🔴 **Log Correlation System**
+  - [ ] Create Correlation Features:
+    - [ ] Related log entry detection
+    - [ ] Log entry relationship mapping
+    - [ ] Log entry timeline visualization
+    - [ ] Log entry impact analysis
+  - [ ] Implement Correlation Analytics:
+    - [ ] Log pattern recognition
+    - [ ] Log correlation insights
+    - [ ] Log correlation optimization
+    - [ ] Log correlation recommendations
+  - [ ] Add Correlation Management:
+    - [ ] Correlation rule configuration
+    - [ ] Correlation performance optimization
+    - [ ] Correlation analytics
+    - [ ] Correlation insights
+
+- [ ] 🔴 **Alert System Integration**
+  - [ ] Create Alert Features:
+    - [ ] Log-based alert generation
+    - [ ] Alert threshold configuration
+    - [ ] Alert notification delivery
+    - [ ] Alert escalation management
+  - [ ] Implement Alert Management:
+    - [ ] Alert rule configuration
+    - [ ] Alert performance monitoring
+    - [ ] Alert analytics
+    - [ ] Alert optimization
+  - [ ] Add Alert Integration:
+    - [ ] Alert integration with monitoring
+    - [ ] Alert integration with diagnostics
+    - [ ] Alert integration with automation
+    - [ ] Alert integration with notifications
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /logs (retrieve log entries with filtering)
+    - [ ] GET /logs/{id} (get specific log entry)
+    - [ ] POST /logs/search (advanced log search)
+    - [ ] GET /logs/analytics (log analytics data)
+    - [ ] POST /logs/export (export log data)
+    - [ ] DELETE /logs/cleanup (cleanup old logs)
+    - [ ] WebSocket /ws/logs (real-time log streaming)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /logs/reports (list available reports)
+    - [ ] POST /logs/reports (generate custom report)
+    - [ ] GET /logs/filters (get available filters)
+    - [ ] POST /logs/filters (save filter presets)
+    - [ ] GET /logs/analytics/trends (trend analysis)
+    - [ ] POST /logs/alerts (configure log alerts)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] LogsPage (root layout)
+    - [ ] LogViewer (log display component)
+    - [ ] LogFilters (filter controls)
+    - [ ] LogDetailPanel (log entry details)
+    - [ ] ReportGenerator (report creation)
+    - [ ] LogAnalytics (analytics dashboard)
+    - [ ] LogSearch (search interface)
+  - [ ] Implement Specialized Components:
+    - [ ] LogEntry
+    - [ ] LogLevelBadge
+    - [ ] LogTimestamp
+    - [ ] LogSource
+    - [ ] LogMessage
+    - [ ] LogStackTrace
+    - [ ] LogContext
+    - [ ] LogActions
+    - [ ] LogBookmarks
+    - [ ] LogNotes
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Monitoring Integration:
+    - [ ] Log data feeds into monitoring metrics
+    - [ ] Monitoring-log correlation
+    - [ ] Health status synchronization
+    - [ ] Alert integration
+  - [ ] Implement Diagnostics Integration:
+    - [ ] Diagnostic results logged here
+    - [ ] Diagnostics-log correlation
+    - [ ] Error trace integration
+    - [ ] Diagnostic optimization
+  - [ ] Add Tasks Integration:
+    - [ ] Task execution logs stored here
+    - [ ] Task-log correlation
+    - [ ] Task performance tracking
+    - [ ] Task optimization
+  - [ ] Create Automation Integration:
+    - [ ] Automation execution logs
+    - [ ] Automation-log correlation
+    - [ ] Automation monitoring
+    - [ ] Automation optimization
+  - [ ] Add Settings Integration:
+    - [ ] Settings changes logged
+    - [ ] Settings-log correlation
+    - [ ] Configuration tracking
+    - [ ] Settings optimization
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient log rendering
+    - [ ] Log data pagination
+    - [ ] Log data caching
+    - [ ] Memory management for large log datasets
+  - [ ] Create Optimization Strategies:
+    - [ ] Log data indexing
+    - [ ] Log data compression
+    - [ ] Log data archival
+    - [ ] Log data cleanup
+  - [ ] Add System Optimization:
+    - [ ] Log system performance tuning
+    - [ ] Database query optimization
+    - [ ] WebSocket message optimization
+    - [ ] Resource usage optimization
+
+- [ ] 🔴 **Advanced Log Features**
+  - [ ] Create Smart Logging:
+    - [ ] AI-powered log analysis
+    - [ ] Intelligent log categorization
+    - [ ] Predictive log analysis
+    - [ ] Automated log insights
+  - [ ] Implement Advanced Features:
+    - [ ] Log data mining
+    - [ ] Log pattern recognition
+    - [ ] Log anomaly detection
+    - [ ] Log optimization recommendations
+  - [ ] Add Enterprise Features:
+    - [ ] Multi-tenant log management
+    - [ ] Centralized log aggregation
+    - [ ] Log compliance reporting
+    - [ ] Advanced analytics and insights
+
+### 5.3 User Profile Page (Personalization & User Management)
+- [ ] 🔴 **User Profile Page Layout & Structure**
+  - [ ] Create two-column layout (Personal Info, AI Interaction)
+  - [ ] Implement top header with profile summary
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create per-user settings storage
+  - [ ] Implement user preferences management
+
+- [ ] 🔴 **Top Header (Profile Summary)**
+  - [ ] Create Profile Overview:
+    - [ ] User avatar and display name
+    - [ ] User role and permissions
+    - [ ] Last login timestamp
+    - [ ] Profile completion status
+  - [ ] Add Quick Actions:
+    - [ ] ✏️ Edit Profile button
+    - [ ] 🔄 Sync Settings button
+    - [ ] 📊 View Analytics button
+    - [ ] ⚙️ Account Settings button
+    - [ ] 🚪 Sign Out button
+  - [ ] Implement Status Indicators:
+    - [ ] Profile completion percentage
+    - [ ] Settings sync status
+    - [ ] Activity status (online/offline)
+    - [ ] Notification preferences
+
+- [ ] 🔴 **Personal Information Section**
+  - [ ] Create Basic Profile:
+    - [ ] Display name and username
+    - [ ] Email address and contact info
+    - [ ] Profile picture/avatar
+    - [ ] Bio and description
+    - [ ] Timezone and locale settings
+  - [ ] Implement Profile Management:
+    - [ ] Profile editing capabilities
+    - [ ] Profile validation
+    - [ ] Profile picture upload
+    - [ ] Profile privacy settings
+  - [ ] Add Profile Features:
+    - [ ] Profile completion tracking
+    - [ ] Profile analytics
+    - [ ] Profile optimization
+    - [ ] Profile security
+
+- [ ] 🔴 **AI Interaction Preferences**
+  - [ ] Create AI Settings:
+    - [ ] Preferred AI model selection
+    - [ ] AI response style preferences
+    - [ ] AI interaction frequency
+    - [ ] AI assistance level
+  - [ ] Implement AI Customization:
+    - [ ] Custom AI prompts and instructions
+    - [ ] AI personality settings
+    - [ ] AI response formatting
+    - [ ] AI learning preferences
+  - [ ] Add AI Features:
+    - [ ] AI interaction history
+    - [ ] AI performance analytics
+    - [ ] AI optimization recommendations
+    - [ ] AI personalization
+
+- [ ] 🔴 **User Preferences System**
+  - [ ] Create UI Preferences:
+    - [ ] Theme selection (Light/Dark/System)
+    - [ ] Layout preferences
+    - [ ] Display settings
+    - [ ] Accessibility options
+  - [ ] Implement Notification Preferences:
+    - [ ] Email notification settings
+    - [ ] In-app notification preferences
+    - [ ] Alert frequency settings
+    - [ ] Notification delivery methods
+  - [ ] Add Workflow Preferences:
+    - [ ] Default workspace settings
+    - [ ] Automation preferences
+    - [ ] Task management preferences
+    - [ ] Collaboration settings
+  - [ ] Create Privacy Preferences:
+    - [ ] Data sharing settings
+    - [ ] Privacy level configuration
+    - [ ] Data retention preferences
+    - [ ] Security settings
+
+- [ ] 🔴 **User Activity Analytics**
+  - [ ] Create Activity Dashboard:
+    - [ ] Usage statistics and metrics
+    - [ ] Activity patterns and trends
+    - [ ] Performance analytics
+    - [ ] Productivity insights
+  - [ ] Implement Analytics Features:
+    - [ ] Time-based activity analysis
+    - [ ] Feature usage tracking
+    - [ ] Performance benchmarking
+    - [ ] Optimization recommendations
+  - [ ] Add Analytics Management:
+    - [ ] Analytics data retention
+    - [ ] Analytics export
+    - [ ] Analytics sharing
+    - [ ] Analytics insights
+
+- [ ] 🔴 **User Settings Management**
+  - [ ] Create Settings Categories:
+    - [ ] Account settings
+    - [ ] Security settings
+    - [ ] Privacy settings
+    - [ ] Notification settings
+    - [ ] Display settings
+    - [ ] Accessibility settings
+  - [ ] Implement Settings Features:
+    - [ ] Settings validation
+    - [ ] Settings backup and restore
+    - [ ] Settings synchronization
+    - [ ] Settings versioning
+  - [ ] Add Settings Management:
+    - [ ] Settings import/export
+    - [ ] Settings migration
+    - [ ] Settings analytics
+    - [ ] Settings optimization
+
+- [ ] 🔴 **User Data Management**
+  - [ ] Create Data Storage:
+    - [ ] User profile data persistence
+    - [ ] User preferences storage
+    - [ ] User activity data
+    - [ ] User analytics data
+  - [ ] Implement Data Features:
+    - [ ] Data encryption and security
+    - [ ] Data backup and recovery
+    - [ ] Data synchronization
+    - [ ] Data validation
+  - [ ] Add Data Management:
+    - [ ] Data retention policies
+    - [ ] Data cleanup and optimization
+    - [ ] Data export and portability
+    - [ ] Data compliance
+
+- [ ] 🔴 **User Security Features**
+  - [ ] Create Security Settings:
+    - [ ] Password management
+    - [ ] Two-factor authentication
+    - [ ] Session management
+    - [ ] Security monitoring
+  - [ ] Implement Security Features:
+    - [ ] Login history tracking
+    - [ ] Security alerts
+    - [ ] Account lockout protection
+    - [ ] Security recommendations
+  - [ ] Add Security Management:
+    - [ ] Security audit logging
+    - [ ] Security analytics
+    - [ ] Security optimization
+    - [ ] Security compliance
+
+- [ ] 🔴 **User Collaboration Features**
+  - [ ] Create Collaboration Settings:
+    - [ ] Team collaboration preferences
+    - [ ] Sharing permissions
+    - [ ] Collaboration notifications
+    - [ ] Collaboration analytics
+  - [ ] Implement Collaboration Features:
+    - [ ] Team member management
+    - [ ] Collaboration history
+    - [ ] Collaboration insights
+    - [ ] Collaboration optimization
+  - [ ] Add Collaboration Management:
+    - [ ] Collaboration analytics
+    - [ ] Collaboration optimization
+    - [ ] Collaboration insights
+    - [ ] Collaboration recommendations
+
+- [ ] 🔴 **User Integration Features**
+  - [ ] Create Integration Settings:
+    - [ ] Third-party integrations
+    - [ ] API key management
+    - [ ] Integration preferences
+    - [ ] Integration monitoring
+  - [ ] Implement Integration Features:
+    - [ ] Integration status monitoring
+    - [ ] Integration performance tracking
+    - [ ] Integration error handling
+    - [ ] Integration optimization
+  - [ ] Add Integration Management:
+    - [ ] Integration analytics
+    - [ ] Integration optimization
+    - [ ] Integration insights
+    - [ ] Integration recommendations
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] GET /user/profile (get user profile)
+    - [ ] PATCH /user/profile (update user profile)
+    - [ ] GET /user/preferences (get user preferences)
+    - [ ] PATCH /user/preferences (update user preferences)
+    - [ ] GET /user/activity (get user activity)
+    - [ ] GET /user/analytics (get user analytics)
+    - [ ] POST /user/export (export user data)
+    - [ ] DELETE /user/data (delete user data)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /user/settings (get user settings)
+    - [ ] PATCH /user/settings (update user settings)
+    - [ ] GET /user/security (get security settings)
+    - [ ] PATCH /user/security (update security settings)
+    - [ ] GET /user/collaboration (get collaboration settings)
+    - [ ] PATCH /user/collaboration (update collaboration settings)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] UserProfilePage (root layout)
+    - [ ] UserProfileCard (personal information)
+    - [ ] AIPreferencesPanel (AI interaction settings)
+    - [ ] UserSettingsForm (user-specific settings)
+    - [ ] ProfileAvatar (user avatar management)
+    - [ ] UserActivityStats (usage statistics)
+    - [ ] UserAnalytics (user analytics dashboard)
+  - [ ] Implement Specialized Components:
+    - [ ] ProfileEditor
+    - [ ] PreferencesManager
+    - [ ] SecuritySettings
+    - [ ] NotificationSettings
+    - [ ] ActivityChart
+    - [ ] UserInsights
+    - [ ] DataExport
+    - [ ] PrivacySettings
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Settings Integration:
+    - [ ] User preferences sync with global settings
+    - [ ] Settings-user correlation
+    - [ ] Configuration synchronization
+    - [ ] Settings optimization
+  - [ ] Implement Analytics Integration:
+    - [ ] User activity feeds into analytics
+    - [ ] Analytics-user correlation
+    - [ ] Performance tracking
+    - [ ] Analytics optimization
+  - [ ] Add Tasks Integration:
+    - [ ] User-specific task management
+    - [ ] Task-user correlation
+    - [ ] Task performance tracking
+    - [ ] Task optimization
+  - [ ] Create Collaboration Integration:
+    - [ ] User collaboration features
+    - [ ] Collaboration-user correlation
+    - [ ] Collaboration tracking
+    - [ ] Collaboration optimization
+  - [ ] Add Security Integration:
+    - [ ] User security monitoring
+    - [ ] Security-user correlation
+    - [ ] Security tracking
+    - [ ] Security optimization
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient user data rendering
+    - [ ] User data caching
+    - [ ] User data synchronization
+    - [ ] Memory management for user data
+  - [ ] Create Optimization Strategies:
+    - [ ] User data optimization
+    - [ ] User performance tuning
+    - [ ] User analytics optimization
+    - [ ] User monitoring optimization
+  - [ ] Add System Optimization:
+    - [ ] User system performance tuning
+    - [ ] Database query optimization
+    - [ ] WebSocket message optimization
+    - [ ] Resource usage optimization
+
+- [ ] 🔴 **Advanced User Features**
+  - [ ] Create Smart User Management:
+    - [ ] AI-powered user insights
+    - [ ] Intelligent user recommendations
+    - [ ] Predictive user analytics
+    - [ ] Automated user optimization
+  - [ ] Implement Advanced Features:
+    - [ ] User behavior analysis
+    - [ ] User pattern recognition
+    - [ ] User anomaly detection
+    - [ ] User optimization recommendations
+  - [ ] Add Enterprise Features:
+    - [ ] Multi-tenant user management
+    - [ ] Centralized user administration
+    - [ ] User compliance reporting
+    - [ ] Advanced user analytics and insights
+
+### 5.4 Help/Docs Page (Knowledge & Support Hub)
+- [ ] 🔴 **Help/Docs Page Layout & Structure**
+  - [ ] Create two-column layout (Documentation Tree, Content Viewer)
+  - [ ] Implement top header with navigation & search
+  - [ ] Add responsive design for different screen sizes
+  - [ ] Create contextual help assistant
+  - [ ] Implement help categories system
+
+- [ ] 🔴 **Top Header (Help Navigation & Search)**
+  - [ ] Create Navigation Controls:
+    - [ ] 🏠 Home button (return to help homepage)
+    - [ ] 🔄 Update button (sync latest documentation)
+    - [ ] 📤 Export button (export documentation)
+    - [ ] ⚙️ Settings button (help preferences)
+    - [ ] 🔍 Search button (open advanced search)
+  - [ ] Implement Global Search:
+    - [ ] Real-time search across all documentation
+    - [ ] Search suggestions and autocomplete
+    - [ ] Search history and saved searches
+    - [ ] Search result highlighting
+  - [ ] Add Help Status:
+    - [ ] Documentation version indicator
+    - [ ] Last update timestamp
+    - [ ] Search result count
+    - [ ] Help system status
+
+- [ ] 🔴 **Left Panel - Documentation Tree**
+  - [ ] Create Navigation Tree:
+    - [ ] Hierarchical documentation structure
+    - [ ] Expandable/collapsible sections
+    - [ ] Current page highlighting
+    - [ ] Breadcrumb navigation
+  - [ ] Implement Navigation Features:
+    - [ ] Favorites ⭐ (users can mark frequently used docs)
+    - [ ] Recently Viewed list for easy backtracking
+    - [ ] Navigation state persistence
+    - [ ] Quick navigation shortcuts
+  - [ ] Add Navigation Management:
+    - [ ] Navigation search and filtering
+    - [ ] Navigation customization
+    - [ ] Navigation analytics
+    - [ ] Navigation optimization
+
+- [ ] 🔴 **Right Panel - Content Viewer**
+  - [ ] Create Rich Markdown Renderer:
+    - [ ] Renders documentation in rich Markdown (converted to Reflex components)
+    - [ ] Table of Contents on the right edge for long pages
+    - [ ] Scroll sync with TOC highlights
+    - [ ] Syntax highlighting for code examples
+    - [ ] Inline search (Ctrl+F scoped to current topic)
+    - [ ] Expandable code snippets with copy button
+    - [ ] Embedded diagrams rendered from Mermaid or PlantUML blocks
+  - [ ] Add Interactive Features:
+    - [ ] "Open Related Settings" → deep link to Control Center sections
+    - [ ] "Run Example" → executes tutorial snippets in sandbox (for developer mode only)
+    - [ ] Content navigation and bookmarking
+    - [ ] Print and export options
+  - [ ] Implement Content Features:
+    - [ ] Content versioning
+    - [ ] Content validation
+    - [ ] Content analytics
+    - [ ] Content optimization
+
+- [ ] 🔴 **Contextual Help Assistant (AI-Powered)**
+  - [ ] Create AI Help Trigger:
+    - [ ] Triggered by: 💬 Ask AI button or pressing Ctrl+?
+    - [ ] Opens sidebar overlay on the right (contextual help chat)
+    - [ ] AI is scoped to local documentation and indexed help materials (RAG on /docs)
+  - [ ] Implement AI Help Features:
+    - [ ] Users can ask natural language queries:
+      - [ ] "How do I connect OpenAI API?"
+      - [ ] "What does Safe Mode mean?"
+      - [ ] "Why is my RAG index not updating?"
+    - [ ] AI responds with precise excerpts + citations linking to documentation sections
+    - [ ] If configured, AI can open related pages automatically (e.g., open "Settings → RAG")
+  - [ ] Add AI Help Management:
+    - [ ] AI help history and context
+    - [ ] AI help preferences
+    - [ ] AI help analytics
+    - [ ] AI help optimization
+
+- [ ] 🔴 **Help Categories System**
+  - [ ] Create User Guide Category:
+    - [ ] Step-by-step tutorials on basic usage: chat, uploading files, managing agents
+    - [ ] User onboarding content
+    - [ ] Basic feature explanations
+    - [ ] User workflow guides
+  - [ ] Implement Developer Guide Category:
+    - [ ] Advanced integration docs: API endpoints, backend architecture, Reflex customization
+    - [ ] Developer onboarding
+    - [ ] API documentation
+    - [ ] Integration examples
+  - [ ] Add System Administration Category:
+    - [ ] Configuration management, environment setup, backup/restore, permissions
+    - [ ] Admin workflows
+    - [ ] System configuration
+    - [ ] Maintenance procedures
+  - [ ] Create AI & Orchestration Category:
+    - [ ] Deep explanations of LangChain, smolagents, AutoGen, and orchestration models
+    - [ ] AI system architecture
+    - [ ] Orchestration patterns
+    - [ ] AI best practices
+  - [ ] Implement Troubleshooting Category:
+    - [ ] Common errors, solutions, diagnostic workflows
+    - [ ] Error resolution guides
+    - [ ] Diagnostic procedures
+    - [ ] Problem-solving workflows
+  - [ ] Add Release Notes Category:
+    - [ ] Version history, new features, and known issues
+    - [ ] Changelog management
+    - [ ] Feature announcements
+    - [ ] Known issues tracking
+
+- [ ] 🔴 **Offline Documentation System**
+  - [ ] Implement Local Storage:
+    - [ ] All help content stored locally as Markdown in /docs folder
+    - [ ] Searchable offline functionality
+    - [ ] Local content management
+    - [ ] Offline content synchronization
+  - [ ] Create Content Management:
+    - [ ] Content versioning
+    - [ ] Content backup and restore
+    - [ ] Content validation
+    - [ ] Content analytics
+  - [ ] Add Content Features:
+    - [ ] Content indexing
+    - [ ] Content search optimization
+    - [ ] Content performance monitoring
+    - [ ] Content analytics
+
+- [ ] 🔴 **Semantic Search System**
+  - [ ] Implement Search Backend:
+    - [ ] FAISS-based local retrieval for doc relevance ranking
+    - [ ] Semantic search capabilities
+    - [ ] Search indexing and optimization
+    - [ ] Search performance monitoring
+  - [ ] Create Search Features:
+    - [ ] Advanced search queries
+    - [ ] Search result ranking
+    - [ ] Search history and suggestions
+    - [ ] Search analytics
+  - [ ] Add Search Management:
+    - [ ] Search optimization
+    - [ ] Search analytics
+    - [ ] Search performance tuning
+    - [ ] Search user experience
+
+- [ ] 🔴 **Auto-Update System**
+  - [ ] Implement Update Management:
+    - [ ] Fetches new docs from GitHub repo if online
+    - [ ] Update scheduling and automation
+    - [ ] Update conflict resolution
+    - [ ] Update rollback capabilities
+  - [ ] Create Update Features:
+    - [ ] Update notifications
+    - [ ] Update progress tracking
+    - [ ] Update validation
+    - [ ] Update analytics
+  - [ ] Add Update Management:
+    - [ ] Update scheduling
+    - [ ] Update conflict resolution
+    - [ ] Update rollback
+    - [ ] Update optimization
+
+- [ ] 🔴 **Interactive Examples System**
+  - [ ] Implement Code Execution:
+    - [ ] Code examples runnable in sandbox (if enabled)
+    - [ ] Sandbox environment management
+    - [ ] Code execution monitoring
+    - [ ] Code execution security
+  - [ ] Create Example Features:
+    - [ ] Example templates
+    - [ ] Example validation
+    - [ ] Example analytics
+    - [ ] Example optimization
+  - [ ] Add Example Management:
+    - [ ] Example security
+    - [ ] Example performance
+    - [ ] Example analytics
+    - [ ] Example optimization
+
+- [ ] 🔴 **Link Integration System**
+  - [ ] Implement Deep Linking:
+    - [ ] Docs cross-link to specific app sections via deep links (app://settings/rag)
+    - [ ] Link validation and management
+    - [ ] Link navigation tracking
+    - [ ] Link analytics
+  - [ ] Create Link Features:
+    - [ ] Link generation
+    - [ ] Link validation
+    - [ ] Link navigation
+    - [ ] Link optimization
+  - [ ] Add Link Management:
+    - [ ] Link analytics
+    - [ ] Link optimization
+    - [ ] Link performance
+    - [ ] Link user experience
+
+- [ ] 🔴 **History and Analytics System**
+  - [ ] Implement User History:
+    - [ ] User's recent searches and viewed topics stored locally
+    - [ ] History management and cleanup
+    - [ ] History analytics
+    - [ ] History optimization
+  - [ ] Create Analytics Features:
+    - [ ] Usage analytics
+    - [ ] Content analytics
+    - [ ] Search analytics
+    - [ ] Performance analytics
+  - [ ] Add Analytics Management:
+    - [ ] Analytics data retention
+    - [ ] Analytics optimization
+    - [ ] Analytics insights
+    - [ ] Analytics recommendations
+
+- [ ] 🔴 **Export System**
+  - [ ] Implement Export Features:
+    - [ ] Full or partial documentation exportable to PDF/HTML
+    - [ ] Export customization
+    - [ ] Export scheduling
+    - [ ] Export analytics
+  - [ ] Create Export Management:
+    - [ ] Export templates
+    - [ ] Export validation
+    - [ ] Export optimization
+    - [ ] Export monitoring
+  - [ ] Add Export Features:
+    - [ ] Export performance
+    - [ ] Export analytics
+    - [ ] Export optimization
+    - [ ] Export user experience
+
+- [ ] 🔴 **Context Awareness System**
+  - [ ] Implement Context Features:
+    - [ ] Help opens pre-filtered to current page (e.g., Chat → shows "Chat Usage Help")
+    - [ ] Context detection and management
+    - [ ] Context-based content filtering
+    - [ ] Context analytics
+  - [ ] Create Context Management:
+    - [ ] Context detection algorithms
+    - [ ] Context validation
+    - [ ] Context optimization
+    - [ ] Context monitoring
+  - [ ] Add Context Features:
+    - [ ] Context analytics
+    - [ ] Context optimization
+    - [ ] Context performance
+    - [ ] Context user experience
+
+- [ ] 🔴 **Backend API Integration**
+  - [ ] Implement Core API Endpoints:
+    - [ ] POST /help/query (semantic doc query using embeddings)
+    - [ ] GET /help/topics (list all doc sections)
+    - [ ] GET /help/topic/{id} (fetch doc content)
+    - [ ] POST /help/update (sync from remote docs repo or local markdown folder)
+    - [ ] GET /help/topics (return hierarchical structure of documentation)
+    - [ ] GET /help/topic/{id} (retrieve specific topic content)
+    - [ ] POST /help/query (semantic search for user queries)
+    - [ ] POST /help/update (refresh local docs from repository)
+    - [ ] POST /help/export (generate offline manual PDF/HTML)
+  - [ ] Add Advanced Endpoints:
+    - [ ] GET /help/search (advanced search)
+    - [ ] GET /help/favorites (user favorites)
+    - [ ] POST /help/favorites (manage favorites)
+    - [ ] GET /help/history (user history)
+    - [ ] POST /help/feedback (user feedback)
+    - [ ] GET /help/analytics (help analytics)
+
+- [ ] 🔴 **UI Components (Reflex)**
+  - [ ] Create Core Components:
+    - [ ] HelpPage (main container)
+    - [ ] DocsTree (navigation sidebar)
+    - [ ] DocViewer (markdown renderer)
+    - [ ] AiHelpSidebar (chat overlay assistant)
+    - [ ] SearchBar (top global search)
+    - [ ] HelpToolbar (home, update, export buttons)
+    - [ ] CodeBlock and MermaidRenderer components
+  - [ ] Implement Specialized Components:
+    - [ ] HelpCategorySelector
+    - [ ] DocNavigation
+    - [ ] HelpSearchResults
+    - [ ] AiHelpChat
+    - [ ] DocExportModal
+    - [ ] HelpAnalytics
+    - [ ] HelpHistory
+    - [ ] HelpFavorites
+    - [ ] HelpSettings
+
+- [ ] 🔴 **Integration with Other Pages**
+  - [ ] Create Control Center Integration:
+    - [ ] Contextual links open relevant configuration docs
+    - [ ] Settings-docs correlation
+    - [ ] Configuration guidance
+    - [ ] Settings optimization
+  - [ ] Implement Diagnostics Integration:
+    - [ ] Error codes link to troubleshooting entries
+    - [ ] Diagnostic-docs correlation
+    - [ ] Error resolution guidance
+    - [ ] Diagnostic optimization
+  - [ ] Add Chat Console Integration:
+    - [ ] Pressing Ctrl+? opens help sidebar scoped to chat commands
+    - [ ] Chat-docs correlation
+    - [ ] Chat command guidance
+    - [ ] Chat optimization
+  - [ ] Create Workflows Integration:
+    - [ ] "Learn More" links guide users through building automations
+    - [ ] Workflow-docs correlation
+    - [ ] Automation guidance
+    - [ ] Workflow optimization
+  - [ ] Implement Logs & Reports Integration:
+    - [ ] Error messages cross-linked to resolution docs
+    - [ ] Logs-docs correlation
+    - [ ] Error resolution guidance
+    - [ ] Logs optimization
+
+- [ ] 🔴 **Performance & Optimization**
+  - [ ] Implement Performance Features:
+    - [ ] Efficient documentation rendering
+    - [ ] Real-time search optimization
+    - [ ] Content caching and optimization
+    - [ ] Memory management for large docs
+  - [ ] Create Optimization Strategies:
+    - [ ] Content optimization
+    - [ ] Search optimization
+    - [ ] Rendering optimization
+    - [ ] Analytics optimization
+  - [ ] Add System Optimization:
+    - [ ] Documentation storage optimization
+    - [ ] Database query optimization
+    - [ ] WebSocket message optimization
+    - [ ] Resource usage optimization
+
+- [ ] 🔴 **Advanced Help Features**
+  - [ ] Create Smart Help:
+    - [ ] AI-powered help suggestions
+    - [ ] Intelligent content recommendations
+    - [ ] Predictive help content
+    - [ ] Automated help optimization
+  - [ ] Implement Advanced Features:
+    - [ ] Help content analysis
+    - [ ] User behavior analysis
+    - [ ] Content optimization recommendations
+    - [ ] Help system optimization
+  - [ ] Add Enterprise Features:
+    - [ ] Multi-tenant help management
+    - [ ] Centralized help management
+    - [ ] Help compliance reporting
+    - [ ] Advanced help analytics
+
+---
+
+## Phase 6: Frontend-Backend Integration
+
+### 6.1 API Client Implementation
+- [x] 🟢 **API Client Setup**
+  - [x] Create HTTP client for API calls
+  - [x] Implement error handling
+  - [x] Add request/response interceptors
+  - [x] Create API endpoint constants
+  - [x] Add authentication handling
+
+### 6.2 WebSocket Integration
+- [x] 🟢 **WebSocket Client**
+  - [x] Set up WebSocket connections
+  - [x] Implement connection management
+  - [x] Add reconnection logic
+  - [x] Handle message routing
+  - [x] Create fallback polling
+
+### 6.3 State Synchronization
+- [x] 🟢 **Data Flow Management**
+  - [x] Implement state synchronization
+  - [x] Add cache management
+  - [x] Create conflict resolution
+  - [x] Handle offline scenarios
+  - [x] Implement optimistic updates
+
+---
+
+## Phase 7: Frontend Testing
+
+### 7.1 Component Testing
+- [x] 🟢 **Unit Testing**
+  - [x] Test individual components
+  - [x] Test state management
+  - [x] Test navigation
+  - [x] Test form validation
+  - [x] Test error handling
+
+### 7.2 Integration Testing
+- [x] 🟢 **Page Testing**
+  - [x] Test page-to-page navigation
+  - [x] Test API integration
+  - [x] Test WebSocket connections
+  - [x] Test real-time updates
+  - [x] Test error recovery
+
+### 7.3 End-to-End Testing
+- [x] 🟢 **User Workflow Testing**
+  - [x] Test complete user journeys
+  - [x] Test cross-page functionality
+  - [x] Test performance
+  - [x] Test accessibility
+  - [x] Test responsive design
+
+---
+
+## 🔗 BACKEND INTEGRATION POINTS
+
+### API Endpoints Required
+- **Dashboard APIs**: 10 endpoints for system overview
+- **Chat APIs**: 7 endpoints for conversational interface
+- **Agent APIs**: 10 endpoints for agent management
+- **Task APIs**: 9 endpoints for task management
+- **Workflow APIs**: 9 endpoints for workflow orchestration
+- **RAG APIs**: 10 endpoints for knowledge base
+- **Monitoring APIs**: 4 endpoints for system metrics
+- **Mail APIs**: 3 endpoints for email integration
+- **Files APIs**: 15 endpoints for file management
+- **Automation APIs**: 15 endpoints for scheduler
+- **Settings APIs**: 6 endpoints for configuration
+- **Diagnostics APIs**: 8 endpoints for system health
+- **Logs APIs**: 8 endpoints for logging
+- **User APIs**: 10 endpoints for user management
+- **Help APIs**: 8 endpoints for documentation
+
+### WebSocket Streams Required
+- `/ws/dashboard` - Dashboard metrics
+- `/ws/chat/{session_id}` - Chat streaming
+- `/ws/agents` - Agent updates
+- `/ws/tasks` - Task progress
+- `/ws/workflows` - Workflow execution
+- `/ws/jobs` - Job progress
+- `/ws/metrics` - System metrics
+- `/ws/email` - Email updates
+- `/ws/scheduler` - Scheduler events
+
+### Data Models Required
+- User model with authentication
+- Agent model with configuration
+- Task model with execution tracking
+- Workflow model with node definitions
+- Document model for RAG system
+- Execution model for task runs
+- Log model for system events
+- Metrics model for performance data
+
+---
+
+## 📊 FRONTEND TASK SUMMARY
+
+### Task Categories
+- **UI Components**: 200+ Reflex components
+- **State Management**: Global + page-specific state
+- **Navigation**: 3-tier navigation system
+- **Real-time Updates**: WebSocket integration
+- **User Experience**: Responsive design and accessibility
+
+### Implementation Phases
+1. **Phase 0-1**: Environment setup and core development
+2. **Phase 2**: Primary navigation pages (7 pages)
+3. **Phase 3**: Secondary navigation pages (4 pages)
+4. **Phase 4**: Tertiary navigation pages (4 pages)
+5. **Phase 5**: Frontend-backend integration
+6. **Phase 6**: Testing and validation
+
+### Success Metrics
+- **18 Pages**: Fully functional with real-time updates
+- **200+ Components**: Reusable and maintainable
+- **WebSocket Integration**: Live data across all pages
+- **Responsive Design**: Mobile-friendly and accessible
+- **Performance**: Fast loading and smooth interactions
+
+### 5.5 Settings Control Center (Master Configuration Panel)
+- [ ] 🔴 **Settings Control Center Layout & Structure**
+  - [ ] Create tabbed or sectioned layout (Left rail 280px, Main pane, Right rail 320px)
+  - [ ] Implement sticky left navigation with status pills (green/orange/red)
+  - [ ] Add global search for settings functionality
+  - [ ] Create profile selector and management
+  - [ ] Implement main content pane for section forms
+  - [ ] Add right rail with live system panel (CPU/RAM/GPU charts)
+  - [ ] Create jobs & events monitoring panel
+  - [ ] Implement validation & apply footer dock (sticky)
+  - [ ] Add global controls top bar (profile selector, compare, export/import, reset, apply buttons)
+  - [ ] Implement keyboard shortcuts (Ctrl+S, Ctrl+Z, Ctrl+F)
+
+- [ ] 🔴 **Top Header (Settings Controls)**
+  - [ ] Create Profile Selector:
+    - [ ] Switch between saved configuration profiles (Development, Production, Offline)
+    - [ ] Profile management and switching
+    - [ ] Profile validation and status
+  - [ ] Add Unsaved Changes Badge:
+    - [ ] Visible when form edits are pending
+    - [ ] Change count indicator
+    - [ ] Dirty state tracking
+  - [ ] Implement Global Search Bar:
+    - [ ] Instant search across all settings sections
+    - [ ] Search highlighting and navigation
+    - [ ] Search history and suggestions
+  - [ ] Add Control Buttons:
+    - [ ] 💾 Apply Changes button (saves and validates configuration)
+    - [ ] 🔁 Apply & Restart button (reloads backend when critical settings change)
+    - [ ] 📦 Export Profile button (downloads JSON configuration file)
+    - [ ] 📂 Import Profile button (uploads previously exported configuration)
+    - [ ] ♻️ Reset to Defaults button (restores baseline config)
+
+- [ ] 🔴 **Workspace Section**
+  - [ ] Create workspace name field (string, required)
+  - [ ] Add config storage path folder picker (default %APPDATA%\LocalAIAgent\config)
+  - [ ] Implement data root path folder picker (default %USERPROFILE%\LocalAIAgent)
+  - [ ] Add profile dropdown of saved profiles
+  - [ ] Create auto-save interval setting (number, seconds, default 10)
+  - [ ] Add config version display (read-only, semantic)
+  - [ ] Implement "Open Config Folder" action
+  - [ ] Add "Backup Now" action
+  - [ ] Create "Restore from Backup..." action
+  - [ ] Add path validation (exist/writeable, name non-empty)
+  - [ ] Implement backend endpoints: GET/PATCH /settings/workspace
+  - [ ] Add side-effect actions: POST /settings/actions/backup, POST /settings/actions/restore
+
+- [ ] 🔴 **Providers & Models Section (Mutually Exclusive)**
+  - [ ] Create provider mode radio selection (Local Ollama | Cloud OpenAI/HF)
+  - [ ] Implement Local (Ollama) configuration:
+    - [ ] Base URL field (default http://localhost:11434)
+    - [ ] Model dropdown from /ollama/models
+    - [ ] Context window setting (int, default per-model)
+    - [ ] Parameters: Temperature, Top_p, Top_k, Repeat Penalty, Seed
+    - [ ] Stream responses toggle
+  - [ ] Implement Cloud OpenAI configuration:
+    - [ ] API key secret field
+    - [ ] Model dropdown (fetched)
+    - [ ] Organization field (optional)
+    - [ ] Base URL field (optional)
+    - [ ] Stream responses toggle
+  - [ ] Implement Cloud Hugging Face configuration:
+    - [ ] API token secret field
+    - [ ] Model repo ID field
+    - [ ] Task selection (text-generation/chat)
+    - [ ] Stream responses toggle
+  - [ ] Add test actions: "Test Local Model", "Test OpenAI", "Test Hugging Face"
+  - [ ] Implement mutual exclusivity validation (exactly one provider active)
+  - [ ] Add backend endpoints: GET/PATCH /settings/llm, POST /settings/tests/ollama/openai/hf
+  - [ ] Implement restart required when switching providers
+
+- [ ] 🔴 **Orchestration & Agents Section**
+  - [ ] Create active orchestrator radio selection (LangChain/LangGraph | smolagents | AutoGen)
+  - [ ] Add default system prompt field (multiline)
+  - [ ] Implement max turns per task setting (int)
+  - [ ] Add concurrency settings:
+    - [ ] Max concurrent tasks (int)
+    - [ ] Per-agent parallelism (int)
+  - [ ] Create governance settings:
+    - [ ] Tool allowlist (multiselect of registered tools)
+    - [ ] Internet access toggle (bool, default false)
+    - [ ] Shell access toggle (bool, gated by confirm)
+    - [ ] Python exec sandbox toggle (bool)
+    - [ ] Token budget per task (int, 0=unlimited)
+  - [ ] Implement AutoGen specific settings:
+    - [ ] Group chat configuration
+    - [ ] Agent communication protocols
+    - [ ] Collaboration settings
+  - [ ] Add backend endpoints: GET/PATCH /settings/orchestration
+  - [ ] Implement validation and testing
+
+- [ ] 🔴 **RAG & Knowledge Base Section**
+  - [ ] Create embedding model selection (sentence-transformers dropdown)
+  - [ ] Add vector store configuration (FAISS settings)
+  - [ ] Implement chunk size and overlap settings
+  - [ ] Add document processing options:
+    - [ ] Auto-ingestion toggle
+    - [ ] File type filters
+    - [ ] Processing priority
+  - [ ] Create namespace management:
+    - [ ] Default namespace setting
+    - [ ] Namespace isolation toggle
+    - [ ] Cross-namespace search toggle
+  - [ ] Add performance settings:
+    - [ ] Index optimization
+    - [ ] Cache settings
+    - [ ] Query optimization
+  - [ ] Implement backend endpoints: GET/PATCH /settings/rag
+  - [ ] Add RAG testing and validation
+
+- [ ] 🔴 **Email Integration Section**
+  - [ ] Create IMAP configuration:
+    - [ ] Server settings (host, port, SSL/TLS)
+    - [ ] Authentication (username, password, OAuth)
+    - [ ] Sync settings (frequency, folders)
+  - [ ] Add email processing options:
+    - [ ] Auto-reply settings
+    - [ ] Email classification
+    - [ ] Priority handling
+  - [ ] Implement security settings:
+    - [ ] Encryption options
+    - [ ] Access controls
+    - [ ] Audit logging
+  - [ ] Add backend endpoints: GET/PATCH /settings/email
+  - [ ] Implement email testing and validation
+
+- [ ] 🔴 **Automation & Scheduler Section**
+  - [ ] Create scheduler configuration:
+    - [ ] Job store settings
+    - [ ] Execution settings
+    - [ ] Retry policies
+  - [ ] Add automation settings:
+    - [ ] Trigger conditions
+    - [ ] Action sequences
+    - [ ] Error handling
+  - [ ] Implement monitoring settings:
+    - [ ] Alert thresholds
+    - [ ] Notification channels
+    - [ ] Performance tracking
+  - [ ] Add backend endpoints: GET/PATCH /settings/automation
+  - [ ] Implement automation testing and validation
+
+- [ ] 🔴 **System & Performance Section**
+  - [ ] Create system settings:
+    - [ ] Resource limits (CPU, RAM, GPU)
+    - [ ] Performance tuning
+    - [ ] Optimization options
+  - [ ] Add monitoring settings:
+    - [ ] Metrics collection
+    - [ ] Alert thresholds
+    - [ ] Reporting options
+  - [ ] Implement security settings:
+    - [ ] Access controls
+    - [ ] Audit logging
+    - [ ] Compliance options
+  - [ ] Add backend endpoints: GET/PATCH /settings/system
+  - [ ] Implement system testing and validation
+
+- [ ] 🔴 **Security & Secrets Section**
+  - [ ] Create security settings:
+    - [ ] Authentication methods
+    - [ ] Authorization policies
+    - [ ] Session management
+  - [ ] Add secrets management:
+    - [ ] Encryption settings
+    - [ ] Key rotation
+    - [ ] Access controls
+  - [ ] Implement compliance settings:
+    - [ ] Audit logging
+    - [ ] Data protection
+    - [ ] Privacy controls
+  - [ ] Add backend endpoints: GET/PATCH /settings/security
+  - [ ] Implement security testing and validation
+
+- [ ] 🔴 **UI & Accessibility Section**
+  - [ ] Create UI settings:
+    - [ ] Theme selection
+    - [ ] Layout options
+    - [ ] Display preferences
+  - [ ] Add accessibility settings:
+    - [ ] Screen reader support
+    - [ ] Keyboard navigation
+    - [ ] High contrast mode
+  - [ ] Implement user preferences:
+    - [ ] Language selection
+    - [ ] Timezone settings
+    - [ ] Notification preferences
+  - [ ] Add backend endpoints: GET/PATCH /settings/ui
+  - [ ] Implement UI testing and validation
+
+- [ ] 🔴 **Backup & Diagnostics Section**
+  - [ ] Create backup settings:
+    - [ ] Backup frequency
+    - [ ] Retention policies
+    - [ ] Storage options
+  - [ ] Add diagnostics settings:
+    - [ ] Health checks
+    - [ ] Performance monitoring
+    - [ ] Error tracking
+  - [ ] Implement recovery settings:
+    - [ ] Disaster recovery
+    - [ ] Data restoration
+    - [ ] System recovery
+  - [ ] Add backend endpoints: GET/PATCH /settings/backup
+  - [ ] Implement backup testing and validation
+
+### 5.6 Executions Page (Execution History & Management)
+- [ ] 🔴 **Executions Page Layout & Structure**
+  - [ ] Create execution history interface with filtering and search
+  - [ ] Implement execution detail view with logs and artifacts
+  - [ ] Add execution retry and management functionality
+  - [ ] Create execution analytics and reporting
+  - [ ] Implement real-time execution monitoring
+
+- [ ] 🔴 **Execution History Interface**
+  - [ ] Create execution list view:
+    - [ ] Execution table with columns (ID, Type, Status, Start Time, Duration, Result)
+    - [ ] Execution filtering and search functionality
+    - [ ] Execution sorting and pagination
+    - [ ] Execution status indicators and badges
+  - [ ] Add execution actions:
+    - [ ] View execution details
+    - [ ] Retry failed executions
+    - [ ] Cancel running executions
+    - [ ] Download execution artifacts
+  - [ ] Implement execution management:
+    - [ ] Bulk operations (delete, retry, export)
+    - [ ] Execution cleanup and archiving
+    - [ ] Execution analytics and insights
+    - [ ] Execution performance tracking
+
+- [ ] 🔴 **Execution Detail View**
+  - [ ] Create execution details panel:
+    - [ ] Execution metadata and configuration
+    - [ ] Execution logs and output
+    - [ ] Execution artifacts and files
+    - [ ] Execution performance metrics
+  - [ ] Add execution monitoring:
+    - [ ] Real-time execution status
+    - [ ] Execution progress tracking
+    - [ ] Execution error handling
+    - [ ] Execution completion notifications
+  - [ ] Implement execution analysis:
+    - [ ] Execution success/failure analysis
+    - [ ] Execution performance optimization
+    - [ ] Execution pattern recognition
+    - [ ] Execution recommendations
+
+- [ ] 🔴 **Execution Management Features**
+  - [ ] Create execution retry system:
+    - [ ] Automatic retry for failed executions
+    - [ ] Manual retry for specific executions
+    - [ ] Retry policy configuration
+    - [ ] Retry history and tracking
+  - [ ] Add execution cleanup:
+    - [ ] Automatic cleanup of old executions
+    - [ ] Manual cleanup of specific executions
+    - [ ] Cleanup policy configuration
+    - [ ] Cleanup history and tracking
+  - [ ] Implement execution analytics:
+    - [ ] Execution success rates
+    - [ ] Execution performance trends
+    - [ ] Execution error analysis
+    - [ ] Execution optimization recommendations
+  - [ ] Add execution reporting:
+    - [ ] Execution summary reports
+    - [ ] Execution detailed reports
+    - [ ] Execution export functionality
+    - [ ] Execution sharing and collaboration
+
+---
+
+## 🔗 FRONTEND-BACKEND INTEGRATION & INTERCONNECTION
+
+### 6.1 Cross-Page Navigation & State Management
+- [ ] 🔴 **Global Navigation Integration**
+  - [ ] Implement cross-page navigation with deep linking
+  - [ ] Create shared state management between pages
+  - [ ] Add breadcrumb navigation across all 18 pages
+  - [ ] Implement page-to-page data passing and context sharing
+  - [ ] Create unified search across all pages
+  - [ ] Add global notification system for cross-page updates
+  - [ ] Implement page history and back/forward navigation
+  - [ ] Create page dependency tracking and validation
+
+### 6.2 Real-Time Data Synchronization
+- [ ] 🔴 **WebSocket Integration Across Pages**
+  - [ ] Dashboard ↔ Chat Console (real-time metrics to chat context)
+  - [ ] Dashboard ↔ Agents (agent status updates to dashboard)
+  - [ ] Dashboard ↔ Tasks (task progress to dashboard metrics)
+  - [ ] Dashboard ↔ Workflows (workflow execution to dashboard)
+  - [ ] Dashboard ↔ Monitoring (system health to dashboard alerts)
+  - [ ] Chat Console ↔ RAG (knowledge base queries from chat)
+  - [ ] Chat Console ↔ Files (file context injection to chat)
+  - [ ] Chat Console ↔ Mail (email context to chat responses)
+  - [ ] Agents ↔ Tasks (agent execution to task management)
+  - [ ] Agents ↔ Workflows (agent orchestration to workflow execution)
+  - [ ] Tasks ↔ Workflows (task completion to workflow progression)
+  - [ ] Tasks ↔ Executions (task execution to execution history)
+  - [ ] RAG ↔ Files (document processing to knowledge base)
+  - [ ] RAG ↔ Mail (email content to knowledge base)
+  - [ ] Files ↔ Mail (file attachments to email processing)
+  - [ ] Automation ↔ All Pages (scheduled job updates across system)
+  - [ ] Settings ↔ All Pages (configuration changes across system)
+  - [ ] Diagnostics ↔ All Pages (health status across system)
+
+### 6.3 Page-to-Page Data Flow
+- [ ] 🔴 **Data Flow Integration**
+  - [ ] Dashboard → Chat Console (system context injection)
+  - [ ] Dashboard → Agents (system status for agent decisions)
+  - [ ] Dashboard → Tasks (system metrics for task prioritization)
+  - [ ] Chat Console → RAG (query context to knowledge base)
+  - [ ] Chat Console → Files (file references to file management)
+  - [ ] Chat Console → Mail (email context to chat responses)
+  - [ ] Agents → Tasks (agent output to task creation)
+  - [ ] Agents → Workflows (agent coordination to workflow orchestration)
+  - [ ] Tasks → Workflows (task results to workflow progression)
+  - [ ] Tasks → Executions (task execution to execution tracking)
+  - [ ] Workflows → Automation (workflow completion to automation triggers)
+  - [ ] RAG → Files (document processing to file management)
+  - [ ] RAG → Mail (knowledge base to email responses)
+  - [ ] Files → RAG (file content to knowledge base indexing)
+  - [ ] Mail → Files (email attachments to file management)
+  - [ ] Automation → All Pages (scheduled updates across system)
+  - [ ] Settings → All Pages (configuration updates across system)
+  - [ ] Diagnostics → All Pages (health updates across system)
+
+### 6.4 Cross-Page Component Sharing
+- [ ] 🔴 **Shared Component Integration**
+  - [ ] Create shared data tables across Dashboard, Agents, Tasks, Workflows
+  - [ ] Implement shared file browser across Files, RAG, Mail pages
+  - [ ] Add shared search functionality across all pages
+  - [ ] Create shared notification system across all pages
+  - [ ] Implement shared progress indicators across Tasks, Workflows, Executions
+  - [ ] Add shared status indicators across Dashboard, Monitoring, Diagnostics
+  - [ ] Create shared modal system across all pages
+  - [ ] Implement shared form components across Settings, User Profile
+  - [ ] Add shared chart components across Dashboard, Monitoring, Analytics
+  - [ ] Create shared log viewer across Logs, Diagnostics, Executions
+
+### 6.5 Backend API Integration Points
+- [ ] 🔴 **API Integration Mapping**
+  - [ ] Dashboard APIs: GET /dashboard/* → Dashboard components
+  - [ ] Chat APIs: POST /chat/* → Chat Console components
+  - [ ] Agent APIs: GET/POST /agents/* → Agents page components
+  - [ ] Task APIs: GET/POST /tasks/* → Tasks page components
+  - [ ] Workflow APIs: GET/POST /workflows/* → Workflows page components
+  - [ ] RAG APIs: GET/POST /rag/* → RAG Knowledge Base components
+  - [ ] Monitoring APIs: GET /monitoring/* → Monitoring page components
+  - [ ] Mail APIs: GET/POST /mail/* → Mail page components
+  - [ ] Files APIs: GET/POST /files/* → Files page components
+  - [ ] Automation APIs: GET/POST /automation/* → Automation page components
+  - [ ] Settings APIs: GET/PATCH /settings/* → Settings Control Center components
+  - [ ] Diagnostics APIs: POST /diagnostics/* → Diagnostics page components
+  - [ ] Logs APIs: GET /logs/* → Logs & Reports page components
+  - [ ] User APIs: GET/PATCH /user/* → User Profile page components
+  - [ ] Help APIs: POST /help/* → Help/Docs page components
+  - [ ] Executions APIs: GET/POST /executions/* → Executions page components
+
+### 6.6 WebSocket Integration Points
+- [ ] 🔴 **WebSocket Connection Mapping**
+  - [ ] /ws/dashboard → Dashboard real-time metrics
+  - [ ] /ws/chat/{session_id} → Chat Console message streaming
+  - [ ] /ws/agents → Agents page status updates
+  - [ ] /ws/tasks → Tasks page progress updates
+  - [ ] /ws/workflows → Workflows page execution updates
+  - [ ] /ws/monitoring → Monitoring page metrics streaming
+  - [ ] /ws/logs → Logs & Reports page log streaming
+  - [ ] /ws/jobs → Automation page job progress
+  - [ ] /ws/alerts → All pages notification system
+  - [ ] /ws/notifications → All pages notification updates
+  - [ ] /ws/system → Dashboard system status
+  - [ ] /ws/settings → Settings Control Center updates
+  - [ ] /ws/executions → Executions page updates
+
+### 6.7 State Management Integration
+- [ ] 🔴 **Global State Integration**
+  - [ ] Create global AppState for cross-page data sharing
+  - [ ] Implement page-specific state classes with global state access
+  - [ ] Add state synchronization between frontend and backend
+  - [ ] Create state persistence across page navigation
+  - [ ] Implement state validation and error handling
+  - [ ] Add state debugging and monitoring tools
+  - [ ] Create state backup and recovery mechanisms
+  - [ ] Implement state versioning and rollback
+
+### 6.8 Error Handling & Recovery Integration
+- [ ] 🔴 **Cross-Page Error Handling**
+  - [ ] Implement global error boundary for all pages
+  - [ ] Create error reporting system across all pages
+  - [ ] Add error recovery mechanisms for failed operations
+  - [ ] Implement error logging and monitoring
+  - [ ] Create error notification system
+  - [ ] Add error debugging tools and diagnostics
+  - [ ] Implement error prevention and validation
+  - [ ] Create error documentation and troubleshooting guides
+
+### 6.9 Performance Optimization Integration
+- [x] 🟢 **Cross-Page Performance Optimization**
+  - [x] Implement lazy loading for page components
+  - [x] Add component caching across pages
+  - [x] Create data prefetching for cross-page navigation
+  - [x] Implement virtual scrolling for large data sets
+  - [x] Add image optimization and compression
+  - [x] Create bundle splitting and code optimization
+  - [x] Implement service worker for offline functionality
+  - [x] Add performance monitoring and analytics
+
+### 6.10 Security Integration
+- [x] 🟢 **Cross-Page Security Implementation**
+  - [x] Implement authentication across all pages
+  - [x] Add authorization checks for page access
+  - [x] Create secure data transmission between pages
+  - [x] Implement input validation and sanitization
+  - [x] Add CSRF protection across all forms
+  - [x] Create secure session management
+  - [x] Implement audit logging for all user actions
+  - [x] Add security monitoring and alerting
+
+### 6.11 Testing Integration
+- [x] 🟢 **Cross-Page Testing Implementation**
+  - [x] Create end-to-end tests for page navigation
+  - [x] Implement integration tests for cross-page data flow
+  - [x] Add performance tests for page transitions
+  - [x] Create accessibility tests across all pages
+  - [x] Implement security tests for cross-page operations
+  - [x] Add user acceptance tests for complete workflows
+  - [x] Create regression tests for page interactions
+  - [x] Implement automated testing for all integrations
+
+### 6.12 Documentation Integration
+- [x] 🟢 **Cross-Page Documentation**
+  - [x] Create user guides for page navigation
+  - [x] Implement contextual help across all pages
+  - [x] Add tooltips and guidance for page interactions
+  - [x] Create video tutorials for complex workflows
+  - [x] Implement interactive tutorials and onboarding
+  - [x] Add API documentation for backend integration
+  - [x] Create troubleshooting guides for common issues
+  - [x] Implement feedback collection and improvement
+
+---
+
+*Last Updated: [Current Date]*  
+*Total Frontend Tasks: 600+*  
+*Components: 300+*  
+*Pages: 18*  
+*Integration Points: 200+*  
+*Cross-Page Connections: 50+*
