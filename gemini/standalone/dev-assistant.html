@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Assistant - AI Development Helper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-container {
+            height: 500px;
+            overflow-y: auto;
+        }
+        .message {
+            margin-bottom: 1rem;
+        }
+        .user-message {
+            text-align: right;
+        }
+        .ai-message {
+            text-align: left;
+        }
+        .message-bubble {
+            display: inline-block;
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+        }
+        .user-bubble {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .ai-bubble {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+        .code-block {
+            background-color: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .floating-window {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 400px;
+            height: 600px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            z-index: 1000;
+            display: none;
+        }
+        .minimized {
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            top: auto;
+            right: 20px;
+        }
+        .minimized .content {
+            display: none;
+        }
+        .minimized .header {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Floating AI Assistant -->
+    <div id="ai-assistant" class="floating-window">
+        <!-- Header -->
+        <div class="header bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-t-lg flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                <span class="font-semibold">Dev Assistant</span>
+            </div>
+            <div class="flex space-x-2">
+                <button onclick="minimizeWindow()" class="text-white hover:bg-white hover:bg-opacity-20 p-1 rounded">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button onclick="closeWindow()" class="text-white hover:bg-white hover:bg-opacity-20 p-1 rounded">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content flex flex-col h-full">
+            <!-- Quick Actions -->
+            <div class="p-3 bg-gray-50 border-b">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="quickAction('debug')" class="px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs hover:bg-red-200">
+                        🐛 Debug Code
+                    </button>
+                    <button onclick="quickAction('explain')" class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs hover:bg-blue-200">
+                        📝 Explain Code
+                    </button>
+                    <button onclick="quickAction('optimize')" class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs hover:bg-green-200">
+                        ⚡ Optimize
+                    </button>
+                    <button onclick="quickAction('review')" class="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs hover:bg-purple-200">
+                        👀 Code Review
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="flex-1 flex flex-col">
+                <div class="chat-container p-4 bg-white" id="chat-messages">
+                    <div class="message ai-message">
+                        <div class="message-bubble ai-bubble">
+                            👋 Hi! I'm your development assistant. I can help you with:
+                            <br>• Debug code issues
+                            <br>• Explain complex code
+                            <br>• Optimize performance
+                            <br>• Code reviews
+                            <br>• Generate boilerplate
+                            <br><br>Just paste your code or describe what you need help with!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="p-4 border-t bg-gray-50">
+                    <div class="flex space-x-2">
+                        <input type="text" id="chat-input" placeholder="Ask for help with your code..." 
+                               class="flex-1 border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+                        <button onclick="sendMessage()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-sm">
+                            Send
+                        </button>
+                    </div>
+                    <div class="mt-2 text-xs text-gray-500">
+                        💡 Tip: Paste code directly or describe your development issue
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toggle Button (when minimized) -->
+    <button id="toggle-btn" onclick="toggleWindow()" class="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 z-50">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+    </button>
+
+    <!-- Main Content (Your Development Work) -->
+    <div class="min-h-screen p-8">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-900 mb-8">Your Development Workspace</h1>
+            
+            <!-- Development Tools -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-3">Code Editor</h3>
+                    <textarea class="w-full h-32 border rounded p-3 font-mono text-sm" placeholder="Write your code here..."></textarea>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-3">Terminal</h3>
+                    <div class="bg-black text-green-400 p-3 rounded font-mono text-sm h-32 overflow-y-auto">
+                        <div>$ npm start</div>
+                        <div>Server running on port 3000</div>
+                        <div>$ git status</div>
+                        <div>On branch main</div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow">
+                    <h3 class="text-lg font-semibold mb-3">File Explorer</h3>
+                    <div class="space-y-1 text-sm">
+                        <div class="flex items-center space-x-2">
+                            <span>📁 src/</span>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-4">
+                            <span>📄 App.tsx</span>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-4">
+                            <span>📄 index.tsx</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span>📁 components/</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Start Guide -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <h3 class="text-lg font-semibold text-blue-900 mb-3">🚀 Dev Assistant Quick Start</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <h4 class="font-medium text-blue-800 mb-2">💬 Chat with AI</h4>
+                        <p class="text-blue-700">Click the chat icon in the bottom right to open the AI assistant</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-blue-800 mb-2">🔧 Development Help</h4>
+                        <p class="text-blue-700">Ask for code reviews, debugging help, or explanations</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-blue-800 mb-2">⚡ Quick Actions</h4>
+                        <p class="text-blue-700">Use the quick action buttons for common tasks</p>
+                    </div>
+                    <div>
+                        <h4 class="font-medium text-blue-800 mb-2">📝 Code Analysis</h4>
+                        <p class="text-blue-700">Paste code directly for instant analysis and suggestions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isMinimized = false;
+        let isVisible = false;
+
+        // Window controls
+        function toggleWindow() {
+            const assistant = document.getElementById('ai-assistant');
+            const toggleBtn = document.getElementById('toggle-btn');
+            
+            if (isVisible) {
+                assistant.style.display = 'none';
+                toggleBtn.style.display = 'block';
+                isVisible = false;
+            } else {
+                assistant.style.display = 'block';
+                toggleBtn.style.display = 'none';
+                isVisible = true;
+            }
+        }
+
+        function minimizeWindow() {
+            const assistant = document.getElementById('ai-assistant');
+            const toggleBtn = document.getElementById('toggle-btn');
+            
+            if (isMinimized) {
+                assistant.classList.remove('minimized');
+                toggleBtn.style.display = 'none';
+                isMinimized = false;
+            } else {
+                assistant.classList.add('minimized');
+                toggleBtn.style.display = 'block';
+                isMinimized = true;
+            }
+        }
+
+        function closeWindow() {
+            const assistant = document.getElementById('ai-assistant');
+            const toggleBtn = document.getElementById('toggle-btn');
+            
+            assistant.style.display = 'none';
+            toggleBtn.style.display = 'block';
+            isVisible = false;
+        }
+
+        // Quick actions
+        function quickAction(action) {
+            const input = document.getElementById('chat-input');
+            const messages = {
+                'debug': 'Please help me debug this code:',
+                'explain': 'Can you explain what this code does:',
+                'optimize': 'Please optimize this code for better performance:',
+                'review': 'Please review this code and suggest improvements:'
+            };
+            
+            input.value = messages[action];
+            input.focus();
+        }
+
+        // Chat functionality
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+
+            // Show typing indicator
+            const typingId = addTypingIndicator();
+
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/gemini/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        messages: [{ role: 'user', content: message }]
+                    })
+                });
+
+                // Remove typing indicator
+                removeTypingIndicator(typingId);
+
+                const data = await response.json();
+                if (data.success) {
+                    addMessage(data.text, 'ai');
+                } else {
+                    addMessage('Sorry, I encountered an error: ' + (data.error || 'Unknown error'), 'ai');
+                }
+            } catch (error) {
+                removeTypingIndicator(typingId);
+                addMessage('Sorry, I couldn\'t connect to the AI service. Make sure the backend is running on localhost:8000', 'ai');
+            }
+        }
+
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const bubble = document.createElement('div');
+            bubble.className = `message-bubble ${sender}-bubble`;
+            
+            // Format code blocks
+            if (text.includes('```')) {
+                const parts = text.split('```');
+                let formattedText = '';
+                
+                for (let i = 0; i < parts.length; i++) {
+                    if (i % 2 === 0) {
+                        formattedText += parts[i];
+                    } else {
+                        formattedText += `<div class="code-block mt-2 mb-2">${parts[i].trim()}</div>`;
+                    }
+                }
+                bubble.innerHTML = formattedText;
+            } else {
+                bubble.textContent = text;
+            }
+            
+            messageDiv.appendChild(bubble);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const chatMessages = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message ai-message';
+            typingDiv.id = 'typing-indicator';
+            
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble ai-bubble';
+            bubble.innerHTML = '<div class="flex items-center space-x-1"><div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s"></div><div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s"></div></div>';
+            
+            typingDiv.appendChild(bubble);
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            return 'typing-indicator';
+        }
+
+        function removeTypingIndicator(id) {
+            const indicator = document.getElementById(id);
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        // Enter key support
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Initialize
+        document.getElementById('toggle-btn').style.display = 'block';
+    </script>
+</body>
+</html>
